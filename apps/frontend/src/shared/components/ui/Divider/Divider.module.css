@@ -1,0 +1,15 @@
+.divider::before {
+    content: "";
+    display: block;
+    background-color: var(--color-background);
+    width: 100%;
+    height: 1px;
+}
+
+.divider::after {
+    content: "";
+    display: block;
+    background-color: var(--color-background);
+    width: 100%;
+    height: 1px;
+}

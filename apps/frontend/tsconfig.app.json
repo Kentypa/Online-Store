@@ -1,0 +1,104 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "/*"
+      ],
+      "@icons/*": [
+        "assets/icons/*"
+      ],
+      "@fonts/*": [
+        "assets/fonts/*"
+      ],
+      "@images/*": [
+        "assets/images/*"
+      ],
+      "@screens/*": [
+        "screens/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ],
+      "@config/*": [
+        "shared/config/*"
+      ],
+      "@enums/*": [
+        "shared/enums/*"
+      ],
+      "@hooks/*": [
+        "shared/hooks/*"
+      ],
+      "@interceptors/*": [
+        "shared/interceptors/*"
+      ],
+      "@services/*": [
+        "shared/services/*"
+      ],
+      "@stores/*": [
+        "shared/stores/*"
+      ],
+      "@shared-types/*": [
+        "shared/types/*"
+      ],
+      "@utils/*": [
+        "shared/utils/*"
+      ],
+      "@selectors/*": [
+        "shared/stores/selectors/*"
+      ],
+      "@business/*": [
+        "shared/components/business/*"
+      ],
+      "@charts/*": [
+        "shared/components/charts/*"
+      ],
+      "@forms/*": [
+        "shared/components/forms/*"
+      ],
+      "@layout/*": [
+        "shared/components/layout/*"
+      ],
+      "@modals/*": [
+        "shared/components/modals/*"
+      ],
+      "@overlays/*": [
+        "shared/components/overlays/*"
+      ],
+      "@ui/*": [
+        "shared/components/ui/*"
+      ],
+      "@wrappers/*": [
+        "shared/components/wrappers/*"
+      ]
+    },
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "src",
+    "aliases.json",
+    "scripts"
+  ]
+}

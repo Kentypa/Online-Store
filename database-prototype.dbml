@@ -1,0 +1,128 @@
+Table user {
+  id serial [pk]
+  username varchar(20) [unique]
+  email varchar(320) [unique, not null]
+  password varchar(512) [not null]
+  avatar_url varchar(256)
+  is_deleted boolean [default: false]
+  language_code varchar(2) [ref: > language.code, default: 'en']
+  role user_role [default: "MEMBER"]
+  country_code varchar(2) [ref: > country.code, default: 'US']
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+enum user_role { ADMIN MEMBER }
+
+Table country {
+  code varchar(2) [pk]
+  name varchar(64)
+}
+
+Table language {
+  code varchar(2) [pk]
+  name varchar(64)
+}
+
+Table user_refresh_token {
+  user_id integer [ref: > user.id]
+  device_id uuid
+  refresh_token varchar(512)
+  expires_at timestamp
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  indexes { (user_id, device_id) [pk] }
+}
+
+Table cart_item {
+  user_id integer [ref: > user.id]
+  product_id integer [ref: > product.id]
+  quantity integer [default: 1]
+  created_at timestamp [default: `now()`]
+  indexes { (user_id, product_id) [pk] }
+}
+
+Table order {
+  id serial [pk]
+  user_id integer [ref: > user.id]
+  status order_status [default: "PENDING"]
+  shipping_method shipping_methods
+  payment_method payment_methods
+  payment_status payment_status [default: "PENDING"]
+  country_code varchar(2) [ref: > country.code]
+  total_price integer
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+enum order_status { PENDING PAID SHIPPED DELIVERED CANCELLED }
+enum shipping_methods { PICKUP COURIER DELIVERY }
+enum payment_methods { CASH CARD }
+enum payment_status { PENDING PAID FAILED }
+
+Table order_item {
+  order_id integer [ref: > order.id]
+  product_id integer [ref: > product.id]
+  quantity integer
+  unit_price integer
+  indexes { (order_id, product_id) [pk] }
+}
+
+Table product {
+  id serial [pk]
+  price integer
+  stock integer [default: 0]
+  main_image_url varchar(256)
+  images text[]
+  category_id integer [ref: > category.id]
+  is_deleted boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
+
+Table product_translation {
+  product_id integer [ref: > product.id]
+  lang varchar(2) [ref: > language.code]
+  title varchar(128)
+  description text
+  indexes { (product_id, lang) [pk] }
+}
+
+Table category {
+  id serial [pk]
+  parent_id integer [ref: > category.id]
+  image_url varchar(256)
+  is_deleted boolean [default: false]
+}
+
+Table category_translation {
+  category_id integer [ref: > category.id]
+  lang varchar(2) [ref: > language.code]
+  name varchar(64)
+  indexes { (category_id, lang) [pk] }
+}
+
+Table shipping_address {
+  order_id integer [ref: > order.id, pk]
+  address varchar(256)
+  city varchar(64)
+  country varchar(64)
+  phone varchar(20)
+}
+
+Table review {
+  id serial [pk]
+  user_id integer [ref: > user.id]
+  product_id integer [ref: > product.id]
+  rating integer
+  comment text
+  created_at timestamp [default: `now()`]
+  indexes { (user_id, product_id) [unique] }
+}
+
+Table enum_translation {
+  type varchar(32) [pk]
+  code varchar(32) [pk]
+  lang varchar(2) [ref: > language.code, pk]
+  name varchar(64) [not null]
+}
