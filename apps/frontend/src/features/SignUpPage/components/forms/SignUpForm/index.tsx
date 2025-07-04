@@ -11,16 +11,25 @@ import { useSignUp } from "@features/SignUpPage/hooks/use-sign-up";
 import { useSignUpPopups } from "@features/SignUpPage/hooks/use-sign-up-popups";
 import { FC, useMemo } from "react";
 import { Link } from "react-router";
+import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 
 export const SignUpForm: FC = () => {
   const { isSuccess, mutate, isError: userSignUpIsError } = useSignUp();
 
   const initialState = useMemo(() => ({ email: "", password: "" }), []);
-  const { handleChange, handleSubmit } = useForm(initialState, (formState) => {
-    mutate(formState);
+  const { formState, handleChange, handleSubmit } = useForm(
+    initialState,
+    (formState) => {
+      mutate(formState);
+    }
+  );
+  const signUpIsNotSubmitable = useIsNotSubmitable({
+    allRequired: true,
+    initialState,
+    state: formState,
   });
 
-  useNavigateOnSuccess(isSuccess, PagesEndponts.SIGN_IN);
+  useNavigateOnSuccess(isSuccess, PagesEndponts.signIn);
 
   useSignUpPopups({ userSignUpIsError });
 
@@ -49,6 +58,7 @@ export const SignUpForm: FC = () => {
         />
         <Button
           type="submit"
+          disabled={signUpIsNotSubmitable}
           className="container p-3 bg-primary text-white text-label-large gap-1.5 rounded-2xl mb-6 "
         >
           Sign up

@@ -1,0 +1,10 @@
+<svg fill="currentColor" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="circle-user-1__a" class="circle-user-1__a">
+      <path d="M0 0h24v24H0z"/>
+    </clipPath>
+  </defs>
+  <g class="circle-user-1__circle-user circle-user-1__1" clip-path="url(#circle-user-1__a)">
+    <path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0ZM8 21.164V21c0-2.206 1.794-4 4-4s4 1.794 4 4v.164A9.943 9.943 0 0 1 12 22a9.943 9.943 0 0 1-4-.836Zm9.925-1.113A6.01 6.01 0 0 0 12 15a6.01 6.01 0 0 0-5.925 5.051A9.993 9.993 0 0 1 2 12C2 6.486 6.486 2 12 2s10 4.486 10 10a9.993 9.993 0 0 1-4.075 8.051ZM12 5C9.794 5 8 6.794 8 9s1.794 4 4 4 4-1.794 4-4-1.794-4-4-4Zm0 6c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2Z" class="circle-user-1__Vector"/>
+  </g>
+</svg>

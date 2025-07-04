@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   OneToOne,
+  DeleteDateColumn,
 } from "typeorm";
 import { User } from "./user.entity";
 
@@ -39,4 +40,14 @@ export class UserStats {
   })
   @Column({ type: "bigint", default: 0 })
   totalClicks: number;
+
+  @ApiProperty({
+    example: "2025-05-27 15:23:48.941416",
+    description: "Date of user stats data deleted",
+    type: Date,
+    required: false,
+  })
+  @DeleteDateColumn()
+  @Exclude()
+  deletedAt?: Date;
 }

@@ -1,6 +1,7 @@
 export enum PagesEndponts {
-  SIGN_IN = "/sign-in",
-  SIGN_UP = "/sign-up",
+  signIn = "/sign-in",
+  signUp = "/sign-up",
+  forgetPassword = "/forget-password",
   PROFILE = "/profile",
   EDIT_PROFILE = "/profile/edit",
 }

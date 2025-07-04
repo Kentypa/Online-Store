@@ -13,7 +13,7 @@ export class UserAccountService {
     private userRepository: Repository<User>,
   ) {}
 
-  async createUserWithStats(email: string, password: string): Promise<User> {
+  async createUser(email: string, password: string): Promise<User> {
     const exists = await this.userRepository.findOne({ where: { email } });
     if (exists) throw new ConflictException("Email already exists");
 

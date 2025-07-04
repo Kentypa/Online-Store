@@ -14,6 +14,7 @@ import { useUserAvatarChange } from "@features/EditProfilePage/hooks/use-user-av
 import { DeleteAccountModal } from "../../modals/DeleteAccountModal";
 import { AvatarUploader } from "../../ui/AvatarUploader";
 import { EditProfileActionButtons } from "../../ui/EditProfileActionButtons";
+import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 
 export const EditProfileContent: FC = () => {
   const { mutate: logoutMutate } = useLogout();
@@ -26,9 +27,16 @@ export const EditProfileContent: FC = () => {
     isError: userUpdateIsError,
   } = useUpdateUser(email, username);
 
-  const initialState = useMemo(() => ({ email, username }), [email, username]);
+  const initialState = useMemo(
+    () => ({ email, username, avatar: undefined }),
+    [email, username]
+  );
   const { formState, handleChangeByValue, handleChange, handleSubmit } =
     useForm<ProfileForm>(initialState, handleUpdatedUser);
+  const changesIsNotSubmitable = useIsNotSubmitable({
+    initialState,
+    state: formState,
+  });
 
   const { editFields, toggleEdit } = useEditableFields({
     email: false,
@@ -103,6 +111,7 @@ export const EditProfileContent: FC = () => {
             onChange={handleAvatarChange}
           />
           <EditProfileActionButtons
+            isNotSubmitable={changesIsNotSubmitable}
             handleLogout={logoutMutate}
             handleDeleteAccount={toggleShowAccountModal}
           />

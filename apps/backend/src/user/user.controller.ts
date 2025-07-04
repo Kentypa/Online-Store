@@ -7,6 +7,7 @@ import {
   HttpStatus,
   ParseFilePipeBuilder,
   Patch,
+  Post,
   Res,
   UploadedFile,
   UseFilters,
@@ -37,16 +38,17 @@ import {
   VALID_UPLOADS_MIME_TYPES,
 } from "./constants/validation-settings.constant";
 import { DeleteUserDto } from "./dto/delete-user.dto";
+import { RecoveryUserDto } from "./dto/recovery-account.dto";
 
 @ApiBearerAuth()
 @ApiTags("user")
 @Controller("user")
 @UseFilters(HttpExceptionFilter)
-@UseGuards(JwtAuthGuard)
 export class UserController {
   constructor(private userService: UserService) {}
 
   @Get("me")
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Get user by session ID" })
   @ApiResponse({
     status: 200,
@@ -59,6 +61,7 @@ export class UserController {
   }
 
   @Delete("delete-account")
+  @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Remove user from database" })
   @ApiResponse({
     status: 204,
@@ -73,7 +76,19 @@ export class UserController {
     return this.userService.delete(user.id, passwordsDto, response);
   }
 
+  @Post("recovery-account")
+  @ApiOperation({ summary: "Recovery user from database" })
+  @ApiResponse({
+    status: 204,
+    description: "User recovered successfully",
+  })
+  @HttpCode(204)
+  async recoveryUser(@Body() recoveryDataDto: RecoveryUserDto) {
+    return this.userService.recoveryUser(recoveryDataDto);
+  }
+
   @Patch("update")
+  @UseGuards(JwtAuthGuard)
   @ApiConsumes("multipart/form-data")
   @HttpCode(200)
   @ApiOperation({

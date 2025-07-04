@@ -3,21 +3,23 @@ import { ConfigModule } from "@nestjs/config/dist/config.module";
 import { LoggerMiddleware } from "./shared/middleware/logger.middleware";
 import { ConfigService } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import projectConfig from "./config/project.config";
-import databaseConfig from "./config/database.config";
-import encryptionConfig from "./config/encryption.config";
-import jwtConfig from "./config/jwt.config";
 import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { UserStats } from "./shared/entities/user-stats.entity";
 import { User } from "./shared/entities/user.entity";
 import { UserCharacteristics } from "./shared/entities/user-characteristics.entity";
 import { UserRefreshToken } from "./shared/entities/user-refresh-tokens.entity";
+import { ScheduleModule } from "@nestjs/schedule";
+import projectConfig from "./config/project.config";
+import databaseConfig from "./config/database.config";
+import encryptionConfig from "./config/encryption.config";
+import jwtConfig from "./config/jwt.config";
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       load: [projectConfig, databaseConfig, encryptionConfig, jwtConfig],

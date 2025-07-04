@@ -1,17 +1,17 @@
-import { ComponentWithChildren } from "shared/types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { LabelHTMLAttributes } from "react";
 
 type LabelProps = {
   className?: string;
-  htmlFor?: string;
-};
+} & Omit<LabelHTMLAttributes<HTMLLabelElement>, "className">;
 
 export const Label: ComponentWithChildren<LabelProps> = ({
   className,
-  htmlFor,
   children,
+  ...otherOptions
 }) => {
   return (
-    <label className={className} htmlFor={htmlFor}>
+    <label className={className} {...otherOptions}>
       {children}
     </label>
   );

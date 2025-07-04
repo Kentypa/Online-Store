@@ -21,7 +21,7 @@ async function updateAliases() {
     const tsconfig = JSON.parse(rawTsConfig);
 
     tsconfig.compilerOptions ||= {};
-    tsconfig.compilerOptions.baseUrl = "src";
+    tsconfig.compilerOptions.baseUrl = "";
     tsconfig.compilerOptions.paths = paths;
 
     await fs.writeFile(

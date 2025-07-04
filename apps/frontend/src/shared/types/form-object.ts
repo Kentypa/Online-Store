@@ -1,1 +1,1 @@
-export type formObject = Record<string, string | number | File>;
+export type formObject<T> = Record<string, T>;

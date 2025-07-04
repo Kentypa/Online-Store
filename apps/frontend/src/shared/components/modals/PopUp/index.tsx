@@ -3,8 +3,9 @@ import { PopupsOptions } from "@enums/popupsOptions";
 import { useAppDispatch } from "@hooks/redux";
 import { popupsListRemove } from "@stores/popupsList/popupsListSlice";
 import { FC, useState, useCallback, useEffect } from "react";
+import { Button } from "@ui/Button";
 import styles from "./styles.module.css";
-import CrossIcon from "@icons/cross.svg";
+import Cross from "@icons/cross.svg?react";
 
 type PopupProps = {
   classname?: string;
@@ -50,12 +51,12 @@ export const Popup: FC<PopupProps & { popupKey: string | number }> = ({
       } ${classname}`}
     >
       <div className="relative">
-        <button
-          onClick={startCloseAnimation}
+        <Button
+          handleClick={startCloseAnimation}
           className="absolute top-0 right-0 text-gray-400 hover:text-gray-700"
         >
-          <img src={CrossIcon} alt="Close" className="w-4 h-4" />
-        </button>
+          <Cross className="w-4 h-4" />
+        </Button>
         <div className="h-2" />
       </div>
 

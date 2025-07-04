@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   OneToOne,
+  DeleteDateColumn,
 } from "typeorm";
 import { User } from "./user.entity";
 
@@ -41,4 +42,14 @@ export class UserCharacteristics {
   })
   @Column({ type: "integer", default: 0 })
   passiveCoinsIncome: number;
+
+  @ApiProperty({
+    example: "2025-05-27 15:23:48.941416",
+    description: "Date of user characteristics data deleted",
+    type: Date,
+    required: false,
+  })
+  @DeleteDateColumn()
+  @Exclude()
+  deletedAt?: Date;
 }

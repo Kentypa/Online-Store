@@ -1,7 +1,7 @@
 import { ComponentWithChildren } from "@shared-types/component-with-children";
 import { ButtonHTMLAttributes } from "react";
 
-type ButtonProps = {
+export type ButtonProps = {
   handleClick?: () => void;
   className?: string;
 } & Omit<
@@ -12,17 +12,11 @@ type ButtonProps = {
 export const Button: ComponentWithChildren<ButtonProps> = ({
   handleClick,
   children,
-  className,
-  type = "button",
+  className = "",
   ...otherOptions
 }) => {
   return (
-    <button
-      className={className}
-      onClick={handleClick}
-      type={type ?? "button"}
-      {...otherOptions}
-    >
+    <button className={className} onClick={handleClick} {...otherOptions}>
       {children}
     </button>
   );

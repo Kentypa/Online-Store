@@ -1,143 +1,83 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Work Sans";
-  src: url("assets/fonts/Work_Sans/WorkSans-VariableFont_wght.ttf")
-    format("truetype");
+  font-family: "Inter";
+  src: url("assets/fonts/Inter/Inter-VariableFont.ttf") format("truetype");
 }
 
 @theme {
-  --color-primary: #121212;
-  --color-subtle-dark: #61646b;
-  --color-subtle-light: #afb1b6;
-  --color-background: #e0e0e0;
-  --color-surface: #fafafa;
-  --color-background-dark: #43464d;
-  --color-dangerous: #af1212;
+  --color-primary: #1a1a1a;
+  --color-secondary: #555555;
+  --color-accent: #3b82f6;
+  --color-background: #f9fafb;
+  --color-surface: #ffffff;
+  --color-separator: #e5e7eb;
+  --color-attention: #f63e3b;
 
-  --font-worksans: "Work Sans";
+  --font-worksans: "Inter";
 }
 
-@utility rounded-lgx {
-  border-radius: 10px;
+@utility text-display-large {
+  font-family: "Inter";
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+  letter-spacing: -0.5%;
 }
 
-@utility rounded-2.5xl {
-  border-radius: 20px;
+@utility text-display-medium {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 44px;
+  letter-spacing: -0.5%;
+}
+
+@utility text-display-small {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.3%;
+}
+
+@utility text-display-smallest {
+  font-family: "Inter";
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: -0.2%;
+}
+
+@utility text-body-paragraph {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
 }
 
 @utility text-body-small {
-  font-family: "Work Sans";
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: var(--color-secondary);
+}
+
+@utility text-caption {
+  font-family: "Inter";
   font-weight: 400;
   font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.2px;
-}
-@utility text-body-medium {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.08px;
-}
-@utility text-body-large {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0px;
-}
-@utility text-label-small {
-  font-family: "Work Sans";
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  letter-spacing: 0.6px;
-}
-@utility text-label-medium {
-  font-family: "Work Sans";
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.4px;
-}
-@utility text-label-large {
-  font-family: "Work Sans";
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.2px;
-}
-@utility text-title-small {
-  font-family: "Work Sans";
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.12px;
-}
-@utility text-title-medium {
-  font-family: "Work Sans";
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0.16px;
-}
-@utility text-title-large {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 22px;
-  line-height: 28px;
-  letter-spacing: 0.4px;
-}
-@utility text-headline-small {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 32px;
+  line-height: 18px;
   letter-spacing: 0;
-}
-@utility text-headline-medium {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 36px;
-  letter-spacing: 0;
-}
-@utility text-headline-large {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 40px;
-  letter-spacing: 0;
-}
-@utility text-display-small {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
-  letter-spacing: 0;
-}
-@utility text-display-medium {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: 0;
-}
-@utility text-display-large {
-  font-family: "Work Sans";
-  font-weight: 400;
-  font-size: 64px;
-  line-height: 72px;
-  letter-spacing: -0.25px;
+  color: var(--color-secondary);
 }
 
 body {
-  font-family: var(--font-worksans), monospace, serif, sans-serif;
+  font-family: var(--font-inter), monospace, serif, sans-serif;
   color: var(--color-primary);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
 }
 
 button:enabled {
@@ -146,4 +86,5 @@ button:enabled {
 
 button:disabled {
   cursor: not-allowed;
+  opacity: 0.25;
 }

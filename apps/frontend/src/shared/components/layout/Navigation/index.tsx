@@ -12,13 +12,13 @@ export const Navigation: FC<NavigationProps> = ({ menuItems, className }) => {
     <>
       {menuItems.map((item) => (
         <NavLink
-          key={item.link}
-          to={item.link}
+          key={item.address}
+          to={item.address}
           className={({ isActive }) =>
             typeof className === "function" ? className(isActive) : className
           }
         >
-          {item.name}
+          {item.label}
         </NavLink>
       ))}
     </>

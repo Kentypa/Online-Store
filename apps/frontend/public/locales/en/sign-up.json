@@ -1,0 +1,13 @@
+{
+  "welcomeMessage": "Welcome to Kent Store",
+  "signUpLabel": "Sign up",
+  "email": "Email",
+  "password": "Password",
+  "button": {
+    "signUp": "Sign up"
+  },
+  "link": {
+    "message": "Already have an account?",
+    "signUp": "Sign in"
+  }
+}

@@ -1,27 +1,81 @@
-Table user {
-  id serial [pk]
-  username varchar(20) [unique]
-  email varchar(320) [unique, not null]
-  password varchar(512) [not null]
-  avatar_url varchar(256)
-  is_deleted boolean [default: false]
-  language_code varchar(2) [ref: > language.code, default: 'en']
-  role user_role [default: "MEMBER"]
-  country_code varchar(2) [ref: > country.code, default: 'US']
-  created_at timestamp [default: `now()`]
-  updated_at timestamp [default: `now()`]
-}
-
-enum user_role { ADMIN MEMBER }
-
+// ---------- Reference Tables ----------
 Table country {
   code varchar(2) [pk]
+  name varchar(64)
+}
+
+Table region {
+  code varchar(16) [pk]
+  country_code varchar(2) [ref: > country.code]
   name varchar(64)
 }
 
 Table language {
   code varchar(2) [pk]
   name varchar(64)
+}
+
+// ---------- Lookup Tables (Enums replaced) ----------
+Table user_role {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+Table order_status {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+Table payment_status {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+Table shipping_methods {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+Table payment_methods {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+Table period_type_enum {
+  code varchar(32) [pk]
+  name varchar(64) [unique]
+}
+
+// ---------- Multilingual Enum Translation ----------
+Table enum_translation {
+  type varchar(32) [pk]
+  code varchar(32) [pk]
+  lang varchar(2) [ref: > language.code, pk]
+  name varchar(64) [not null]
+}
+
+// ---------- User ----------
+Table user {
+  id serial [pk]
+  email varchar(320) [unique, not null]
+  password varchar(512) [not null]
+  first_name varchar(64)
+  last_name varchar(64)
+  phone varchar(20) [unique]
+  avatar_url varchar(256)
+  language_code varchar(2) [ref: > language.code, default: 'en']
+  role_code varchar(32) [ref: > user_role.code, default: 'MEMBER']
+  country_code varchar(2) [ref: > country.code, default: 'US']
+  region_code varchar(16) [ref: > region.code, null]
+  city varchar(64)
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  deleted_at timestamp
+  indexes {
+    email [unique, name: 'idx_user_email']
+    (country_code, region_code) [name: 'idx_user_location']
+    created_at [name: 'idx_user_created']
+  }
 }
 
 Table user_refresh_token {
@@ -34,6 +88,14 @@ Table user_refresh_token {
   indexes { (user_id, device_id) [pk] }
 }
 
+Table password_reset_token {
+  user_id integer [ref: > user.id]
+  token varchar(512) [pk]
+  expires_at timestamp
+  created_at timestamp [default: `now()`]
+}
+
+// ---------- Cart ----------
 Table cart_item {
   user_id integer [ref: > user.id]
   product_id integer [ref: > product.id]
@@ -42,42 +104,108 @@ Table cart_item {
   indexes { (user_id, product_id) [pk] }
 }
 
-Table order {
+// ---------- Order ----------
+Table shipping_address {
   id serial [pk]
-  user_id integer [ref: > user.id]
-  status order_status [default: "PENDING"]
-  shipping_method shipping_methods
-  payment_method payment_methods
-  payment_status payment_status [default: "PENDING"]
-  country_code varchar(2) [ref: > country.code]
+  user_id integer [ref: > user.id, null]
+  recipient_name varchar(128) [not null]
+  address_line1 varchar(256) [not null]
+  address_line2 varchar(256)
+  city varchar(64) [not null]
+  postal_code varchar(20) [not null]
+  country_code varchar(2) [ref: > country.code, not null]
+  region_code varchar(16) [ref: > region.code, null]
+  phone varchar(20) [not null]
+  is_default boolean [default: false]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  shipping_address_id integer [ref: > shipping_address.id]
+  indexes {
+    (user_id, is_default)
+    (country_code, region_code)
+  }
+}
+
+Table "order" {
+  id serial [pk]
+  user_id integer [ref: > user.id, null]
+  shipping_address_id integer [ref: > shipping_address.id]
+  status_code varchar(32) [ref: > order_status.code, default: 'PENDING']
+  shipping_method_code varchar(32) [ref: > shipping_methods.code]
+  payment_method_code varchar(32) [ref: > payment_methods.code]
+  payment_status_code varchar(32) [ref: > payment_status.code, default: 'PENDING']
   total_price integer
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
+  indexes {
+    (user_id, status_code, created_at) [name: 'idx_order_user_status']
+    created_at [name: 'idx_order_created']
+  }
 }
 
-enum order_status { PENDING PAID SHIPPED DELIVERED CANCELLED }
-enum shipping_methods { PICKUP COURIER DELIVERY }
-enum payment_methods { CASH CARD }
-enum payment_status { PENDING PAID FAILED }
+Table order_history {
+  id serial [pk]
+  order_id integer [ref: > "order".id, not null]
+  user_id integer [ref: > user.id, not null]
+  status_code varchar(32) [ref: > order_status.code, not null]
+  changed_at timestamp [default: `now()`]
+  changed_by integer [ref: > user.id, null]
+  indexes { 
+    order_id
+    user_id 
+  }
+}
 
 Table order_item {
-  order_id integer [ref: > order.id]
+  order_id integer [ref: > "order".id]
   product_id integer [ref: > product.id]
   quantity integer
   unit_price integer
   indexes { (order_id, product_id) [pk] }
 }
 
+// ---------- Payment ----------
+Table payment_transaction {
+  id serial [pk]
+  order_id integer [ref: > "order".id]
+  external_transaction_id varchar(256) [unique]
+  payment_provider varchar(32)
+  amount integer
+  currency varchar(3) [default: 'USD']
+  status_code varchar(32) [ref: > payment_status.code]
+  gateway_metadata jsonb
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  indexes {
+    order_id
+    created_at
+  }
+}
+
+// ---------- Product Catalog ----------
 Table product {
   id serial [pk]
   price integer
+  currency varchar(3) [default: 'USD']
   stock integer [default: 0]
   main_image_url varchar(256)
-  images text[]
   category_id integer [ref: > category.id]
-  is_deleted boolean [default: false]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
+  deleted_at timestamp
+  indexes {
+    category_id [name: 'idx_product_category']
+    created_at [name: 'idx_product_created']
+    price [name: 'idx_product_price']
+  }
+}
+
+Table product_image {
+  product_id integer [ref: > product.id]
+  url varchar(256)
+  image_type varchar(16) // -- MAIN, ZOOM, 3D
+  alt_text varchar(128)
+  indexes { (product_id, url) [pk] }
 }
 
 Table product_translation {
@@ -85,14 +213,17 @@ Table product_translation {
   lang varchar(2) [ref: > language.code]
   title varchar(128)
   description text
-  indexes { (product_id, lang) [pk] }
+  indexes { 
+    (product_id, lang) [pk]
+    (`to_tsvector('simple', title || ' ' || description)`) [type: gin, name: 'idx_product_search']
+  }
 }
 
 Table category {
   id serial [pk]
-  parent_id integer [ref: > category.id]
+  parent_id integer [ref: > category.id, null]
   image_url varchar(256)
-  is_deleted boolean [default: false]
+  deleted_at timestamp
 }
 
 Table category_translation {
@@ -102,27 +233,48 @@ Table category_translation {
   indexes { (category_id, lang) [pk] }
 }
 
-Table shipping_address {
-  order_id integer [ref: > order.id, pk]
-  address varchar(256)
-  city varchar(64)
-  country varchar(64)
-  phone varchar(20)
-}
-
 Table review {
   id serial [pk]
   user_id integer [ref: > user.id]
   product_id integer [ref: > product.id]
-  rating integer
+  rating integer [note: 'CHECK (rating >= 1 AND rating <= 5)']
   comment text
   created_at timestamp [default: `now()`]
-  indexes { (user_id, product_id) [unique] }
+  updated_at timestamp [default: ``]
+  indexes { 
+    (user_id, product_id) [unique]
+    (product_id, rating) [name: 'idx_review_product_rating']
+    created_at [name: 'idx_review_created']
+  }
 }
 
-Table enum_translation {
-  type varchar(32) [pk]
-  code varchar(32) [pk]
-  lang varchar(2) [ref: > language.code, pk]
-  name varchar(64) [not null]
+// ---------- Analytics ----------
+Table product_stats {
+  product_id integer [ref: > product.id, pk]
+  region_code varchar(16) [ref: > region.code, pk]
+  total_sold integer [default: 0]
+  period_type_code varchar(32) [ref: > period_type_enum.code, default: 'ALL_TIME']
+  period_date date
+  indexes {
+    (region_code, period_type_code, total_sold) [name: 'idx_stats_region_sales']
+    period_date [name: 'idx_stats_period']
+  }
+}
+
+// ---------- Audit ----------
+Table audit_log {
+  id serial [pk]
+  entity_type varchar(32) [not null] // -- PRODUCT, CATEGORY, USER, ORDER
+  entity_id integer [not null]
+  action varchar(32) [not null] // -- CREATE, UPDATE, DELETE, SOFT_DELETE
+  field_name varchar(64) [not null]
+  old_value text
+  new_value text
+  changed_at timestamp [default: `now()`]
+  changed_by integer [ref: > user.id, null]
+  indexes {
+    (entity_type, entity_id) [name: 'idx_audit_entity']
+    changed_at [name: 'idx_audit_changed']
+    changed_by [name: 'idx_audit_user']
+  }
 }

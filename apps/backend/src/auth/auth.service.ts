@@ -1,13 +1,13 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { compare } from "bcrypt";
 import { JwtService, JwtSignOptions } from "@nestjs/jwt";
 import { User } from "src/shared/entities/user.entity";
 import { ConfigService } from "@nestjs/config";
@@ -19,7 +19,7 @@ import { RegisterUserDto } from "./dto/register-user.dto";
 import { calculateTokenExpires } from "./functions/calculate-token-expires.function";
 import { UserAccountService } from "src/user/user-account.service";
 import { CookieService } from "src/shared/services/cookie.service";
-import { UserRefreshTokenService } from "./refresh-token.service";
+import { UserRefreshTokenService } from "../shared/services/refresh-token.service";
 
 @Injectable()
 export class AuthService {
@@ -79,13 +79,23 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string): Promise<User> {
-    const user = await this.authRepository.findOneBy({ email });
+    const user = await this.authRepository.findOne({
+      where: { email },
+      withDeleted: true,
+    });
 
     if (!user) {
       throw new UnauthorizedException("User not found");
     }
 
-    const isMatch = await compare(password, user.password);
+    if (user.deletedAt !== null) {
+      throw new ForbiddenException("Account has been deleted");
+    }
+
+    const isMatch = await this.encryptionService.compare(
+      password,
+      user.password,
+    );
 
     if (!isMatch) {
       throw new BadRequestException("Passwords is not match");
@@ -162,7 +172,7 @@ export class AuthService {
 
     const passwordHash = await this.encryptionService.hashData(user.password);
 
-    const newUser = await this.userAccountService.createUserWithStats(
+    const newUser = await this.userAccountService.createUser(
       user.email,
       passwordHash,
     );

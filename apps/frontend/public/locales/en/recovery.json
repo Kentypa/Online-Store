@@ -1,0 +1,8 @@
+{
+  "recoveryLabel": "Account recovery",
+  "email": "Email",
+  "password": "Password",
+  "button": {
+    "recovery": "Recovery"
+  }
+}

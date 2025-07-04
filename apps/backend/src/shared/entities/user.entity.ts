@@ -8,6 +8,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  DeleteDateColumn,
 } from "typeorm";
 import { UserStats } from "./user-stats.entity";
 import { UserCharacteristics } from "./user-characteristics.entity";
@@ -94,4 +95,14 @@ export class User {
   @UpdateDateColumn()
   @Exclude()
   updatedAt: Date;
+
+  @ApiProperty({
+    example: "2025-05-27 15:23:48.941416",
+    description: "Date of user data deleted",
+    type: Date,
+    required: false,
+  })
+  @DeleteDateColumn()
+  @Exclude()
+  deletedAt?: Date;
 }

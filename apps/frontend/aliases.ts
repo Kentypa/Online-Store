@@ -13,7 +13,7 @@ const aliases: Record<string, string> = JSON.parse(raw);
 const transformDataToViteConfig = (aliases: Record<string, string>) => {
   return Object.entries(aliases).map(([alias, relPath]) => ({
     find: alias,
-    replacement: path.resolve(__dirname, "src", relPath),
+    replacement: path.resolve(__dirname, relPath),
   }));
 };
 

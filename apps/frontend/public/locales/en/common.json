@@ -1,0 +1,44 @@
+{
+  "header": {
+    "catalog": "Catalog",
+    "search": "Search"
+  },
+  "footer": {
+    "column_1": {
+      "section": "Kent Store",
+      "aboutUs": "About us",
+      "contacts": "Contacts",
+      "allBrands": "All brands",
+      "onMap": "On map"
+    },
+    "column_2": {
+      "section": "For users",
+      "delivery": "Delivery",
+      "shops": "Shops",
+      "serviceAndWarranty": "Service and warranty",
+      "serviceCenters": "Service centers"
+    },
+    "column_3": {
+      "section": "Business",
+      "forBulkClients": "For bulk clients",
+      "forCorporateClients": "For corporate clients",
+      "serviceLogin": "Service login"
+    },
+    "column_4": {
+      "section": "Benefits",
+      "loyaltyProgram": "Loyalty Program",
+      "promotions": "Promotions",
+      "giftCertificates": "Gift Certificates",
+      "paymentByInstallments": "Payment by Installments",
+      "discountedProducts": "Discounted Products"
+    },
+    "column_5": {
+      "section": "Feedback",
+      "supportService": "Support Service",
+      "phoneNumber": "0 800 216 800",
+      "callCenterHourse": "Call Center Hours",
+      "weekdays": "Mon-Fri: 9:00 AM to 8:00 PM",
+      "weekends": "Sat-Sun: 10:00 AM to 7:00 PM"
+    }
+  }
+}

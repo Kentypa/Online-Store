@@ -1,85 +1,38 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "",
     "paths": {
-      "@/*": [
-        "/*"
-      ],
-      "@icons/*": [
-        "assets/icons/*"
-      ],
-      "@fonts/*": [
-        "assets/fonts/*"
-      ],
-      "@images/*": [
-        "assets/images/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-      "@features/*": [
-        "features/*"
-      ],
-      "@config/*": [
-        "shared/config/*"
-      ],
-      "@enums/*": [
-        "shared/enums/*"
-      ],
-      "@hooks/*": [
-        "shared/hooks/*"
-      ],
-      "@interceptors/*": [
-        "shared/interceptors/*"
-      ],
-      "@services/*": [
-        "shared/services/*"
-      ],
-      "@stores/*": [
-        "shared/stores/*"
-      ],
-      "@shared-types/*": [
-        "shared/types/*"
-      ],
-      "@utils/*": [
-        "shared/utils/*"
-      ],
-      "@selectors/*": [
-        "shared/stores/selectors/*"
-      ],
-      "@business/*": [
-        "shared/components/business/*"
-      ],
-      "@charts/*": [
-        "shared/components/charts/*"
-      ],
-      "@forms/*": [
-        "shared/components/forms/*"
-      ],
-      "@layout/*": [
-        "shared/components/layout/*"
-      ],
-      "@modals/*": [
-        "shared/components/modals/*"
-      ],
-      "@overlays/*": [
-        "shared/components/overlays/*"
-      ],
-      "@ui/*": [
-        "shared/components/ui/*"
-      ],
-      "@wrappers/*": [
-        "shared/components/wrappers/*"
-      ]
+      "@/*": ["/*"],
+      "@en/*": ["public/locales/en/*"],
+      "@uk/*": ["public/locales/uk/*"],
+      "@i18n/*": ["src/i18n/*"],
+      "@icons/*": ["src/assets/icons/*"],
+      "@fonts/*": ["src/assets/fonts/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@screens/*": ["src/screens/*"],
+      "@features/*": ["src/features/*"],
+      "@config/*": ["src/shared/config/*"],
+      "@enums/*": ["src/shared/enums/*"],
+      "@hooks/*": ["src/shared/hooks/*"],
+      "@interceptors/*": ["src/shared/interceptors/*"],
+      "@services/*": ["src/shared/services/*"],
+      "@stores/*": ["src/shared/stores/*"],
+      "@shared-types/*": ["src/shared/types/*"],
+      "@utils/*": ["src/shared/utils/*"],
+      "@selectors/*": ["src/shared/stores/selectors/*"],
+      "@business/*": ["src/shared/components/business/*"],
+      "@charts/*": ["src/shared/components/charts/*"],
+      "@forms/*": ["src/shared/components/forms/*"],
+      "@layout/*": ["src/shared/components/layout/*"],
+      "@modals/*": ["src/shared/components/modals/*"],
+      "@overlays/*": ["src/shared/components/overlays/*"],
+      "@ui/*": ["src/shared/components/ui/*"],
+      "@wrappers/*": ["src/shared/components/wrappers/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "resolveJsonModule": true,
@@ -96,9 +49,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [
-    "src",
-    "aliases.json",
-    "scripts"
-  ]
+  "include": ["src", "aliases.json", "scripts"]
 }

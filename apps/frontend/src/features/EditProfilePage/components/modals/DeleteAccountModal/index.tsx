@@ -1,8 +1,9 @@
-import { ChangeEvent, FC, FormEvent } from "react";
+import { ChangeEvent, FC, FormEvent, useMemo } from "react";
 import { Button } from "@ui/Button";
 import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
 import { Input } from "@forms/Input";
 import { Modal } from "@modals/Modal";
+import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 
 type DeleteAccountModalProps = {
   visible: boolean;
@@ -19,6 +20,16 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
   handleChange,
   handleSubmit,
 }) => {
+  const initialState = useMemo(
+    () => ({ password: "", passwordRepeat: "" }),
+    []
+  );
+
+  const changesIsNotSubmitable = useIsNotSubmitable({
+    allRequired: true,
+    initialState,
+    state: formState,
+  });
   return (
     <Modal
       toggleModal={toggleModal}
@@ -49,6 +60,7 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
           <Button
             className="p-3 bg-primary text-white rounded-2xl"
             type="submit"
+            disabled={changesIsNotSubmitable}
           >
             Confirm
           </Button>

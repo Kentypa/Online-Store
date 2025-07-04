@@ -2,14 +2,14 @@ import api from "@config/axios";
 import { formObject } from "@shared-types/form-object";
 
 export function authService(url: string) {
-  const signInUser = async (formState: formObject) => {
+  const signInUser = async (formState: formObject<string>) => {
     return api.post(`${url}/sign-in`, formState).catch((error) => {
       console.log(error.toJSON());
-      throw new Error(error.message);
+      throw error;
     });
   };
 
-  const signUpUser = async (formState: formObject) => {
+  const signUpUser = async (formState: formObject<string>) => {
     return api.post(`${url}/sign-up`, formState).catch((error) => {
       console.log(error.toJSON());
       throw new Error(error.message);

@@ -1,0 +1,10 @@
+<svg fill="currentColor" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="search-1__a" class="search-1__a">
+      <path d="M0 0h24v24H0z"/>
+    </clipPath>
+  </defs>
+  <g class="search-1__search search-1__1" clip-path="url(#search-1__a)">
+    <path d="m23.707 22.293-5.969-5.969a10.016 10.016 0 1 0-1.414 1.414l5.969 5.969a1 1 0 0 0 1.414-1.414ZM10 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8Z" class="search-1__Vector"/>
+  </g>
+</svg>

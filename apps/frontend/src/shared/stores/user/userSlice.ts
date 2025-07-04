@@ -2,18 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserData } from "@shared-types/user-data";
 
 const initialState: UserData = {
-  username: "",
   avatarUrl: "",
-  achievements: [],
   email: "",
-  userStats: {
-    totalClickCoins: 0,
-    totalClicks: 0,
-  },
-  userCharacteristics: {
-    coinsPerClick: 1,
-    passiveCoinsIncome: 0,
-  },
   authLoading: true,
   isAuthenticated: null,
 };
@@ -23,14 +13,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     changeByData: (state, action: PayloadAction<UserData>) => {
-      state.username = action.payload.username;
+      state.email = action.payload.email;
+      state.firstName = action.payload.firstName;
+      state.lastName = action.payload.lastName;
+      state.city = action.payload.city;
+      state.region = action.payload.region;
+      state.country = action.payload.country;
+      state.phone = action.payload.phone;
       state.avatarUrl = action.payload.avatarUrl
         ? `http://localhost:3000/${action.payload.avatarUrl}`
         : "";
-      state.achievements = action.payload.achievements;
-      state.email = action.payload.email;
-      state.userStats = action.payload.userStats;
-      state.userCharacteristics = action.payload.userCharacteristics;
     },
     changeIsAuthenticated: (state, action: PayloadAction<boolean>) => {
       state.isAuthenticated = action.payload;

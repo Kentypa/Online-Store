@@ -35,7 +35,7 @@ export const CreateOfferModal: FC<CreateOfferModalProps> = ({
             handleChangeByValue={handleChangeByValue}
           />
           <NumericInput
-            label="Amount of coins to sell"
+            label="Price per coin"
             labelClassName="text-subtle-dark text-body-large"
             className="text-center text-body-large p-2.75 border border-subtle-light rounded-lg w-full"
             name="pricePerCoin"

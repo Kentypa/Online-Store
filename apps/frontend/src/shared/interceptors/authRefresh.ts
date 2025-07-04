@@ -84,7 +84,7 @@ api.interceptors.response.use(
       setRefreshingStatus();
 
       const validationStatus = await retryValidate(
-        3,
+        1,
         1000,
         setSuccessRefresh,
         setFailureRefresh

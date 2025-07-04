@@ -1,0 +1,54 @@
+RU
+1. ❓ Это график/диаграмма?
+   ✅ → charts/
+
+2. ❓ Это поле ввода/форма?
+   ✅ → forms/
+
+3. ❓ Это модальное окно с интерактивным контентом?
+   ✅ → modals/
+
+4. ❓ Это элемент поверх контента (загрузчик, уведомление)?
+   ✅ → overlays/
+
+5. ❓ Это структурный элемент страницы (хедер, футер, навигация)?
+   ✅ → layout/
+
+6. ❓ Это обертка, которая добавляет логику другим компонентам?
+   ✅ → wrappers/
+
+7. ❓ Содержит бизнес-логику И переиспользуется?
+   ✅ → business/
+
+8. ❓ Простой UI элемент без бизнес-логики?
+   ✅ → ui/
+
+9. ❓ Специфичен только для одной страницы/фичи?
+   ✅ → остается в features/
+EN
+1. ❓ This is a graph/diagram?
+   ✅ → charts/
+
+2. ❓ This is an input field/form?
+   ✅ → forms/
+
+3. ❓ This is a modal window with interactive content?
+   ✅ → modals/
+
+4. ❓ This is an element on top of the content (loader, notification)?
+   ✅ → overlays/
+
+5. ❓ This is a structural element of the page (header, footer, navigation)?
+   ✅ → layout/
+
+6. ❓ It is a wrapper that adds logic to other components?
+   ✅ → wrappers/
+
+7. ❓ Contains business logic AND is reusable?
+   ✅ → business/
+
+8. ❓ Simple UI element without business logic?
+   ✅ → ui/
+
+9. ❓ Specific to one page/feature only?
+   ✅ → remains in features/

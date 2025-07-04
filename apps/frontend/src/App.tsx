@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router";
 import { store } from "./shared/stores/store";
 import "@interceptors/authRefresh";
 import "@interceptors/userUUID";
+import "@i18n/i18n";
 import "./App.css";
 
 const queryClient = new QueryClient();
