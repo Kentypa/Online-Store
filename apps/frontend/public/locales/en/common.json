@@ -40,5 +40,10 @@
       "weekdays": "Mon-Fri: 9:00 AM to 8:00 PM",
       "weekends": "Sat-Sun: 10:00 AM to 7:00 PM"
     }
+  },
+  "profileNavigation": {
+    "section": "Profile",
+    "orders": "Orders",
+    "userSettings": "User settings"
   }
 }

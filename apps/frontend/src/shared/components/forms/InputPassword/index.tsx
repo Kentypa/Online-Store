@@ -22,6 +22,7 @@ export const InputPassword: FC<InputProps> = ({
       />
       <Button
         handleClick={handleClick}
+        type="button"
         className="absolute top-1/2 right-3 -translate-y-1/2"
       >
         {showPassword ? (
