@@ -19,7 +19,7 @@ export const userSlice = createSlice({
       state.city = action.payload.city;
       state.region = action.payload.region;
       state.country = action.payload.country;
-      state.phone = action.payload.phone;
+      state.phoneNumber = action.payload.phoneNumber;
       state.avatarUrl = action.payload.avatarUrl
         ? `http://localhost:3000/${action.payload.avatarUrl}`
         : "";

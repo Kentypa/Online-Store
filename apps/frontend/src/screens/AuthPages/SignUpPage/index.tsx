@@ -16,13 +16,17 @@ import SignUpIcon from "@icons/sign.svg?react";
 export const SignUpPage: FC = () => {
   const { t } = useTranslation(["sign-up"]);
 
-  const { isSuccess, mutate, isError: userSignUpIsError } = useSignUp();
+  const {
+    isSuccess,
+    mutate: signUpMutate,
+    isError: userSignUpIsError,
+  } = useSignUp();
 
   const initialState = useMemo(() => ({ email: "", password: "" }), []);
   const { formState, handleChange, handleSubmit } = useForm(
     initialState,
     (formState) => {
-      mutate(formState);
+      signUpMutate(formState);
     }
   );
 

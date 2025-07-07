@@ -3,9 +3,6 @@
     "userEmail": "User Email:",
     "userFirstName": "User First Name:",
     "userLastName": "User Last Name:",
-    "userCity": "City:",
-    "userRegion": "Region:",
-    "userCountry": "Country:",
     "userPhoneNumber": "Phone Number:"
   },
   "buttons": {
@@ -13,5 +10,10 @@
     "changePassword": "Change password",
     "logout": "Logout",
     "deleteAccount": "Delete account"
+  },
+  "labels": {
+    "userCity": "City:",
+    "userRegion": "Region:",
+    "userCountry": "Country:"
   }
 }

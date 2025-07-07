@@ -1,13 +1,35 @@
 // ---------- Reference Tables ----------
 Table country {
-  code varchar(2) [pk]
-  name varchar(64)
+  code varchar(2) [pk] 
+}
+
+Table country_translation {
+  country_code varchar(2) [ref: > country.code, pk]
+  lang_code varchar(2) [ref: > language.code, pk]
+  name varchar(128) [not null]
 }
 
 Table region {
-  code varchar(16) [pk]
-  country_code varchar(2) [ref: > country.code]
-  name varchar(64)
+  id serial [pk]
+  country_code varchar(2) [ref: > country.code, not null]
+  code varchar(16) [unique, not null]
+}
+
+Table region_translation {
+  region_id integer [ref: > region.id, pk]
+  lang_code varchar(2) [ref: > language.code, pk]
+  name varchar(128) [not null]
+}
+
+Table city {
+  id serial [pk]
+  region_id integer [ref: > region.id, not null]
+}
+
+Table city_translation {
+  city_id integer [ref: > city.id, pk]
+  lang_code varchar(2) [ref: > language.code, pk]
+  name varchar(128) [not null]
 }
 
 Table language {
@@ -64,10 +86,9 @@ Table user {
   phone varchar(20) [unique]
   avatar_url varchar(256)
   language_code varchar(2) [ref: > language.code, default: 'en']
-  role_code varchar(32) [ref: > user_role.code, default: 'MEMBER']
-  country_code varchar(2) [ref: > country.code, default: 'US']
-  region_code varchar(16) [ref: > region.code, null]
-  city varchar(64)
+  country_code varchar(2) [ref: > country.code, default: 'GB']
+  region_id integer [ref: > region.id, null]
+  city_id integer [ref: > city.id, null]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
   deleted_at timestamp
@@ -111,10 +132,10 @@ Table shipping_address {
   recipient_name varchar(128) [not null]
   address_line1 varchar(256) [not null]
   address_line2 varchar(256)
-  city varchar(64) [not null]
   postal_code varchar(20) [not null]
   country_code varchar(2) [ref: > country.code, not null]
-  region_code varchar(16) [ref: > region.code, null]
+  region_id integer [ref: > region.id, null]
+  city_id integer [ref: > city.id, not null]
   phone varchar(20) [not null]
   is_default boolean [default: false]
   created_at timestamp [default: `now()`]
@@ -126,7 +147,7 @@ Table shipping_address {
   }
 }
 
-Table "order" {
+Table order {
   id serial [pk]
   user_id integer [ref: > user.id, null]
   shipping_address_id integer [ref: > shipping_address.id]
@@ -145,7 +166,7 @@ Table "order" {
 
 Table order_history {
   id serial [pk]
-  order_id integer [ref: > "order".id, not null]
+  order_id integer [ref: > order.id, not null]
   user_id integer [ref: > user.id, not null]
   status_code varchar(32) [ref: > order_status.code, not null]
   changed_at timestamp [default: `now()`]
@@ -157,7 +178,7 @@ Table order_history {
 }
 
 Table order_item {
-  order_id integer [ref: > "order".id]
+  order_id integer [ref: > order.id]
   product_id integer [ref: > product.id]
   quantity integer
   unit_price integer
@@ -167,7 +188,7 @@ Table order_item {
 // ---------- Payment ----------
 Table payment_transaction {
   id serial [pk]
-  order_id integer [ref: > "order".id]
+  order_id integer [ref: > order.id]
   external_transaction_id varchar(256) [unique]
   payment_provider varchar(32)
   amount integer
@@ -203,7 +224,7 @@ Table product {
 Table product_image {
   product_id integer [ref: > product.id]
   url varchar(256)
-  image_type varchar(16) // -- MAIN, ZOOM, 3D
+  image_type varchar(16)
   alt_text varchar(128)
   indexes { (product_id, url) [pk] }
 }
@@ -250,8 +271,8 @@ Table review {
 
 // ---------- Analytics ----------
 Table product_stats {
-  product_id integer [ref: > product.id, pk]
-  region_code varchar(16) [ref: > region.code, pk]
+  product_id integer [ref: > product.id, pk]  
+  region_id integer [ref: > region.id, pk]
   total_sold integer [default: 0]
   period_type_code varchar(32) [ref: > period_type_enum.code, default: 'ALL_TIME']
   period_date date

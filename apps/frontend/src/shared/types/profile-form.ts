@@ -5,8 +5,8 @@ export type ProfileForm = {
   newPassword?: string;
   firstName?: string;
   lastName?: string;
-  phone?: string;
-  country?: string;
-  region?: string;
-  city?: string;
+  phoneNumber?: string;
+  countryCode?: string;
+  regionId?: number;
+  cityId?: number;
 };

@@ -11,7 +11,7 @@ import { useState, useMemo } from "react";
 export const useDeleteAccount = () => {
   const [showDeleteAccountModal, setShowAccountModal] = useState(false);
 
-  const toggleShowAccountModal = () =>
+  const toggleShowDeleteAccountModal = () =>
     setShowAccountModal(!showDeleteAccountModal);
 
   const queryClient = useQueryClient();
@@ -42,7 +42,7 @@ export const useDeleteAccount = () => {
     showDeleteAccountModal,
     handleChange,
     handleSubmit,
-    toggleShowAccountModal,
+    toggleShowDeleteAccountModal,
     ...otherOptions,
   };
 };

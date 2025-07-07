@@ -10,15 +10,17 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from "@nestjs/common";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import * as fs from "fs";
-import * as path from "path";
 import { DeleteUserDto } from "./dto/delete-user.dto";
 import { Response } from "express";
 import { CookieService } from "src/shared/services/cookie.service";
 import { RecoveryUserDto } from "./dto/recovery-account.dto";
-import { UserCharacteristics } from "src/shared/entities/user-characteristics.entity";
-import { UserStats } from "src/shared/entities/user-stats.entity";
+import { UpdateUserDto } from "./dto/update-user.dto";
+import * as fs from "fs";
+import * as path from "path";
+import { Language } from "src/geo/entities/language.entity";
+import { Country } from "src/geo/entities/country.entity";
+import { Region } from "src/geo/entities/region.entity";
+import { City } from "src/geo/entities/city.entity";
 
 @Injectable()
 export class UserService {
@@ -40,7 +42,6 @@ export class UserService {
     const user = await this.userRepository.findOne({
       where: { email },
       withDeleted: true,
-      relations: ["userStats", "userCharacteristics"],
     });
 
     if (user?.deletedAt === null) {
@@ -62,21 +63,13 @@ export class UserService {
 
     await this.userRepository.restore(user.id);
 
-    if (user.userStats?.id) {
-      await this.dataSource.getRepository(UserStats).restore(user.userStats.id);
-    }
-
-    if (user.userCharacteristics?.id) {
-      await this.dataSource
-        .getRepository(UserCharacteristics)
-        .restore(user.userCharacteristics.id);
-    }
     return;
   }
 
   async getById(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
+      relations: ["language", "city", "country", "region"],
     });
 
     if (!user) {
@@ -93,40 +86,71 @@ export class UserService {
   }
 
   async update(id: number, dto: UpdateUserDto, avatar?: Express.Multer.File) {
-    try {
-      const user = await this.getById(id);
+    const user = await this.getById(id);
 
-      if (dto.email) user.email = dto.email;
-      if (dto.username) user.username = dto.username;
+    if (dto.email) user.email = dto.email;
+    if (dto.firstName) user.firstName = dto.firstName;
+    if (dto.lastName) user.lastName = dto.lastName;
+    if (dto.phoneNumber) user.phoneNumber = dto.phoneNumber;
 
-      if (dto.oldPassword && dto.newPassword) {
-        const isOldPasswordValid = await this.encryptionService.compare(
-          dto.oldPassword,
-          user.password,
-        );
-        if (!isOldPasswordValid) {
-          throw new BadRequestException("Incorrect old password");
-        }
-        user.password = await this.encryptionService.hashData(dto.newPassword);
+    if (dto.oldPassword && dto.newPassword) {
+      const isOldPasswordValid = await this.encryptionService.compare(
+        dto.oldPassword,
+        user.password,
+      );
+      if (!isOldPasswordValid) {
+        throw new BadRequestException("Incorrect old password");
       }
-
-      if (avatar && avatar.path) {
-        if (user.avatarUrl) {
-          const oldPath = path.resolve(user.avatarUrl);
-          if (fs.existsSync(oldPath)) {
-            fs.unlinkSync(oldPath);
-          }
-        }
-
-        user.avatarUrl = path.join(avatar.path);
-      }
-
-      return await this.userRepository.save(user);
-    } catch {
-      if (avatar && avatar.path && fs.existsSync(avatar.path)) {
-        fs.unlinkSync(avatar.path);
-      }
+      user.password = await this.encryptionService.hashData(dto.newPassword);
     }
+
+    if (dto.languageCode) {
+      const language = await this.dataSource.getRepository(Language).findOne({
+        where: { code: dto.languageCode },
+      });
+      if (!language) throw new NotFoundException("Language not found");
+      user.language = language;
+    }
+
+    if (dto.countryCode) {
+      const country = await this.dataSource.getRepository(Country).findOne({
+        where: { code: dto.countryCode },
+      });
+      if (!country) throw new NotFoundException("Country not found");
+      user.country = country;
+    }
+
+    if (dto.regionId) {
+      const region = await this.dataSource.getRepository(Region).findOne({
+        where: { id: Number(dto.regionId) },
+      });
+      if (!region) throw new NotFoundException("Region not found");
+      user.region = region;
+    }
+
+    if (dto.cityId) {
+      const city = await this.dataSource.getRepository(City).findOne({
+        where: { id: Number(dto.cityId) },
+      });
+      if (!city) throw new NotFoundException("City not found");
+      user.city = city;
+    }
+
+    if (avatar && avatar.path) {
+      if (user.avatarUrl) {
+        const oldPath = path.resolve(user.avatarUrl);
+        if (fs.existsSync(oldPath)) {
+          fs.unlinkSync(oldPath);
+        }
+      }
+      user.avatarUrl = avatar.path;
+    }
+
+    if (dto.avatarUrl) {
+      user.avatarUrl = dto.avatarUrl;
+    }
+
+    return await this.userRepository.save(user);
   }
 
   async delete(id: number, dto: DeleteUserDto, response: Response) {

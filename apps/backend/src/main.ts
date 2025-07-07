@@ -4,45 +4,95 @@ import { NestExpressApplication } from "@nestjs/platform-express/interfaces/nest
 import { ConfigService } from "@nestjs/config/dist/config.service";
 import { DocumentBuilder } from "@nestjs/swagger/dist/document-builder";
 import { SwaggerModule } from "@nestjs/swagger";
-import cookieParser from "cookie-parser";
 import { HttpExceptionFilter } from "./shared/filters/http-exception.filter";
-import { ClassSerializerInterceptor, ValidationPipe } from "@nestjs/common";
+import {
+  ClassSerializerInterceptor,
+  ValidationPipe,
+  Logger,
+} from "@nestjs/common";
 import { join } from "path";
+import { GeoSeederService } from "./geo/seeds/geo-seeder.service";
+import cookieParser from "cookie-parser";
+
+async function runSeeder(app: NestExpressApplication) {
+  const logger = new Logger("Seeder");
+
+  try {
+    logger.log("Starting database seeding process...");
+
+    const seeder = app.get(GeoSeederService);
+
+    if (!seeder) {
+      throw new Error("GeoSeederService not found in application context");
+    }
+
+    await seeder.seed();
+    logger.log("Database seeding completed successfully!");
+  } catch (error) {
+    logger.error("Database seeding failed:", error);
+    // Можете решить, нужно ли завершать приложение при ошибке сидера
+    // throw error; // Раскомментируйте, если хотите остановить приложение при ошибке сидера
+  }
+}
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const configService = app.get(ConfigService);
+  const logger = new Logger("Bootstrap");
 
-  app.useStaticAssets(join(__dirname, "..", "uploads"), {
-    prefix: "/uploads/",
-  });
+  try {
+    logger.log("Creating NestJS application...");
+    const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    const configService = app.get(ConfigService);
 
-  app.enableCors({
-    origin: `http://localhost:${configService.get("project.frontend.port") as number}`,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  });
+    // Настройка статических файлов
+    app.useStaticAssets(join(__dirname, "..", "uploads"), {
+      prefix: "/uploads/",
+    });
 
-  const config = new DocumentBuilder()
-    .setTitle("Clicker API")
-    .setDescription("Clicker app api description")
-    .setVersion("1.0")
-    .build();
+    // Настройка CORS
+    app.enableCors({
+      origin: `http://localhost:${configService.get("project.frontend.port") as number}`,
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true,
+    });
 
-  const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup("api", app, documentFactory);
+    // app.enableCors();
 
-  app.use(cookieParser());
+    // Настройка Swagger
+    const config = new DocumentBuilder()
+      .setTitle("Clicker API")
+      .setDescription("Clicker app api description")
+      .setVersion("1.0")
+      .build();
 
-  app.useGlobalFilters(new HttpExceptionFilter());
+    const documentFactory = () => SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup("api", app, documentFactory);
 
-  app.useGlobalPipes(new ValidationPipe());
+    // Глобальные middleware и фильтры
+    app.use(cookieParser());
+    app.useGlobalFilters(new HttpExceptionFilter());
+    app.useGlobalPipes(new ValidationPipe({ transform: true }));
+    app.useGlobalInterceptors(
+      new ClassSerializerInterceptor(app.get(Reflector)),
+    );
 
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+    logger.log("Seeder is enabled, running database seeding...");
+    await runSeeder(app);
 
-  await app.listen(configService.getOrThrow<number>("project.backend.port"));
+    // Запуск сервера
+    const port = configService.getOrThrow<number>("project.backend.port");
+    await app.listen(port);
+
+    logger.log(`Application is running on port ${port}`);
+    logger.log(
+      `Swagger documentation available at: http://localhost:${port}/api`,
+    );
+  } catch (error) {
+    logger.error("Error during application bootstrap:", error);
+    process.exit(1);
+  }
 }
 
 bootstrap().catch((error) => {
-  console.error("Error during application bootstrap:", error);
+  console.error("Critical error during bootstrap:", error);
+  process.exit(1);
 });

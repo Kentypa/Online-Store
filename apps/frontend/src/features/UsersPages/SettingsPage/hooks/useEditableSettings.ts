@@ -5,22 +5,29 @@ import { ChangeEvent } from "react";
 import { editableSettingsKeys } from "../settings/editableSettingsKeys";
 
 export const useEditableSettings = (
-  handleChange?: (event: ChangeEvent<HTMLInputElement>) => void
-) => {
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void,
+  formState: Record<string, string>
+): EditableSettingsInputProps[] => {
   const { t } = useTranslation("user-settings");
 
   const editableFieldsInitialState = Object.fromEntries(
-    editableSettingsKeys.map((key) => [key, false])
+    editableSettingsKeys.map((obj) => {
+      const labelKey = Object.keys(obj)[0];
+      return [labelKey, false];
+    })
   );
 
   const editableFields = useEditableFields(editableFieldsInitialState);
 
-  const createEditableInput = (key: string): EditableSettingsInputProps => ({
-    label: t(`inputs.${key}`),
-    isEdited: editableFields.editFields[key],
-    toggleEdit: () => editableFields.toggleEdit(key),
-    handleChange,
+  return editableSettingsKeys.map((obj) => {
+    const [labelKey, name] = Object.entries(obj)[0];
+    return {
+      label: t(`inputs.${labelKey}`),
+      isEdited: editableFields.editFields[labelKey],
+      toggleEdit: () => editableFields.toggleEdit(labelKey),
+      handleChange,
+      name,
+      value: formState[name] || "",
+    };
   });
-
-  return editableSettingsKeys.map(createEditableInput);
 };

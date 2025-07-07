@@ -21,7 +21,7 @@ export const useLogout = () => {
       queryClient.removeQueries({ queryKey: [Queries.AUTH] });
       queryClient.removeQueries({ queryKey: [Queries.USER] });
 
-      navigate(PagesEndponts.signIn);
+      navigate(PagesEndponts.SIGN_IN);
     },
   });
 

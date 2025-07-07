@@ -27,18 +27,18 @@ import { GetUserDto } from "./dto/get-user.dto";
 import { User } from "src/shared/entities/user.entity";
 import { UserDecorator } from "src/shared/decorators/user.decorator";
 import { JwtAuthGuard } from "src/shared/guards/jwt-auth.guard";
+import { Response } from "express";
+import { DeleteUserDto } from "./dto/delete-user.dto";
+import { RecoveryUserDto } from "./dto/recovery-account.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { Express, Response } from "express";
 import { avatarStorage } from "src/config/multer.config";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { FileMimeTypeValidator } from "src/shared/validators/file-mime-type.validator";
 import { ValidationFilePipe } from "src/shared/pipes/validation-file.pipe";
+import { FileMimeTypeValidator } from "src/shared/validators/file-mime-type.validator";
 import {
   MAX_USER_AVATAR_SIZE_IN_BYTES,
   VALID_UPLOADS_MIME_TYPES,
 } from "./constants/validation-settings.constant";
-import { DeleteUserDto } from "./dto/delete-user.dto";
-import { RecoveryUserDto } from "./dto/recovery-account.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @ApiBearerAuth()
 @ApiTags("user")

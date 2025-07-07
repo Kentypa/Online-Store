@@ -1,19 +1,21 @@
 import { ChangeEvent, FC, FormEvent, useMemo } from "react";
 import { Button } from "@ui/Button";
-import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
 import { Input } from "@forms/Input";
 import { Modal } from "@modals/Modal";
 import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
+import { Label } from "@forms/Label";
+import { Form } from "@forms/Form";
+import { ChangePasswordFormData } from "@shared-types/change-password-form-data";
 
-type DeleteAccountModalProps = {
+type ChangePasswordModalProps = {
   visible: boolean;
-  formState: DeleteAccountFormData;
+  formState: ChangePasswordFormData;
   toggleModal: () => void;
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 };
 
-export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
+export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
   visible,
   formState,
   toggleModal,
@@ -21,7 +23,7 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
   handleSubmit,
 }) => {
   const initialState = useMemo(
-    () => ({ password: "", passwordRepeat: "" }),
+    () => ({ oldPassword: "", newPassword: "" }),
     []
   );
 
@@ -34,27 +36,28 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
     <Modal
       toggleModal={toggleModal}
       visible={visible}
-      backgroundClassName="z-10 bg-[#12121280] fixed inset-0 flex justify-center items-center"
+      backgroundClassName="z-10 bg-[#1A1A1A80] fixed inset-0 flex justify-center items-center"
     >
-      <form
-        className="bg-white flex flex-col border border-subtle-light rounded-xl p-3 gap-3"
-        onSubmit={handleSubmit}
+      <Form
+        className="bg-white flex flex-col border border-separator rounded-xl p-3 gap-3"
+        handleSubmit={handleSubmit}
       >
+        <Label>Old Password</Label>
         <Input
           handleChange={handleChange}
-          value={formState.password}
-          name="password"
-          placeholder="Password"
-          label="Password"
-          className="p-1 border border-subtle-dark rounded-xl"
+          value={formState.oldPassword}
+          name="oldPassword"
+          className="p-1 border border-separator rounded-xl"
+          type="password"
         />
+
+        <Label>New Password</Label>
         <Input
           handleChange={handleChange}
-          value={formState.passwordRepeat}
-          name="passwordRepeat"
-          placeholder="Repeat password"
-          label="Repeat password"
-          className="p-1 border border-subtle-dark rounded-xl"
+          value={formState.newPassword}
+          name="newPassword"
+          className="p-1 border border-separator rounded-xl"
+          type="password"
         />
         <div className="flex justify-between">
           <Button
@@ -65,13 +68,13 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
             Confirm
           </Button>
           <Button
-            className="p-3 bg-subtle-light rounded-2xl"
+            className="p-3 bg-separator rounded-2xl"
             handleClick={toggleModal}
           >
             Cancel
           </Button>
         </div>
-      </form>
+      </Form>
     </Modal>
   );
 };

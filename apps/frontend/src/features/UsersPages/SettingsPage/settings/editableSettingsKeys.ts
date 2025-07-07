@@ -1,9 +1,6 @@
 export const editableSettingsKeys = [
-  "userEmail",
-  "userFirstName",
-  "userLastName",
-  "userCity",
-  "userRegion",
-  "userCountry",
-  "userPhoneNumber",
+  { userEmail: "email" },
+  { userFirstName: "firstName" },
+  { userLastName: "lastName" },
+  { userPhoneNumber: "phoneNumber" },
 ];

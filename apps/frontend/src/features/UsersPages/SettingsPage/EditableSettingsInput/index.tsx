@@ -6,9 +6,10 @@ import EditFieldPencil from "@icons/pencil.svg?react";
 export type EditableSettingsInputProps = {
   label: string;
   isEdited: boolean;
+  name: string;
+  value?: string | number;
   toggleEdit: () => void;
   handleChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-  initialLabel?: string;
 };
 
 export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
@@ -16,7 +17,8 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
   isEdited,
   toggleEdit,
   handleChange,
-  initialLabel = "",
+  name,
+  value,
 }) => {
   return (
     <div className="flex w-full justify-between">
@@ -24,10 +26,11 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
         <Input
           className="p-1 border-2 border-separator rounded-xl max-h-6"
           handleChange={handleChange}
-          name={label}
+          name={name}
+          value={value}
         />
       ) : (
-        <p>{label + initialLabel}</p>
+        <p>{label + value}</p>
       )}
 
       <Button handleClick={toggleEdit}>

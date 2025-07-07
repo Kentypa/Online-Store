@@ -12,6 +12,7 @@ import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
 import { useUserData } from "@hooks/use-user-data";
 import { useUserVerify } from "@hooks/use-user-validate";
 import { Form } from "@forms/Form";
+import { useAuthSetup } from "@features/AuthPages/SignInPage/hooks/use-auth-setup";
 import SiteLogo from "@icons/logo-website.svg?react";
 import SignInIcon from "@icons/sign.svg?react";
 
@@ -45,6 +46,7 @@ export const SignInPage: FC = () => {
 
   useNavigateOnSuccess(userDataFetchedSuccess, PagesEndponts.USER_SETTINGS);
   useSignInPopups({ userSignInIsError });
+  useAuthSetup(authIsSuccess);
 
   return (
     <div className="mt-30 flex flex-col gap-17.5 items-center">

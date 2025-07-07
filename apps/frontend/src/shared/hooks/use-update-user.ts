@@ -7,15 +7,16 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useAppDispatch } from "@hooks/redux";
 import { UserData } from "@shared-types/user-data";
 
-export const useUpdateUser = (
-  email?: string,
-  firstName?: string,
-  lastName?: string,
-  country?: string,
-  region?: string,
-  city?: string,
-  phone?: string
-) => {
+export const useUpdateUser = (data: ProfileForm) => {
+  const {
+    cityId,
+    countryCode,
+    email,
+    firstName,
+    lastName,
+    phoneNumber,
+    regionId,
+  } = data;
   const { updateUserData } = userService(ServiceNames.USER);
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -46,14 +47,22 @@ export const useUpdateUser = (
       formData.append("firstName", data.firstName);
     if (data.lastName && data.lastName.trim() && data.lastName !== lastName)
       formData.append("lastName", data.lastName);
-    if (data.country && data.country.trim() && data.country !== country)
-      formData.append("country", data.country);
-    if (data.region && data.region.trim() && data.region !== region)
-      formData.append("region", data.region);
-    if (data.city && data.city.trim() && data.city !== city)
-      formData.append("city", data.city);
-    if (data.phone && data.phone.trim() && data.phone !== phone)
-      formData.append("region", data.phone);
+    if (
+      data.countryCode &&
+      data.countryCode.trim() &&
+      data.countryCode !== countryCode
+    )
+      formData.append("countryCode", data.countryCode);
+    if (data.regionId && data.regionId !== regionId)
+      formData.append("regionId", String(data.regionId));
+    if (data.cityId && data.cityId !== cityId)
+      formData.append("cityId", String(data.cityId));
+    if (
+      data.phoneNumber &&
+      data.phoneNumber.trim() &&
+      data.phoneNumber !== phoneNumber
+    )
+      formData.append("phoneNumber", data.phoneNumber);
     if (data.avatar instanceof File) formData.append("avatar", data.avatar);
     if (data.oldPassword && data.newPassword) {
       formData.append("oldPassword", data.oldPassword);

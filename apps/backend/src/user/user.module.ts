@@ -5,7 +5,6 @@ import { UserService } from "./user.service";
 import { EncryptionService } from "src/shared/services/encryption.service";
 import { UserController } from "./user.controller";
 import { UserAccountService } from "./user-account.service";
-import { UserStats } from "src/shared/entities/user-stats.entity";
 import { UserFactory } from "./user.factory";
 import { CookieService } from "src/shared/services/cookie.service";
 import { UserDeleteAccountService } from "./user-deletion.service";
@@ -13,7 +12,7 @@ import { UserRefreshTokenService } from "src/shared/services/refresh-token.servi
 import { UserRefreshToken } from "src/shared/entities/user-refresh-tokens.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, UserStats, UserRefreshToken])],
+  imports: [TypeOrmModule.forFeature([User, UserRefreshToken])],
   controllers: [UserController],
   providers: [
     UserRefreshTokenService,

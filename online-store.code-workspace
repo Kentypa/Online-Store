@@ -163,7 +163,8 @@
       "*.strategy.ts": "strategy",
       "*.dto.ts": "dto",
       "*.gateaway.ts": "gateaway",
-      "*.migration.ts": "migration"
+      "*.migration.ts": "migration",
+      "*.seed.ts": "seeder"
     },
     "material-icon-theme.files.customClones": [
       {
@@ -245,6 +246,11 @@
         "name": "migration",
         "base": "database",
         "color": "red"
+      },
+      {
+        "name": "seeder",
+        "base": "database",
+        "color": "green"
       }
     ]
   }

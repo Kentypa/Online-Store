@@ -8,7 +8,6 @@ export class UpdateUserDto {
     example: "test@gmail.com",
     description: "User email",
     type: "string",
-    required: false,
   })
   @MaxLength(320)
   email?: string;
@@ -16,33 +15,91 @@ export class UpdateUserDto {
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: "kentik",
-    description: "User name",
+    example: "Igor",
+    description: "First name",
     type: "string",
-    required: false,
   })
-  @MaxLength(20)
-  username: string;
+  @MaxLength(64)
+  firstName?: string;
 
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: "qwerty1234",
-    description: "User old password",
+    example: "Voitenko",
+    description: "Last name",
     type: "string",
-    required: false,
   })
-  @MaxLength(512)
+  @MaxLength(64)
+  lastName?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: "+88005553535",
+    description: "Phone number",
+    type: "string",
+  })
+  @MaxLength(20)
+  phoneNumber?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: "en",
+    description: "Language code",
+    type: "string",
+  })
+  languageCode?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: "US",
+    description: "Country code",
+    type: "string",
+  })
+  countryCode?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: 1,
+    description: "Region ID",
+    type: "string",
+  })
+  regionId?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: 1,
+    description: "City ID",
+    type: "string",
+  })
+  cityId?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: "/uploads/users/avatars/avatar.jpg",
+    description: "Path to avatar",
+    type: "string",
+  })
+  avatarUrl?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({
+    example: "oldPassword123",
+    description: "Old password",
+  })
   oldPassword?: string;
 
   @IsOptional()
   @IsString()
   @ApiProperty({
-    example: "1234qwerty",
-    description: "User new password",
-    type: "string",
-    required: false,
+    example: "newPassword123",
+    description: "New password",
   })
-  @MaxLength(512)
   newPassword?: string;
 }

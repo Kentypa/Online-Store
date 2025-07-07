@@ -14,7 +14,7 @@
   --color-separator: #e5e7eb;
   --color-attention: #f63e3b;
 
-  --font-worksans: "Inter";
+  --font-inter: "Inter";
 }
 
 @utility text-display-large {

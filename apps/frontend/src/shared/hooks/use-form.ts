@@ -8,7 +8,7 @@ import {
 
 export function useForm<T extends Record<string, unknown>>(
   initialState: T,
-  onSubmit?: (formState: T) => void,
+  onSubmit?: (formState: T) => void
 ) {
   const [formState, setFormState] = useState<T>(initialState);
 
@@ -16,20 +16,23 @@ export function useForm<T extends Record<string, unknown>>(
     setFormState(initialState);
   }, [initialState]);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }, []);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+      const { name, value } = e.target;
+      setFormState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    },
+    []
+  );
 
   const handleSubmit = useCallback(
     (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       onSubmit?.(formState);
     },
-    [formState, onSubmit],
+    [formState, onSubmit]
   );
 
   const handleChangeByValue = useCallback(
@@ -39,7 +42,7 @@ export function useForm<T extends Record<string, unknown>>(
         [name]: value,
       }));
     },
-    [],
+    []
   );
 
   return { formState, handleChange, handleChangeByValue, handleSubmit };

@@ -1,11 +1,11 @@
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import { Input } from "@forms/Input";
 import UndefinedAvatar from "@icons/user-avatar.svg?react";
 import EditIcon from "@icons/pencil.svg?react";
 
 type AvatarUploaderProps = {
   avatarPreview?: string;
-  handleChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const AvatarUploader: FC<AvatarUploaderProps> = ({

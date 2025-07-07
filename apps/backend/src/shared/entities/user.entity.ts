@@ -4,15 +4,17 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToOne,
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
   DeleteDateColumn,
+  ManyToOne,
 } from "typeorm";
-import { UserStats } from "./user-stats.entity";
-import { UserCharacteristics } from "./user-characteristics.entity";
 import { UserRefreshToken } from "./user-refresh-tokens.entity";
+import { Language } from "src/geo/entities/language.entity";
+import { Country } from "src/geo/entities/country.entity";
+import { Region } from "src/geo/entities/region.entity";
+import { City } from "src/geo/entities/city.entity";
 
 @Entity()
 export class User {
@@ -33,12 +35,28 @@ export class User {
   email: string;
 
   @ApiProperty({
-    example: "Kentik",
-    description: "User name",
+    example: "Igor",
+    description: "User firstname",
     type: "string",
   })
-  @Column({ type: "varchar", length: 20, unique: true, nullable: true })
-  username: string;
+  @Column({ type: "varchar", length: 64, nullable: true })
+  firstName: string;
+
+  @ApiProperty({
+    example: "Voitenko",
+    description: "User lastname",
+    type: "string",
+  })
+  @Column({ type: "varchar", length: 64, nullable: true })
+  lastName: string;
+
+  @ApiProperty({
+    example: "+88005553535",
+    description: "User phone number",
+    type: "string",
+  })
+  @Column({ type: "varchar", length: 20, nullable: true })
+  phoneNumber: string;
 
   @ApiProperty({
     example: "qwerty1234",
@@ -57,21 +75,17 @@ export class User {
   @Column({ type: "varchar", length: 512, nullable: true })
   avatarUrl: string;
 
-  @OneToOne(() => UserStats, (stats) => stats.user, {
-    eager: true,
-    cascade: true,
-  })
-  userStats: UserStats;
+  @ManyToOne(() => Language, (language) => language.code)
+  language: Language;
 
-  @OneToOne(
-    () => UserCharacteristics,
-    (characteristics) => characteristics.user,
-    {
-      eager: true,
-      cascade: true,
-    },
-  )
-  userCharacteristics: UserCharacteristics;
+  @ManyToOne(() => Country, (country) => country.code)
+  country: Country;
+
+  @ManyToOne(() => Region, (region) => region.id)
+  region: Region;
+
+  @ManyToOne(() => City, (city) => city.id)
+  city: City;
 
   @OneToMany(() => UserRefreshToken, (token) => token.user, {
     cascade: true,

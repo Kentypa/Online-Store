@@ -1,0 +1,19 @@
+{
+  "inputs": {
+    "userEmail": "Пошта користувача:",
+    "userFirstName": "User First Name:",
+    "userLastName": "User Last Name:",
+    "userPhoneNumber": "Phone Number:"
+  },
+  "buttons": {
+    "saveChanges": "Save changes",
+    "changePassword": "Change password",
+    "logout": "Logout",
+    "deleteAccount": "Delete account"
+  },
+  "labels": {
+    "userCity": "City:",
+    "userRegion": "Region:",
+    "userCountry": "Country:"
+  }
+}
