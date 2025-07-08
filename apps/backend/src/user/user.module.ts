@@ -10,9 +10,12 @@ import { CookieService } from "src/shared/services/cookie.service";
 import { UserDeleteAccountService } from "./user-deletion.service";
 import { UserRefreshTokenService } from "src/shared/services/refresh-token.service";
 import { UserRefreshToken } from "src/shared/entities/user-refresh-tokens.entity";
+import { PasswordResetToken } from "src/shared/entities/user-password-reset-tokens.entity";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, UserRefreshToken])],
+  imports: [
+    TypeOrmModule.forFeature([User, UserRefreshToken, PasswordResetToken]),
+  ],
   controllers: [UserController],
   providers: [
     UserRefreshTokenService,

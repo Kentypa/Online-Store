@@ -33,7 +33,7 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
         <p>{label + value}</p>
       )}
 
-      <Button handleClick={toggleEdit}>
+      <Button handleClick={toggleEdit} type="button">
         <EditFieldPencil className="fill-primary size-6" />
       </Button>
     </div>

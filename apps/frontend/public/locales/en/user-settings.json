@@ -11,9 +11,31 @@
     "logout": "Logout",
     "deleteAccount": "Delete account"
   },
-  "labels": {
-    "userCity": "City:",
-    "userRegion": "Region:",
-    "userCountry": "Country:"
+  "sections": {
+    "chooseCountry": "Please choose country",
+    "chooseRegion": "Please choose region",
+    "chooseCity": "Please choose city"
+  },
+  "modals": {
+    "deleteAccount": {
+      "labels": {
+        "password": "Password",
+        "repeatPassword": "Repeat Password"
+      },
+      "buttons": {
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+      }
+    },
+    "changePassword": {
+      "labels": {
+        "oldPassword": "Old Password",
+        "newPassword": "New Password"
+      },
+      "buttons": {
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+      }
+    }
   }
 }

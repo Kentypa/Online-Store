@@ -15,6 +15,7 @@ import { Language } from "src/geo/entities/language.entity";
 import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";
+import { PasswordResetToken } from "./user-password-reset-tokens.entity";
 
 @Entity()
 export class User {
@@ -91,6 +92,11 @@ export class User {
     cascade: true,
   })
   refreshTokens: UserRefreshToken[];
+
+  @OneToMany(() => PasswordResetToken, (token) => token.user, {
+    cascade: true,
+  })
+  passwordResetTokens: PasswordResetToken[];
 
   @ApiProperty({
     example: "2025-05-27 15:23:48.941416",

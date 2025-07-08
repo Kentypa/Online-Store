@@ -79,7 +79,7 @@ export const SignInPage: FC = () => {
           </Link>
           {isForbiddenError && (
             <Link
-              className="text-body-large underline text-dangerous"
+              className="text-body-large underline text-attention self-end"
               to={PagesEndponts.ACCOUNT_RECOVERY}
             >
               Wanna recovery your account?

@@ -15,22 +15,81 @@ import { Response } from "express";
 import { CookieService } from "src/shared/services/cookie.service";
 import { RecoveryUserDto } from "./dto/recovery-account.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import * as fs from "fs";
-import * as path from "path";
 import { Language } from "src/geo/entities/language.entity";
 import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";
+import { PasswordResetToken } from "src/shared/entities/user-password-reset-tokens.entity";
+import { randomUUID } from "crypto";
+import { ResetPasswordDto } from "./dto/reset-password.dto";
+import { MailerService } from "@nestjs-modules/mailer";
+import * as fs from "fs";
+import * as path from "path";
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(PasswordResetToken)
+    private resetTokenRepository: Repository<PasswordResetToken>,
     private encryptionService: EncryptionService,
     private cookieService: CookieService,
     private dataSource: DataSource,
+    private mailerService: MailerService,
   ) {}
+
+  async sendResetPasswordMail(email: string) {
+    const user = await this.userRepository.findOne({ where: { email } });
+
+    if (!user) throw new BadRequestException("User not found");
+
+    const resetToken = randomUUID();
+
+    const token = this.resetTokenRepository.create({
+      user,
+      resetToken,
+      used: false,
+    });
+
+    await this.resetTokenRepository.save(token);
+
+    const languageCode = user.language?.code ?? "en";
+
+    await this.mailerService.sendMail({
+      to: user.email,
+      subject: "Reset your password",
+      template: `reset-password/${languageCode}`,
+      context: {
+        name: user.firstName,
+        resetLink: `http://localhost:5173/reset-password?token=${resetToken}`,
+      },
+    });
+  }
+
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const { newPassword, resetToken } = resetPasswordDto;
+
+    const token = await this.resetTokenRepository.findOne({
+      where: { resetToken, used: false },
+      relations: ["user"],
+    });
+
+    if (!token) throw new BadRequestException("Token not found");
+
+    const now = new Date();
+    const diff = (now.getTime() - token.createdAt.getTime()) / 1000 / 60;
+    if (diff > 60) {
+      throw new BadRequestException("Token expired");
+    }
+
+    const hashed = await this.encryptionService.hashData(newPassword);
+    token.user.password = hashed;
+    await this.userRepository.save(token.user);
+
+    token.used = true;
+    await this.resetTokenRepository.save(token);
+  }
 
   async getSafeUser(id: number): Promise<GetUserDto> {
     return this.getById(id);

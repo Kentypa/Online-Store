@@ -1,4 +1,5 @@
 import api from "@config/axios";
+import { ResetPasswordDto } from "@features/AuthPages/RecoveryPages/ResetPasswordPage/dto/reset-password-dto";
 import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
 import { formObject } from "@shared-types/form-object";
 import { UserData } from "@shared-types/user-data";
@@ -35,6 +36,25 @@ export function userService(url: string) {
     });
   };
 
+  const requestResetPasswordUser = async (formState: formObject<string>) => {
+    return api
+      .post(`${url}/request-password-reset`, formState)
+      .catch((error) => {
+        console.log(error.toJSON());
+        throw new Error(error.message);
+      });
+  };
+
+  const resetPassword = async (resetPasswordDto: ResetPasswordDto) => {
+    const { newPassword, resetToken } = resetPasswordDto;
+    return api
+      .post(`${url}/reset-password`, { newPassword, resetToken })
+      .catch((error) => {
+        console.log(error.toJSON());
+        throw new Error(error.message);
+      });
+  };
+
   const updateLanguageUser = async (languageCode: string) => {
     return api
       .patch(`${url}/update`, { languageCode: languageCode })
@@ -50,5 +70,7 @@ export function userService(url: string) {
     deleteAccount,
     recoveryUser,
     updateLanguageUser,
+    requestResetPasswordUser,
+    resetPassword,
   };
 }

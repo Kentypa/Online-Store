@@ -65,6 +65,14 @@ services:
       - public
     env_file:
       - ./apps/frontend/.env
+  maildev:
+    image: maildev/maildev
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    networks:
+      - public
+      - private
 
 volumes:
   db_data:

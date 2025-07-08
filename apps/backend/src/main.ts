@@ -30,8 +30,6 @@ async function runSeeder(app: NestExpressApplication) {
     logger.log("Database seeding completed successfully!");
   } catch (error) {
     logger.error("Database seeding failed:", error);
-    // Можете решить, нужно ли завершать приложение при ошибке сидера
-    // throw error; // Раскомментируйте, если хотите остановить приложение при ошибке сидера
   }
 }
 
@@ -43,21 +41,16 @@ async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
     const configService = app.get(ConfigService);
 
-    // Настройка статических файлов
     app.useStaticAssets(join(__dirname, "..", "uploads"), {
       prefix: "/uploads/",
     });
 
-    // Настройка CORS
     app.enableCors({
       origin: `http://localhost:${configService.get("project.frontend.port") as number}`,
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
     });
 
-    // app.enableCors();
-
-    // Настройка Swagger
     const config = new DocumentBuilder()
       .setTitle("Clicker API")
       .setDescription("Clicker app api description")
@@ -67,7 +60,6 @@ async function bootstrap() {
     const documentFactory = () => SwaggerModule.createDocument(app, config);
     SwaggerModule.setup("api", app, documentFactory);
 
-    // Глобальные middleware и фильтры
     app.use(cookieParser());
     app.useGlobalFilters(new HttpExceptionFilter());
     app.useGlobalPipes(new ValidationPipe({ transform: true }));
@@ -78,7 +70,6 @@ async function bootstrap() {
     logger.log("Seeder is enabled, running database seeding...");
     await runSeeder(app);
 
-    // Запуск сервера
     const port = configService.getOrThrow<number>("project.backend.port");
     await app.listen(port);
 

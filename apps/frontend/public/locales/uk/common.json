@@ -40,5 +40,10 @@
       "weekdays": "Пн-Пт: 9:00–20:00",
       "weekends": "Сб-Нд: 10:00–19:00"
     }
+  },
+  "profileNavigation": {
+    "section": "Профіль",
+    "orders": "Замовлення",
+    "userSettings": "Налаштування"
   }
 }

@@ -202,7 +202,7 @@ export const UserSettingsPage: FC = () => {
                 className="appearance-none"
                 value={formState.countryCode}
               >
-                <Option value="">Please choose country</Option>
+                <Option value="">{t("sections.chooseCountry")}</Option>
                 {countriesData &&
                   countriesData.map((country) => (
                     <Option
@@ -222,7 +222,7 @@ export const UserSettingsPage: FC = () => {
                   className="appearance-none"
                   value={formState.regionId}
                 >
-                  <Option value="">Please choose region</Option>
+                  <Option value="">{t("sections.chooseRegion")}</Option>
                   {regionsData &&
                     regionsData.map((region) => (
                       <Option key={region.region_id} value={region.region_id}>
@@ -240,7 +240,7 @@ export const UserSettingsPage: FC = () => {
                   className="appearance-none"
                   value={formState.cityId}
                 >
-                  <Option value="">Please choose city</Option>
+                  <Option value="">{t("sections.chooseCity")}</Option>
                   {citiesData &&
                     citiesData.map((city) => (
                       <Option key={city.city_id} value={city.city_id}>

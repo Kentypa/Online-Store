@@ -1,19 +1,41 @@
 {
   "inputs": {
-    "userEmail": "Пошта користувача:",
-    "userFirstName": "User First Name:",
-    "userLastName": "User Last Name:",
-    "userPhoneNumber": "Phone Number:"
+    "userEmail": "Електронна пошта користувача:",
+    "userFirstName": "Ім’я користувача:",
+    "userLastName": "Прізвище користувача:",
+    "userPhoneNumber": "Номер телефону:"
   },
   "buttons": {
-    "saveChanges": "Save changes",
-    "changePassword": "Change password",
-    "logout": "Logout",
-    "deleteAccount": "Delete account"
+    "saveChanges": "Зберегти зміни",
+    "changePassword": "Змінити пароль",
+    "logout": "Вийти",
+    "deleteAccount": "Видалити акаунт"
   },
-  "labels": {
-    "userCity": "City:",
-    "userRegion": "Region:",
-    "userCountry": "Country:"
+  "sections": {
+    "chooseCountry": "Оберіть країну",
+    "chooseRegion": "Оберіть регіон",
+    "chooseCity": "Оберіть місто"
+  },
+  "modals": {
+    "deleteAccount": {
+      "labels": {
+        "password": "Пароль",
+        "repeatPassword": "Повторіть пароль"
+      },
+      "buttons": {
+        "confirm": "Підтвердити",
+        "cancel": "Скасувати"
+      }
+    },
+    "changePassword": {
+      "labels": {
+        "oldPassword": "Старий пароль",
+        "newPassword": "Новий пароль"
+      },
+      "buttons": {
+        "confirm": "Підтвердити",
+        "cancel": "Скасувати"
+      }
+    }
   }
 }

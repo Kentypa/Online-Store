@@ -6,6 +6,7 @@ import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
 import { ChangePasswordFormData } from "@shared-types/change-password-form-data";
+import { useTranslation } from "react-i18next";
 
 type ChangePasswordModalProps = {
   visible: boolean;
@@ -32,6 +33,9 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
     initialState,
     state: formState,
   });
+
+  const { t } = useTranslation("user-settings");
+
   return (
     <Modal
       toggleModal={toggleModal}
@@ -42,7 +46,7 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
         className="bg-white flex flex-col border border-separator rounded-xl p-3 gap-3"
         handleSubmit={handleSubmit}
       >
-        <Label>Old Password</Label>
+        <Label>{t("modals.changePassword.labels.oldPassword")}</Label>
         <Input
           handleChange={handleChange}
           value={formState.oldPassword}
@@ -51,7 +55,7 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
           type="password"
         />
 
-        <Label>New Password</Label>
+        <Label>{t("modals.changePassword.labels.newPassword")}</Label>
         <Input
           handleChange={handleChange}
           value={formState.newPassword}
@@ -65,13 +69,13 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
             type="submit"
             disabled={changesIsNotSubmitable}
           >
-            Confirm
+            {t("modals.changePassword.buttons.confirm")}
           </Button>
           <Button
             className="p-3 bg-separator rounded-2xl"
             handleClick={toggleModal}
           >
-            Cancel
+            {t("modals.changePassword.buttons.cancel")}
           </Button>
         </div>
       </Form>

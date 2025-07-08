@@ -39,6 +39,7 @@ import {
   VALID_UPLOADS_MIME_TYPES,
 } from "./constants/validation-settings.constant";
 import { UpdateUserDto } from "./dto/update-user.dto";
+import { ResetPasswordDto } from "./dto/reset-password.dto";
 
 @ApiBearerAuth()
 @ApiTags("user")
@@ -120,5 +121,17 @@ export class UserController {
     @UserDecorator() user: User,
   ) {
     return this.userService.update(user.id, updatedInfo, file);
+  }
+
+  @Post("request-password-reset")
+  @HttpCode(204)
+  async requestPasswordReset(@Body("email") email: string) {
+    await this.userService.sendResetPasswordMail(email);
+  }
+
+  @Post("reset-password")
+  @HttpCode(204)
+  async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {
+    await this.userService.resetPassword(resetPasswordDto);
   }
 }

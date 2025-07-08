@@ -6,6 +6,7 @@ import { Modal } from "@modals/Modal";
 import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
+import { useTranslation } from "react-i18next";
 
 type DeleteAccountModalProps = {
   visible: boolean;
@@ -32,6 +33,9 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
     initialState,
     state: formState,
   });
+
+  const { t } = useTranslation("user-settings");
+
   return (
     <Modal
       toggleModal={toggleModal}
@@ -42,7 +46,7 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
         className="bg-white flex flex-col border border-separator rounded-xl p-3 gap-3"
         handleSubmit={handleSubmit}
       >
-        <Label>Password</Label>
+        <Label>{t("modals.deleteAccount.labels.password")}</Label>
         <Input
           handleChange={handleChange}
           value={formState.password}
@@ -51,7 +55,7 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
           type="password"
         />
 
-        <Label>Repeat Password</Label>
+        <Label>{t("modals.deleteAccount.labels.repeatPassword")}</Label>
         <Input
           handleChange={handleChange}
           value={formState.passwordRepeat}
@@ -65,13 +69,13 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
             type="submit"
             disabled={changesIsNotSubmitable}
           >
-            Confirm
+            {t("modals.deleteAccount.buttons.confirm")}
           </Button>
           <Button
             className="p-3 bg-separator rounded-2xl"
             handleClick={toggleModal}
           >
-            Cancel
+            {t("modals.deleteAccount.buttons.cancel")}
           </Button>
         </div>
       </Form>
