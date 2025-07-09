@@ -1,0 +1,695 @@
+{
+  "Electronics": {
+    "icon_name": "electronics",
+    "PC": {
+      "Desktops": {},
+      "Laptops": {},
+      "Monitors": {},
+      "Components": {}
+    },
+    "Mobile Phones": {
+      "Smartphones": {},
+      "Feature Phones": {},
+      "Accessories": {},
+      "Wearables": {}
+    },
+    "Audio": {
+      "Headphones": {},
+      "Speakers": {},
+      "Soundbars": {},
+      "Microphones": {}
+    },
+    "TV & Video": {
+      "LED TVs": {},
+      "OLED TVs": {},
+      "Projectors": {},
+      "Streaming Devices": {}
+    },
+    "Cameras": {
+      "DSLR": {},
+      "Mirrorless": {},
+      "Action Cameras": {},
+      "Lenses": {}
+    },
+    "Gaming": {
+      "Consoles": {},
+      "Games": {},
+      "Controllers": {},
+      "VR Headsets": {}
+    },
+    "Smart Home": {
+      "Smart Lights": {},
+      "Smart Plugs": {},
+      "Security Cameras": {},
+      "Smart Speakers": {}
+    },
+    "Networking": {
+      "Routers": {},
+      "Modems": {},
+      "Switches": {},
+      "Range Extenders": {}
+    },
+    "Storage": {
+      "External HDD": {},
+      "External SSD": {},
+      "USB Flash Drives": {},
+      "Memory Cards": {}
+    },
+    "Office Equipment": {
+      "Printers": {},
+      "Scanners": {},
+      "Projectors": {},
+      "Laminators": {}
+    }
+  },
+  "Home & Garden": {
+    "icon_name": "home-garden",
+    "Furniture": {
+      "Living Room": {},
+      "Bedroom": {},
+      "Office": {},
+      "Outdoor": {}
+    },
+    "Kitchen": {
+      "Cookware": {},
+      "Appliances": {},
+      "Utensils": {},
+      "Tableware": {}
+    },
+    "Decor": {
+      "Wall Art": {},
+      "Rugs": {},
+      "Curtains": {},
+      "Mirrors": {}
+    },
+    "Lighting": {
+      "Ceiling Lights": {},
+      "Table Lamps": {},
+      "Outdoor Lights": {},
+      "LED Strips": {}
+    },
+    "Garden": {
+      "Plants": {},
+      "Tools": {},
+      "Furniture": {},
+      "Grills": {}
+    },
+    "Bedding": {
+      "Sheets": {},
+      "Blankets": {},
+      "Pillows": {},
+      "Mattress Toppers": {}
+    },
+    "Bath": {
+      "Towels": {},
+      "Shower Curtains": {},
+      "Bath Mats": {},
+      "Storage": {}
+    },
+    "Cleaning": {
+      "Vacuum Cleaners": {},
+      "Mops": {},
+      "Cleaning Supplies": {},
+      "Laundry": {}
+    },
+    "Storage": {
+      "Boxes": {},
+      "Shelves": {},
+      "Baskets": {},
+      "Closet Organizers": {}
+    },
+    "Tools": {
+      "Power Tools": {},
+      "Hand Tools": {},
+      "Ladders": {},
+      "Workbenches": {}
+    }
+  },
+  "Fashion": {
+    "icon_name": "fashion",
+    "Men's Clothing": {
+      "Shirts": {},
+      "Pants": {},
+      "Jackets": {},
+      "Suits": {}
+    },
+    "Women's Clothing": {
+      "Dresses": {},
+      "Blouses": {},
+      "Skirts": {},
+      "Outerwear": {}
+    },
+    "Shoes": {
+      "Sneakers": {},
+      "Boots": {},
+      "Sandals": {},
+      "Formal Shoes": {}
+    },
+    "Accessories": {
+      "Bags": {},
+      "Belts": {},
+      "Hats": {},
+      "Gloves": {}
+    },
+    "Jewelry": {
+      "Necklaces": {},
+      "Rings": {},
+      "Bracelets": {},
+      "Earrings": {}
+    },
+    "Kids": {
+      "Boys Clothing": {},
+      "Girls Clothing": {},
+      "Kids Shoes": {},
+      "Kids Accessories": {}
+    },
+    "Sportswear": {
+      "Active Tops": {},
+      "Active Bottoms": {},
+      "Sports Bras": {},
+      "Swimwear": {}
+    },
+    "Underwear": {
+      "Bras": {},
+      "Panties": {},
+      "Boxers": {},
+      "Socks": {}
+    },
+    "Maternity": {
+      "Tops": {},
+      "Dresses": {},
+      "Bottoms": {},
+      "Nursing Wear": {}
+    },
+    "Wedding": {
+      "Bridal Gowns": {},
+      "Bridesmaid Dresses": {},
+      "Groom Suits": {},
+      "Accessories": {}
+    }
+  },
+  "Sports & Outdoors": {
+    "icon_name": "sports-outdoors",
+    "Fitness": {
+      "Exercise Equipment": {},
+      "Yoga": {},
+      "Weights": {},
+      "Fitness Trackers": {}
+    },
+    "Cycling": {
+      "Bikes": {},
+      "Helmets": {},
+      "Clothing": {},
+      "Accessories": {}
+    },
+    "Camping": {
+      "Tents": {},
+      "Sleeping Bags": {},
+      "Backpacks": {},
+      "Stoves": {}
+    },
+    "Fishing": {
+      "Rods": {},
+      "Reels": {},
+      "Lures": {},
+      "Accessories": {}
+    },
+    "Hiking": {
+      "Boots": {},
+      "Poles": {},
+      "Backpacks": {},
+      "Clothing": {}
+    },
+    "Team Sports": {
+      "Soccer": {},
+      "Basketball": {},
+      "Baseball": {},
+      "Volleyball": {}
+    },
+    "Water Sports": {
+      "Swimwear": {},
+      "Goggles": {},
+      "Boards": {},
+      "Accessories": {}
+    },
+    "Winter Sports": {
+      "Skis": {},
+      "Snowboards": {},
+      "Helmets": {},
+      "Clothing": {}
+    },
+    "Hunting": {
+      "Gear": {},
+      "Clothing": {},
+      "Scopes": {},
+      "Knives": {}
+    },
+    "Running": {
+      "Shoes": {},
+      "Clothing": {},
+      "Hydration": {},
+      "Accessories": {}
+    }
+  },
+  "Beauty & Health": {
+    "icon_name": "beauty-health",
+    "Skincare": {
+      "Cleansers": {},
+      "Moisturizers": {},
+      "Serums": {},
+      "Masks": {}
+    },
+    "Makeup": {
+      "Foundations": {},
+      "Lipsticks": {},
+      "Eyeshadows": {},
+      "Blushes": {}
+    },
+    "Haircare": {
+      "Shampoo": {},
+      "Conditioner": {},
+      "Styling": {},
+      "Treatments": {}
+    },
+    "Fragrances": {
+      "Women's Perfume": {},
+      "Men's Cologne": {},
+      "Unisex": {},
+      "Roll-ons": {}
+    },
+    "Men's Grooming": {
+      "Razors": {},
+      "Beard Care": {},
+      "Shaving Cream": {},
+      "Aftershave": {}
+    },
+    "Tools & Accessories": {
+      "Brushes": {},
+      "Curlers": {},
+      "Sponges": {},
+      "Mirrors": {}
+    },
+    "Oral Care": {
+      "Toothbrushes": {},
+      "Toothpaste": {},
+      "Mouthwash": {},
+      "Floss": {}
+    },
+    "Personal Care": {
+      "Deodorants": {},
+      "Body Wash": {},
+      "Lotions": {},
+      "Feminine Care": {}
+    },
+    "Health Supplements": {
+      "Vitamins": {},
+      "Minerals": {},
+      "Herbal": {},
+      "Protein Powders": {}
+    },
+    "Medical Supplies": {
+      "First Aid": {},
+      "Monitors": {},
+      "Supports & Braces": {},
+      "Thermometers": {}
+    }
+  },
+  "Automotive": {
+    "icon_name": "automotive",
+    "Car Electronics": {
+      "GPS": {},
+      "Dash Cams": {},
+      "Speakers": {},
+      "Subwoofers": {}
+    },
+    "Exterior Accessories": {
+      "Covers": {},
+      "Decals": {},
+      "Roof Racks": {},
+      "Mirrors": {}
+    },
+    "Interior Accessories": {
+      "Seat Covers": {},
+      "Floor Mats": {},
+      "Organizers": {},
+      "Sun Shades": {}
+    },
+    "Replacement Parts": {
+      "Brakes": {},
+      "Filters": {},
+      "Lighting": {},
+      "Batteries": {}
+    },
+    "Tires & Wheels": {
+      "All-Season": {},
+      "Winter Tires": {},
+      "Rims": {},
+      "Accessories": {}
+    },
+    "Motorcycle & ATV": {
+      "Helmets": {},
+      "Protective Gear": {},
+      "Parts": {},
+      "Accessories": {}
+    },
+    "Car Care": {
+      "Cleaners": {},
+      "Polish": {},
+      "Wax": {},
+      "Detailing Tools": {}
+    },
+    "Tools & Equipment": {
+      "Jacks": {},
+      "Tool Sets": {},
+      "Diagnostic Tools": {},
+      "Battery Chargers": {}
+    },
+    "RV Parts & Accessories": {
+      "Covers": {},
+      "Steps": {},
+      "Hitches": {},
+      "Electrical": {}
+    },
+    "Oils & Fluids": {
+      "Motor Oil": {},
+      "Transmission Fluid": {},
+      "Coolant": {},
+      "Brake Fluid": {}
+    }
+  },
+  "Toys & Hobbies": {
+    "icon_name": "toys-hobbies",
+    "Action Figures": {
+      "Superheroes": {},
+      "Anime": {},
+      "Movies": {},
+      "Games": {}
+    },
+    "Dolls": {
+      "Fashion Dolls": {},
+      "Baby Dolls": {},
+      "Collectible Dolls": {},
+      "Accessories": {}
+    },
+    "Building Sets": {
+      "Blocks": {},
+      "Bricks": {},
+      "STEM Kits": {},
+      "Robotics": {}
+    },
+    "Educational": {
+      "Science Kits": {},
+      "Math Toys": {},
+      "Language Toys": {},
+      "Music Toys": {}
+    },
+    "Puzzles": {
+      "Jigsaw": {},
+      "3D Puzzles": {},
+      "Brain Teasers": {},
+      "Wooden Puzzles": {}
+    },
+    "Remote Control": {
+      "Cars": {},
+      "Drones": {},
+      "Boats": {},
+      "Planes": {}
+    },
+    "Outdoor Play": {
+      "Swings": {},
+      "Slides": {},
+      "Sandboxes": {},
+      "Playhouses": {}
+    },
+    "Games": {
+      "Board Games": {},
+      "Card Games": {},
+      "Dice Games": {},
+      "Party Games": {}
+    },
+    "Arts & Crafts": {
+      "Drawing": {},
+      "Painting": {},
+      "Sculpting": {},
+      "Craft Kits": {}
+    },
+    "Collectibles": {
+      "Cards": {},
+      "Coins": {},
+      "Stamps": {},
+      "Figures": {}
+    }
+  },
+  "Books": {
+    "icon_name": "books",
+    "Fiction": {
+      "Fantasy": {},
+      "Romance": {},
+      "Mystery": {},
+      "Science Fiction": {}
+    },
+    "Non-fiction": {
+      "Biographies": {},
+      "History": {},
+      "Self-help": {},
+      "Business": {}
+    },
+    "Children's Books": {
+      "Picture Books": {},
+      "Early Readers": {},
+      "Young Adult": {},
+      "Educational": {}
+    },
+    "Comics": {
+      "Manga": {},
+      "Graphic Novels": {},
+      "Superhero Comics": {},
+      "Anthologies": {}
+    },
+    "Textbooks": {
+      "Science": {},
+      "Math": {},
+      "Language": {},
+      "Engineering": {}
+    },
+    "Cookbooks": {
+      "Baking": {},
+      "Vegetarian": {},
+      "World Cuisine": {},
+      "Healthy Cooking": {}
+    },
+    "Travel": {
+      "Guides": {},
+      "Maps": {},
+      "Adventure": {},
+      "Memoirs": {}
+    },
+    "Art & Photography": {
+      "Art History": {},
+      "Photography Guides": {},
+      "Collections": {},
+      "Portfolios": {}
+    },
+    "Religion": {
+      "Bibles": {},
+      "Spirituality": {},
+      "Meditation": {},
+      "Mythology": {}
+    },
+    "Reference": {
+      "Dictionaries": {},
+      "Encyclopedias": {},
+      "Manuals": {},
+      "Atlases": {}
+    }
+  },
+  "Music & Instruments": {
+    "icon_name": "music-instruments",
+    "Instruments": {
+      "Guitars": {},
+      "Pianos": {},
+      "Drums": {},
+      "Wind Instruments": {}
+    },
+    "Accessories": {
+      "Strings": {},
+      "Picks": {},
+      "Stands": {},
+      "Cases": {}
+    },
+    "Recording": {
+      "Microphones": {},
+      "Mixers": {},
+      "Audio Interfaces": {},
+      "Studio Monitors": {}
+    },
+    "DJ Equipment": {
+      "Controllers": {},
+      "Headphones": {},
+      "Mixers": {},
+      "Lighting": {}
+    },
+    "Sheet Music": {
+      "Classical": {},
+      "Jazz": {},
+      "Pop": {},
+      "Rock": {}
+    },
+    "Vinyl": {
+      "Rock": {},
+      "Jazz": {},
+      "Hip-Hop": {},
+      "Classical": {}
+    },
+    "CDs": {
+      "Pop": {},
+      "Rock": {},
+      "Country": {},
+      "Classical": {}
+    },
+    "Merchandise": {
+      "T-shirts": {},
+      "Posters": {},
+      "Hats": {},
+      "Stickers": {}
+    },
+    "Music Lessons": {
+      "Guitar": {},
+      "Piano": {},
+      "Drums": {},
+      "Vocals": {}
+    },
+    "Live Sound": {
+      "Speakers": {},
+      "Mixers": {},
+      "Amplifiers": {},
+      "Cables": {}
+    }
+  },
+  "Pets": {
+    "icon_name": "pets",
+    "Dogs": {
+      "Food": {},
+      "Toys": {},
+      "Beds": {},
+      "Leashes": {}
+    },
+    "Cats": {
+      "Food": {},
+      "Litter": {},
+      "Toys": {},
+      "Scratching Posts": {}
+    },
+    "Birds": {
+      "Cages": {},
+      "Food": {},
+      "Toys": {},
+      "Perches": {}
+    },
+    "Fish": {
+      "Tanks": {},
+      "Filters": {},
+      "Food": {},
+      "Decor": {}
+    },
+    "Small Animals": {
+      "Cages": {},
+      "Food": {},
+      "Bedding": {},
+      "Toys": {}
+    },
+    "Reptiles": {
+      "Terrariums": {},
+      "Lighting": {},
+      "Food": {},
+      "Heating": {}
+    },
+    "Pet Grooming": {
+      "Shampoos": {},
+      "Brushes": {},
+      "Nail Clippers": {},
+      "Ear Cleaners": {}
+    },
+    "Health & Wellness": {
+      "Supplements": {},
+      "Medications": {},
+      "Vitamins": {},
+      "Treatments": {}
+    },
+    "Training": {
+      "Clickers": {},
+      "Pads": {},
+      "Repellents": {},
+      "Books": {}
+    },
+    "Pet Carriers": {
+      "Soft Carriers": {},
+      "Hard Carriers": {},
+      "Strollers": {},
+      "Backpacks": {}
+    }
+  },
+  "Baby Products": {
+    "icon_name": "baby-products",
+    "Diapers": {
+      "Newborn": {},
+      "Infant": {},
+      "Toddler": {},
+      "Pull-Ups": {}
+    },
+    "Feeding": {
+      "Bottles": {},
+      "Breast Pumps": {},
+      "High Chairs": {},
+      "Utensils": {}
+    },
+    "Nursery": {
+      "Cribs": {},
+      "Dressers": {},
+      "Rockers": {},
+      "Bedding": {}
+    },
+    "Bathing": {
+      "Tubs": {},
+      "Towels": {},
+      "Washcloths": {},
+      "Bath Toys": {}
+    },
+    "Travel Gear": {
+      "Car Seats": {},
+      "Strollers": {},
+      "Carriers": {},
+      "Travel Beds": {}
+    },
+    "Health & Safety": {
+      "Monitors": {},
+      "Thermometers": {},
+      "Humidifiers": {},
+      "Baby Gates": {}
+    },
+    "Clothing": {
+      "Onesies": {},
+      "Pajamas": {},
+      "Outerwear": {},
+      "Hats": {}
+    },
+    "Toys": {
+      "Rattles": {},
+      "Teethers": {},
+      "Mobiles": {},
+      "Play Mats": {}
+    },
+    "Maternity": {
+      "Nursing Covers": {},
+      "Maternity Bras": {},
+      "Belly Bands": {},
+      "Skin Care": {}
+    },
+    "Gifts": {
+      "Gift Sets": {},
+      "Keepsakes": {},
+      "Baby Books": {},
+      "Gift Cards": {}
+    }
+  }
+}

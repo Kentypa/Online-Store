@@ -1,6 +1,6 @@
 import { Entity, ManyToOne, JoinColumn, PrimaryColumn, Column } from "typeorm";
 import { Country } from "./country.entity";
-import { Language } from "./language.entity";
+import { Language } from "../../shared/entities/language.entity";
 
 @Entity()
 export class CountryTranslation {

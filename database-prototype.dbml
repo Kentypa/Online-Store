@@ -110,6 +110,7 @@ Table user_refresh_token {
 }
 
 Table password_reset_token {
+  id serial [pk]
   user_id integer [ref: > user.id]
   token varchar(512) [pk]
   expires_at timestamp

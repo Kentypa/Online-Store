@@ -11,7 +11,7 @@ import {
   ManyToOne,
 } from "typeorm";
 import { UserRefreshToken } from "./user-refresh-tokens.entity";
-import { Language } from "src/geo/entities/language.entity";
+import { Language } from "src/shared/entities/language.entity";
 import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";

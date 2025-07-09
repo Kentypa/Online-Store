@@ -13,23 +13,27 @@ import { CityTranslation } from "./geo/entities/city-translation.entity";
 import { City } from "./geo/entities/city.entity";
 import { CountryTranslation } from "./geo/entities/country-translation.entity";
 import { Country } from "./geo/entities/country.entity";
-import { Language } from "./geo/entities/language.entity";
+import { Language } from "./shared/entities/language.entity";
 import { RegionTranslation } from "./geo/entities/region-translation.entity";
 import { Region } from "./geo/entities/region.entity";
 import { MailerModule } from "@nestjs-modules/mailer";
 import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter";
 import { PasswordResetToken } from "./shared/entities/user-password-reset-tokens.entity";
+import { Category } from "./store/categories/entities/category.entity";
+import { CategoryTranslation } from "./store/categories/entities/category-translation.entity";
 import projectConfig from "./config/project.config";
 import databaseConfig from "./config/database.config";
 import encryptionConfig from "./config/encryption.config";
 import jwtConfig from "./config/jwt.config";
 import mailerConfig from "./config/mailer.config";
+import { CategoryModule } from "./store/categories/categories.module";
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
     GeoModule,
+    CategoryModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -62,6 +66,8 @@ import mailerConfig from "./config/mailer.config";
           Country,
           CountryTranslation,
           PasswordResetToken,
+          Category,
+          CategoryTranslation,
         ],
         synchronize: true,
         // migrations: ["dist/migrations/*.js"],

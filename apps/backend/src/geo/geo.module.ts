@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CityTranslation } from "./entities/city-translation.entity";
-import { Language } from "./entities/language.entity";
+import { Language } from "../shared/entities/language.entity";
 import { RegionTranslation } from "./entities/region-translation.entity";
 import { CountryTranslation } from "./entities/country-translation.entity";
 import { City } from "./entities/city.entity";

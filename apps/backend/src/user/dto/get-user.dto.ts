@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsNumber, IsString, IsOptional } from "class-validator";
 import { City } from "src/geo/entities/city.entity";
 import { Country } from "src/geo/entities/country.entity";
-import { Language } from "src/geo/entities/language.entity";
+import { Language } from "src/shared/entities/language.entity";
 import { Region } from "src/geo/entities/region.entity";
 
 export class GetUserDto {

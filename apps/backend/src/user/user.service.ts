@@ -15,7 +15,7 @@ import { Response } from "express";
 import { CookieService } from "src/shared/services/cookie.service";
 import { RecoveryUserDto } from "./dto/recovery-account.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import { Language } from "src/geo/entities/language.entity";
+import { Language } from "src/shared/entities/language.entity";
 import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";

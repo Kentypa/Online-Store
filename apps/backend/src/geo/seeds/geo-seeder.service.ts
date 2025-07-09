@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository, DataSource, QueryRunner, EntityManager } from "typeorm";
-import { Language } from "../entities/language.entity";
+import { Language } from "../../shared/entities/language.entity";
 import { Country } from "../entities/country.entity";
 import { CountryTranslation } from "../entities/country-translation.entity";
 import { Region } from "../entities/region.entity";
@@ -90,7 +90,7 @@ export class GeoSeederService {
 
   private loadJsonData(): JsonCountryData[] {
     try {
-      const basePath = path.join(process.cwd(), "src", "data");
+      const basePath = path.join(process.cwd(), "src", "data", "geo");
 
       const ukrainePath = path.join(basePath, "ukraine_expanded.json");
       const ukPath = path.join(basePath, "united_kingdom_expanded.json");

@@ -1,0 +1,10 @@
+<svg fill="currentColor" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="music-alt-1__a" class="music-alt-1__a">
+      <path d="M0 0h24v24H0z"/>
+    </clipPath>
+  </defs>
+  <g class="music-alt-1__music-alt music-alt-1__1" clip-path="url(#music-alt-1__a)">
+    <path d="M22.554.923A3.977 3.977 0 0 0 19.263.07l-9.184 1.722A5 5 0 0 0 6 6.706v9.85A3.96 3.96 0 0 0 4 16a4 4 0 1 0 4 4v-9.124A2 2 0 0 1 9.632 8.91l11.183-2.1A1 1 0 0 1 22 7.8v5.76a3.96 3.96 0 0 0-2-.56 4 4 0 1 0 4 4V4A3.987 3.987 0 0 0 22.554.923ZM4 22a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM20.447 4.848 9.263 6.944A4 4 0 0 0 8 7.416v-.71a3 3 0 0 1 2.447-2.949l9.185-1.722A2 2 0 0 1 22 4v.984a2.955 2.955 0 0 0-1.553-.136ZM20 19a2 2 0 1 1 0-4 2 2 0 0 1 0 4Z" class="music-alt-1__Vector"/>
+  </g>
+</svg>

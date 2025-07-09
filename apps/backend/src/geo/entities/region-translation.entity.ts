@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, ManyToOne, JoinColumn, Column } from "typeorm";
 import { Region } from "./region.entity";
-import { Language } from "./language.entity";
+import { Language } from "../../shared/entities/language.entity";
 import { Exclude } from "class-transformer";
 
 @Entity()
