@@ -93,14 +93,22 @@ export class CategorySeederService {
       const enSubNode = enNode[enName];
       const ukSubNode = ukNode[ukName];
 
-      const imageUrl =
-        typeof enNode.icon_name === "string"
-          ? `/assets/icons/categories/${enNode.icon_name}.svg`
-          : undefined;
+      let imageUrl: string | undefined = undefined;
+
+      if (
+        enSubNode &&
+        typeof enSubNode === "object" &&
+        "icon_name" in enSubNode
+      ) {
+        const iconName = (enSubNode as { icon_name?: unknown }).icon_name;
+        if (typeof iconName === "string" && iconName.length > 0) {
+          imageUrl = `${iconName}`;
+        }
+      }
 
       const newCategory = this.categoryRepository.create({
         parent: parent ?? undefined,
-        image_url: imageUrl,
+        image_url: imageUrl ?? undefined,
       });
 
       const savedCategory = await manager.save(newCategory);

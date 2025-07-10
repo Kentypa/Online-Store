@@ -9,6 +9,7 @@ export class CookieService {
     refreshToken: string,
     accessExpires: Date,
     refreshExpires: Date,
+    deviceId: string,
   ): void {
     response.cookie("Authentication", accessToken, {
       httpOnly: true,
@@ -17,6 +18,12 @@ export class CookieService {
     });
 
     response.cookie("Refresh", refreshToken, {
+      httpOnly: true,
+      secure: false,
+      expires: refreshExpires,
+    });
+
+    response.cookie("DeviceId", deviceId, {
       httpOnly: true,
       secure: false,
       expires: refreshExpires,
@@ -31,6 +38,12 @@ export class CookieService {
     });
 
     response.clearCookie("Refresh", {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+    });
+
+    response.clearCookie("DeviceId", {
       httpOnly: true,
       secure: false,
       sameSite: "lax",

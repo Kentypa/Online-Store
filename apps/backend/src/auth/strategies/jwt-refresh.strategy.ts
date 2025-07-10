@@ -12,6 +12,12 @@ const cookieExtractor: JwtFromRequestFunction = (
   return typeof req?.cookies?.Refresh === "string" ? req.cookies.Refresh : null;
 };
 
+const deviceIdCookieExtractor = (req: Request): string | null => {
+  return typeof req?.cookies?.DeviceId === "string"
+    ? req.cookies.DeviceId
+    : null;
+};
+
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(
   Strategy,
@@ -33,8 +39,8 @@ export class JwtRefreshStrategy extends PassportStrategy(
     if (!refreshToken) {
       throw new UnauthorizedException("Refresh token not found");
     }
+    const deviceId = deviceIdCookieExtractor(request);
 
-    const deviceId = request.headers["device-id"] as string;
     if (!deviceId) {
       throw new UnauthorizedException("Device ID not found");
     }

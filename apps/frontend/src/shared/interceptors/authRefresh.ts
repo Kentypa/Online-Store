@@ -21,7 +21,7 @@ const retryValidate = async (
 
   for (let i = 0; i < countRetries; i++) {
     try {
-      await api.post(`${ServiceNames.AUTH}/refresh`);
+      await api.post(`${ServiceNames.AUTH}/refresh`, {}, {});
       validationStatus = TokenValidatingStatus.SUCCESS;
       break;
     } catch {

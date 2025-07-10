@@ -83,18 +83,6 @@ export class AuthController {
     return this.authService.logout(request, response);
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get("validate")
-  @ApiOperation({ summary: "Validate user token" })
-  @ApiResponse({
-    status: 204,
-    description: "User token validated successfully",
-  })
-  @HttpCode(204)
-  validate() {
-    return this.authService.validateToken();
-  }
-
   @UseGuards(JwtRefreshAuthGuard)
   @Post("refresh")
   @ApiOperation({ summary: "Refresh user token" })
@@ -109,5 +97,17 @@ export class AuthController {
     @UserDecorator() user: User,
   ) {
     return this.authService.refresh(user, request, response);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get("validate")
+  @ApiOperation({ summary: "Validate user token" })
+  @ApiResponse({
+    status: 204,
+    description: "User token validated successfully",
+  })
+  @HttpCode(204)
+  validate() {
+    return this.authService.validateToken();
   }
 }

@@ -211,6 +211,7 @@ Table product {
   currency varchar(3) [default: 'USD']
   stock integer [default: 0]
   main_image_url varchar(256)
+  other_image_urls text[]
   category_id integer [ref: > category.id]
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
@@ -222,14 +223,6 @@ Table product {
   }
 }
 
-Table product_image {
-  product_id integer [ref: > product.id]
-  url varchar(256)
-  image_type varchar(16)
-  alt_text varchar(128)
-  indexes { (product_id, url) [pk] }
-}
-
 Table product_translation {
   product_id integer [ref: > product.id]
   lang varchar(2) [ref: > language.code]
@@ -237,7 +230,6 @@ Table product_translation {
   description text
   indexes { 
     (product_id, lang) [pk]
-    (`to_tsvector('simple', title || ' ' || description)`) [type: gin, name: 'idx_product_search']
   }
 }
 

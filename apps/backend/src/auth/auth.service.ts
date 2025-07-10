@@ -36,7 +36,10 @@ export class AuthService {
   ) {}
 
   private getDeviceId(request: Request): string {
-    return request.headers["device-id"] as string;
+    const deviceId = request.cookies?.DeviceId as string;
+    if (!deviceId) return crypto.randomUUID();
+
+    return deviceId;
   }
 
   private generateTokens(payload: JwtPayload): {
@@ -138,6 +141,7 @@ export class AuthService {
       tokens.refreshToken,
       tokens.expiresAccessToken,
       tokens.expiresRefreshToken,
+      deviceId,
     );
 
     return;
@@ -217,6 +221,7 @@ export class AuthService {
       tokens.refreshToken,
       tokens.expiresAccessToken,
       tokens.expiresRefreshToken,
+      deviceId,
     );
 
     return;

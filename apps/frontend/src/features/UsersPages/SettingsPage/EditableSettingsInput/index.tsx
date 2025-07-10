@@ -30,7 +30,7 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
           value={value}
         />
       ) : (
-        <p>{label + value}</p>
+        <p>{value ? label + value : label}</p>
       )}
 
       <Button handleClick={toggleEdit} type="button">

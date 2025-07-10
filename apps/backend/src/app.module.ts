@@ -21,12 +21,16 @@ import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter";
 import { PasswordResetToken } from "./shared/entities/user-password-reset-tokens.entity";
 import { Category } from "./store/categories/entities/category.entity";
 import { CategoryTranslation } from "./store/categories/entities/category-translation.entity";
+import { CategoryModule } from "./store/categories/categories.module";
+import { ProductModule } from "./store/products/products.module";
+import { Product } from "./store/products/entities/product.entity";
+import { ProductTranslation } from "./store/products/entities/product-translation.entity";
 import projectConfig from "./config/project.config";
 import databaseConfig from "./config/database.config";
 import encryptionConfig from "./config/encryption.config";
 import jwtConfig from "./config/jwt.config";
 import mailerConfig from "./config/mailer.config";
-import { CategoryModule } from "./store/categories/categories.module";
+import { ProductStats } from "./store/products/entities/product-stats.entity";
 
 @Module({
   imports: [
@@ -34,6 +38,7 @@ import { CategoryModule } from "./store/categories/categories.module";
     AuthModule,
     GeoModule,
     CategoryModule,
+    ProductModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -68,6 +73,9 @@ import { CategoryModule } from "./store/categories/categories.module";
           PasswordResetToken,
           Category,
           CategoryTranslation,
+          Product,
+          ProductTranslation,
+          ProductStats,
         ],
         synchronize: true,
         // migrations: ["dist/migrations/*.js"],

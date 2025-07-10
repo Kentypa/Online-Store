@@ -14,6 +14,7 @@ import { join } from "path";
 import { GeoSeederService } from "./geo/seeds/geo-seeder.service";
 import cookieParser from "cookie-parser";
 import { CategorySeederService } from "./store/categories/seeds/category-seeder.service";
+import { ProductSeederService } from "./store/products/seeds/product-seeder.service";
 
 async function runSeeders(app: NestExpressApplication) {
   const logger = new Logger("Seeder");
@@ -23,6 +24,7 @@ async function runSeeders(app: NestExpressApplication) {
 
     const getSeeder = app.get(GeoSeederService);
     const categorySeeder = app.get(CategorySeederService);
+    const productsSeeder = app.get(ProductSeederService);
 
     if (!getSeeder || !categorySeeder) {
       throw new Error("GeoSeederService not found in application context");
@@ -30,6 +32,7 @@ async function runSeeders(app: NestExpressApplication) {
 
     await getSeeder.seed();
     await categorySeeder.seed();
+    await productsSeeder.seed();
     logger.log("Database seeding completed successfully!");
   } catch (error) {
     logger.error("Database seeding failed:", error);
@@ -54,7 +57,7 @@ async function bootstrap() {
 
     app.enableCors({
       origin: `http://localhost:${configService.get("project.frontend.port") as number}`,
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
       credentials: true,
     });
 

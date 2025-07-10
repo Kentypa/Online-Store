@@ -13,12 +13,13 @@ import { JwtRefreshStrategy } from "./strategies/jwt-refresh.strategy";
 import { CookieService } from "src/shared/services/cookie.service";
 import { UserRefreshTokenService } from "../shared/services/refresh-token.service";
 import { UserRefreshToken } from "src/shared/entities/user-refresh-tokens.entity";
+import { PasswordResetToken } from "src/shared/entities/user-password-reset-tokens.entity";
 
 @Module({
   imports: [
     UserModule,
     PassportModule,
-    TypeOrmModule.forFeature([User, UserRefreshToken]),
+    TypeOrmModule.forFeature([User, UserRefreshToken, PasswordResetToken]),
     JwtModule,
   ],
   controllers: [AuthController],
