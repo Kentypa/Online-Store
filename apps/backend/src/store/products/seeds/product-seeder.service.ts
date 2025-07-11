@@ -126,14 +126,14 @@ export class ProductSeederService {
           {
             product_id: productId,
             lang: "uk",
-            title: fakerUK.commerce.productName(),
-            description: fakerUK.commerce.productDescription(),
+            title: fakerUK.commerce.productName() + "UA",
+            description: fakerUK.commerce.productDescription() + "UA",
           },
           {
             product_id: productId,
             lang: "en",
-            title: fakerEN.commerce.productName(),
-            description: fakerEN.commerce.productDescription(),
+            title: fakerEN.commerce.productName() + "EN",
+            description: fakerEN.commerce.productDescription() + "EN",
           },
         );
 
