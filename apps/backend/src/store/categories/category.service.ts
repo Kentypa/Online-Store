@@ -1,9 +1,10 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
-import { CategoryTranslation } from "../entities/category-translation.entity";
-import { Category } from "../entities/category.entity";
-import { MasterCategoryNode } from "../types/master-category-node.type";
+import { CategoryTranslation } from "./entities/category-translation.entity";
+import { Category } from "./entities/category.entity";
+import { MasterCategoryNode } from "./types/master-category-node.type";
+import { Cached } from "src/shared/decorators/cached.decorator";
 
 @Injectable()
 export class CategoryService {
@@ -14,6 +15,42 @@ export class CategoryService {
     private categoryTranslationRepository: Repository<CategoryTranslation>,
   ) {}
 
+  getDescendantCategoryIdsFromTree(
+    tree: MasterCategoryNode[],
+    rootId: number,
+  ): number[] {
+    const ids: number[] = [];
+
+    const findNode = (
+      nodes: MasterCategoryNode[],
+    ): MasterCategoryNode | null => {
+      for (const node of nodes) {
+        if (node.id === rootId) return node;
+        const foundChild = findNode(node.children);
+        if (foundChild) return foundChild;
+      }
+      return null;
+    };
+
+    const traverse = (node: MasterCategoryNode) => {
+      ids.push(node.id);
+      node.children.forEach(traverse);
+    };
+
+    const rootNode = findNode(tree);
+    if (rootNode) {
+      traverse(rootNode);
+    }
+
+    return ids;
+  }
+
+  @Cached(
+    null,
+    300,
+    (langCode?: string, parent_id?: number) =>
+      `category_tree:${langCode ?? "all"}:${parent_id ?? "root"}`,
+  )
   async getCategoryTree(
     langCode?: string,
     parent_id: number | null = null,
@@ -59,6 +96,12 @@ export class CategoryService {
     }
   }
 
+  @Cached(
+    null,
+    300,
+    (langCode?: string, parent_id?: number) =>
+      `categories:${langCode ?? "all"}:${parent_id ?? "root"}`,
+  )
   async getCategories(
     langCode?: string,
     parent_id?: number,

@@ -20,11 +20,11 @@ import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";
 import { PasswordResetToken } from "src/shared/entities/user-password-reset-tokens.entity";
-import { randomUUID } from "crypto";
 import { ResetPasswordDto } from "./dto/reset-password.dto";
 import { MailerService } from "@nestjs-modules/mailer";
-import * as fs from "fs";
+import { randomUUID } from "crypto";
 import * as path from "path";
+import * as fs from "fs";
 
 @Injectable()
 export class UserService {
@@ -79,6 +79,7 @@ export class UserService {
 
     const now = new Date();
     const diff = (now.getTime() - token.createdAt.getTime()) / 1000 / 60;
+
     if (diff > 60) {
       throw new BadRequestException("Token expired");
     }

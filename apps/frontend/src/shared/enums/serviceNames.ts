@@ -3,4 +3,5 @@ export enum ServiceNames {
   USER = "user",
   GEO = "geo",
   CATEGORY = "category",
+  PRODUCTS = "products",
 }

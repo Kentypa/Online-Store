@@ -8,6 +8,8 @@ import { CategoryModule } from "../categories/categories.module";
 import { Category } from "../categories/entities/category.entity";
 import { ProductStats } from "./entities/product-stats.entity";
 import { Region } from "src/geo/entities/region.entity";
+import { ProductsService } from "./products.service";
+import { ProductsController } from "./products.controller";
 
 @Module({
   imports: [
@@ -21,8 +23,8 @@ import { Region } from "src/geo/entities/region.entity";
     ]),
     CategoryModule,
   ],
-  controllers: [],
-  providers: [ProductSeederService],
+  controllers: [ProductsController],
+  providers: [ProductSeederService, ProductsService],
   exports: [ProductSeederService],
 })
-export class ProductModule {}
+export class ProductsModule {}

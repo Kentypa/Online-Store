@@ -3,8 +3,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { Category } from "./entities/category.entity";
 import { CategoryTranslation } from "./entities/category-translation.entity";
 import { Language } from "src/shared/entities/language.entity";
-import { CategoryController } from "./controllers/category.controller";
-import { CategoryService } from "./services/category.service";
+import { CategoryController } from "./category.controller";
+import { CategoryService } from "./category.service";
 import { CategorySeederService } from "./seeds/category-seeder.service";
 
 @Module({
@@ -13,6 +13,6 @@ import { CategorySeederService } from "./seeds/category-seeder.service";
   ],
   controllers: [CategoryController],
   providers: [CategorySeederService, CategoryService],
-  exports: [CategorySeederService],
+  exports: [CategorySeederService, CategoryService],
 })
 export class CategoryModule {}

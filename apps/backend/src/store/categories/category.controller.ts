@@ -1,15 +1,9 @@
 import { Controller, Get, HttpCode, Query } from "@nestjs/common";
-import {
-  ApiBearerAuth,
-  ApiTags,
-  ApiOperation,
-  ApiResponse,
-} from "@nestjs/swagger";
-import { CategoryService } from "../services/category.service";
-import { CategoryTranslation } from "../entities/category-translation.entity";
-import { MasterCategoryNode } from "../types/master-category-node.type";
+import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { CategoryService } from "./category.service";
+import { CategoryTranslation } from "./entities/category-translation.entity";
+import { MasterCategoryNode } from "./types/master-category-node.type";
 
-@ApiBearerAuth()
 @ApiTags("category")
 @Controller("category")
 export class CategoryController {

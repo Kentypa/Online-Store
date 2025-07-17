@@ -1,16 +1,15 @@
+import { fakerEN, fakerUK } from "@faker-js/faker";
 import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { DataSource, EntityManager, Repository } from "typeorm";
-import { Product } from "../entities/product.entity";
-import { ProductTranslation } from "../entities/product-translation.entity";
-import { Category } from "src/store/categories/entities/category.entity";
-import { Region } from "src/geo/entities/region.entity";
-import { ProductStats } from "../entities/product-stats.entity";
-import { PeriodTypeEnum } from "../enums/period-type.enum";
-import { fakerEN } from "@faker-js/faker";
-import { fakerUK } from "@faker-js/faker";
 import * as fs from "fs";
 import * as path from "path";
+import { Region } from "src/geo/entities/region.entity";
+import { Category } from "src/store/categories/entities/category.entity";
+import { DataSource, EntityManager, Repository } from "typeorm";
+import { ProductStats } from "../entities/product-stats.entity";
+import { ProductTranslation } from "../entities/product-translation.entity";
+import { Product } from "../entities/product.entity";
+import { PeriodTypeEnum } from "../enums/period-type.enum";
 
 @Injectable()
 export class ProductSeederService {
@@ -79,7 +78,7 @@ export class ProductSeederService {
 
     const products: Array<Partial<Product>> = [];
     for (const category of leafCategories) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 100; i++) {
         const mainImage = fakerEN.helpers.arrayElement(imageFiles);
         const otherImages = fakerEN.helpers.arrayElements(
           imageFiles.filter((f) => f !== mainImage),
@@ -114,44 +113,33 @@ export class ProductSeederService {
     const translations: Array<Partial<ProductTranslation>> = [];
     const stats: Array<Partial<ProductStats>> = [];
 
-    let productIndex = 0;
-    const leafCategoriesLength = leafCategories.length;
+    const periodDate = new Date();
+    const periodType = PeriodTypeEnum.MONTHLY;
+    const defaultRegion = fakerEN.helpers.arrayElement(allRegions);
 
-    for (let i = 0; i < leafCategoriesLength; i++) {
-      for (let j = 0; j < 5; j++) {
-        const productId = productIds[productIndex++];
-        if (!productId) continue;
+    for (const productId of productIds) {
+      translations.push(
+        {
+          product_id: productId,
+          lang: "uk",
+          title: fakerUK.commerce.productName() + "UA",
+          description: fakerUK.commerce.productDescription() + "UA",
+        },
+        {
+          product_id: productId,
+          lang: "en",
+          title: fakerEN.commerce.productName() + "EN",
+          description: fakerEN.commerce.productDescription() + "EN",
+        },
+      );
 
-        translations.push(
-          {
-            product_id: productId,
-            lang: "uk",
-            title: fakerUK.commerce.productName() + "UA",
-            description: fakerUK.commerce.productDescription() + "UA",
-          },
-          {
-            product_id: productId,
-            lang: "en",
-            title: fakerEN.commerce.productName() + "EN",
-            description: fakerEN.commerce.productDescription() + "EN",
-          },
-        );
-
-        const randomRegions = fakerEN.helpers.arrayElements(allRegions, {
-          min: 1,
-          max: 3,
-        });
-
-        for (const region of randomRegions) {
-          stats.push({
-            product_id: productId,
-            region_id: region.id,
-            total_sold: fakerEN.number.int({ min: 0, max: 1000 }),
-            period_type_code: fakerEN.helpers.enumValue(PeriodTypeEnum),
-            period_date: fakerEN.date.past(),
-          });
-        }
-      }
+      stats.push({
+        product_id: productId,
+        region_id: defaultRegion.id,
+        total_sold: fakerEN.number.int({ min: 0, max: 1000 }),
+        period_type_code: periodType,
+        period_date: periodDate,
+      });
     }
 
     await this.insertInChunks(
@@ -171,7 +159,7 @@ export class ProductSeederService {
     );
 
     this.logger.log(
-      `Inserted: ${products.length} products, ${translations.length} translations, ${stats.length} stats`,
+      `Inserted: ${productIds.length} products, ${translations.length} translations, ${stats.length} stats`,
     );
   }
 

@@ -5,6 +5,8 @@ import { ForgetPasswordPage } from "@screens/AuthPages/RecoveryPages/ForgetPassw
 import { ResetPasswordPage } from "@screens/AuthPages/RecoveryPages/ResetPasswordPage";
 import { SignInPage } from "@screens/AuthPages/SignInPage";
 import { SignUpPage } from "@screens/AuthPages/SignUpPage";
+import { HomePage } from "@screens/HomePage";
+import { ProductsPage } from "@screens/ProductsPage";
 import { UserSettingsPage } from "@screens/UsersPages/SettingsPage";
 import { ProtectedRoute } from "@wrappers/ProtectedRoute";
 import { FC } from "react";
@@ -22,6 +24,8 @@ export const ApplicationRoutes: FC = () => {
       <Route path="account-recovery" element={<AccountRecoveryPage />} />
       <Route path="reset-password" element={<ResetPasswordPage />} />
       <Route path="forget-password" element={<ForgetPasswordPage />} />
+      <Route path="*" element={<HomePage />} />
+      <Route path="products" element={<ProductsPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="user">
           <Route path="settings" element={<UserSettingsPage />} />

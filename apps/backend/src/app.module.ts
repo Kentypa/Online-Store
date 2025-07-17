@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from "@nestjs/common";
+import { MiddlewareConsumer, Module, RequestMethod } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config/dist/config.module";
 import { LoggerMiddleware } from "./shared/middleware/logger.middleware";
 import { ConfigService } from "@nestjs/config";
@@ -22,23 +22,26 @@ import { PasswordResetToken } from "./shared/entities/user-password-reset-tokens
 import { Category } from "./store/categories/entities/category.entity";
 import { CategoryTranslation } from "./store/categories/entities/category-translation.entity";
 import { CategoryModule } from "./store/categories/categories.module";
-import { ProductModule } from "./store/products/products.module";
+import { ProductsModule } from "./store/products/products.module";
 import { Product } from "./store/products/entities/product.entity";
 import { ProductTranslation } from "./store/products/entities/product-translation.entity";
+import { ProductStats } from "./store/products/entities/product-stats.entity";
 import projectConfig from "./config/project.config";
 import databaseConfig from "./config/database.config";
 import encryptionConfig from "./config/encryption.config";
 import jwtConfig from "./config/jwt.config";
 import mailerConfig from "./config/mailer.config";
-import { ProductStats } from "./store/products/entities/product-stats.entity";
+import redisConfig from "./config/redis.config";
+import { AppCacheModule } from "./cache/cache.module";
 
 @Module({
   imports: [
+    AppCacheModule,
     UserModule,
     AuthModule,
     GeoModule,
     CategoryModule,
-    ProductModule,
+    ProductsModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -48,6 +51,7 @@ import { ProductStats } from "./store/products/entities/product-stats.entity";
         encryptionConfig,
         jwtConfig,
         mailerConfig,
+        redisConfig,
       ],
     }),
     TypeOrmModule.forRootAsync({
@@ -103,6 +107,8 @@ import { ProductStats } from "./store/products/entities/product-stats.entity";
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes("auth", "user");
+    consumer
+      .apply(LoggerMiddleware)
+      .forRoutes({ path: "*", method: RequestMethod.ALL });
   }
 }

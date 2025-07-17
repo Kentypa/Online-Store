@@ -19,7 +19,6 @@ export const useUserData = (enabled: boolean = true) => {
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(changeByData(data.data));
-      console.log(data.data);
     }
   }, [data, dispatch, isSuccess]);
 

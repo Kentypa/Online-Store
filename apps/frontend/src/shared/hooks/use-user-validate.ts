@@ -25,13 +25,11 @@ export const useUserVerify = (enabled: boolean = true) => {
     if (isSuccess) {
       dispatch(changeIsAuthenticated(true));
       dispatch(changeAuthLoading(false));
-      console.log("Success");
     }
 
     if (isError) {
       dispatch(changeIsAuthenticated(false));
       dispatch(changeAuthLoading(false));
-      console.log("Error");
     }
   }, [dispatch, isError, isSuccess]);
 

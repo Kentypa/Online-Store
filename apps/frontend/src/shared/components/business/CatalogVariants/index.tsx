@@ -3,6 +3,7 @@ import { CatalogVariantsIcons } from "@ui/CatalogVariantsIcons";
 import { FC, useEffect, useState } from "react";
 import { CategoryRoot } from "@shared-types/category-root";
 import RightArrow from "@icons/angle-right.svg?react";
+import { useNavigate, useSearchParams } from "react-router";
 
 export type CatalogVariantsProps = {
   visible: boolean;
@@ -11,6 +12,16 @@ export type CatalogVariantsProps = {
 export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
   const { categoriesData, isLoading, isSuccess } = useCategories();
   const [currentCategory, setCurrentCategory] = useState<CategoryRoot>();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const handleCategoryClick = (categoryId: number) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("categoryId", String(categoryId));
+    newParams.set("page", "1");
+
+    navigate(`/products?${newParams.toString()}`);
+  };
 
   useEffect(() => {
     if (isSuccess && categoriesData) {
@@ -19,7 +30,6 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
   }, [isSuccess, categoriesData]);
 
   if (isLoading) return;
-  console.log(currentCategory);
 
   const activeCategoryStyle = (id: number) =>
     currentCategory?.id === id
@@ -60,7 +70,13 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
             </p>
             <ul className="flex flex-col gap-1.5">
               {category.children.map((subcategory) => (
-                <li key={subcategory.id} className="text-body-paragraph">
+                <li
+                  key={subcategory.id}
+                  className="text-body-paragraph hover:text-accent cursor-pointer"
+                  onClick={() =>
+                    handleCategoryClick(subcategory.translations[0].category_id)
+                  }
+                >
                   {subcategory.translations[0].name}
                 </li>
               ))}

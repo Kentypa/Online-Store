@@ -6,8 +6,9 @@ import {
   changeIsAuthenticated,
 } from "@stores/user/userSlice";
 import { delay } from "@utils/delay";
-import { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { store } from "@stores/store";
+import { BACKEND_URL } from "@config/config";
 
 let isRefreshing = false;
 
@@ -15,13 +16,13 @@ const retryValidate = async (
   countRetries: number,
   delayTime: number,
   isSuccess?: () => void,
-  isError?: () => void
+  isError?: () => void,
 ): Promise<TokenValidatingStatus> => {
   let validationStatus = TokenValidatingStatus.IN_PROCESS;
 
   for (let i = 0; i < countRetries; i++) {
     try {
-      await api.post(`${ServiceNames.AUTH}/refresh`, {}, {});
+      await axios.post(`${BACKEND_URL}/${ServiceNames.AUTH}/refresh`, {}, {});
       validationStatus = TokenValidatingStatus.SUCCESS;
       break;
     } catch {
@@ -87,7 +88,7 @@ api.interceptors.response.use(
         1,
         1000,
         setSuccessRefresh,
-        setFailureRefresh
+        setFailureRefresh,
       );
 
       if (validationStatus === TokenValidatingStatus.SUCCESS) {
@@ -101,5 +102,5 @@ api.interceptors.response.use(
     } finally {
       isRefreshing = false;
     }
-  }
+  },
 );
