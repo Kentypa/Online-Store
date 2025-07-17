@@ -2,9 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { getProductsDto } from "./dto/getProducts.dto";
-import { ProductStats } from "./entities/product-stats.entity";
 import { ProductTranslation } from "./entities/product-translation.entity";
-import { Product } from "./entities/product.entity";
 import { SortProductsBy } from "./enums/sort-products-by.enum";
 import { responseProductsDto } from "./dto/responseProducts.dto";
 import { CategoryService } from "../categories/category.service";
@@ -12,12 +10,8 @@ import { CategoryService } from "../categories/category.service";
 @Injectable()
 export class ProductsService {
   constructor(
-    @InjectRepository(Product)
-    private productRepository: Repository<Product>,
     @InjectRepository(ProductTranslation)
     private productTranslationRepository: Repository<ProductTranslation>,
-    @InjectRepository(ProductStats)
-    private productStatsRepository: Repository<ProductStats>,
     private readonly categoryService: CategoryService,
   ) {}
 

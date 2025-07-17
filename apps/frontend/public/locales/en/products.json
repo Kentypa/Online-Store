@@ -1,5 +1,10 @@
 {
   "buttons": {
     "buy": "Buy"
+  },
+  "sortingTypes": {
+    "totalSold": "By solds",
+    "fromLower": "From lower to higher",
+    "fromHighter": "From higher to lower"
   }
 }

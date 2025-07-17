@@ -22,7 +22,11 @@ const retryValidate = async (
 
   for (let i = 0; i < countRetries; i++) {
     try {
-      await axios.post(`${BACKEND_URL}/${ServiceNames.AUTH}/refresh`, {}, {});
+      await axios.post(
+        `${BACKEND_URL}/${ServiceNames.AUTH}/refresh`,
+        {},
+        { withCredentials: true },
+      );
       validationStatus = TokenValidatingStatus.SUCCESS;
       break;
     } catch {

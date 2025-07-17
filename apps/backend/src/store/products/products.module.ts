@@ -10,6 +10,7 @@ import { ProductStats } from "./entities/product-stats.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { ProductsService } from "./products.service";
 import { ProductsController } from "./products.controller";
+import { GeoModule } from "src/geo/geo.module";
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ProductsController } from "./products.controller";
       Region,
     ]),
     CategoryModule,
+    GeoModule,
   ],
   controllers: [ProductsController],
   providers: [ProductSeederService, ProductsService],

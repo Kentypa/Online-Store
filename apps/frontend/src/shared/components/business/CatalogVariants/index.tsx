@@ -4,6 +4,8 @@ import { FC, useEffect, useState } from "react";
 import { CategoryRoot } from "@shared-types/category-root";
 import RightArrow from "@icons/angle-right.svg?react";
 import { useNavigate, useSearchParams } from "react-router";
+import { Button } from "@ui/Button";
+import { SortProductsBy } from "@enums/sortProductsBy";
 
 export type CatalogVariantsProps = {
   visible: boolean;
@@ -12,13 +14,14 @@ export type CatalogVariantsProps = {
 export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
   const { categoriesData, isLoading, isSuccess } = useCategories();
   const [currentCategory, setCurrentCategory] = useState<CategoryRoot>();
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const handleCategoryClick = (categoryId: number) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set("categoryId", String(categoryId));
     newParams.set("page", "1");
+    newParams.set("sortBy", SortProductsBy.TOTAL_SOLD_DESC.toLowerCase());
 
     navigate(`/products?${newParams.toString()}`);
   };
@@ -53,31 +56,47 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
               className="size-6"
               iconName={category.image_url ?? ""}
             />
-            <div className="flex justify-between max-w-62 w-full">
+            <Button
+              className="flex justify-between max-w-62 w-full"
+              handleClick={() =>
+                handleCategoryClick(category.translations[0].category_id)
+              }
+            >
               <p className="text-body-paragraph">
                 {category.translations[0].name}
               </p>
               <RightArrow className="size-6" />
-            </div>
+            </Button>
           </li>
         ))}
       </ul>
       <div className="w-max-288 w-full grid grid-cols-5 bg-white p-5 rounded-4xl">
         {currentCategory?.children?.map((category) => (
           <div key={category.id} className="flex flex-col gap-1.5">
-            <p className="text-display-smallest mb-3">
-              {category.translations[0].name}
+            <p className="text-display-smallest mb-3 hover:text-accent cursor-pointer">
+              <Button
+                handleClick={() =>
+                  handleCategoryClick(category.translations[0].category_id)
+                }
+              >
+                {category.translations[0].name}
+              </Button>
             </p>
             <ul className="flex flex-col gap-1.5">
               {category.children.map((subcategory) => (
                 <li
                   key={subcategory.id}
                   className="text-body-paragraph hover:text-accent cursor-pointer"
-                  onClick={() =>
-                    handleCategoryClick(subcategory.translations[0].category_id)
-                  }
                 >
-                  {subcategory.translations[0].name}
+                  <Button
+                    handleClick={() =>
+                      handleCategoryClick(
+                        subcategory.translations[0].category_id,
+                      )
+                    }
+                  >
+                    {subcategory.translations[0].name}
+                  </Button>
                 </li>
               ))}
             </ul>

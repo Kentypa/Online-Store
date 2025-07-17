@@ -1,15 +1,15 @@
 import { fakerEN, fakerUK } from "@faker-js/faker";
-import { Injectable, Logger } from "@nestjs/common";
+import { Inject, Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import * as fs from "fs";
 import * as path from "path";
-import { Region } from "src/geo/entities/region.entity";
 import { Category } from "src/store/categories/entities/category.entity";
 import { DataSource, EntityManager, Repository } from "typeorm";
 import { ProductStats } from "../entities/product-stats.entity";
 import { ProductTranslation } from "../entities/product-translation.entity";
 import { Product } from "../entities/product.entity";
 import { PeriodTypeEnum } from "../enums/period-type.enum";
+import { RegionService } from "src/geo/services/region.service";
 
 @Injectable()
 export class ProductSeederService {
@@ -23,8 +23,8 @@ export class ProductSeederService {
     private readonly productTranslationRepository: Repository<ProductTranslation>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
-    @InjectRepository(Region)
-    private readonly regionRepository: Repository<Region>,
+    @Inject()
+    private readonly regionService: RegionService,
     @InjectRepository(ProductStats)
     private readonly productStatsRepository: Repository<ProductStats>,
   ) {}
@@ -59,7 +59,7 @@ export class ProductSeederService {
 
   private async createProducts(manager: EntityManager): Promise<void> {
     const [allRegions, allCategories] = await Promise.all([
-      this.regionRepository.find(),
+      this.regionService.getRegions(),
       this.categoryRepository.find(),
     ]);
 
@@ -115,9 +115,9 @@ export class ProductSeederService {
 
     const periodDate = new Date();
     const periodType = PeriodTypeEnum.MONTHLY;
-    const defaultRegion = fakerEN.helpers.arrayElement(allRegions);
 
     for (const productId of productIds) {
+      const randomRegion = fakerEN.helpers.arrayElement(allRegions);
       translations.push(
         {
           product_id: productId,
@@ -135,7 +135,7 @@ export class ProductSeederService {
 
       stats.push({
         product_id: productId,
-        region_id: defaultRegion.id,
+        region_id: randomRegion.region_id,
         total_sold: fakerEN.number.int({ min: 0, max: 1000 }),
         period_type_code: periodType,
         period_date: periodDate,

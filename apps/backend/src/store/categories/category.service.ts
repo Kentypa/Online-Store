@@ -45,8 +45,23 @@ export class CategoryService {
     return ids;
   }
 
+  async getParentCategoryIds(
+    categoryId: number,
+    parents: number[] = [],
+  ): Promise<number[]> {
+    const category = await this.categoryRepository.findOne({
+      where: { id: categoryId },
+    });
+
+    if (category && category.parent_id !== null) {
+      parents.push(category.parent_id);
+      return this.getParentCategoryIds(category.parent_id, parents);
+    }
+
+    return parents;
+  }
+
   @Cached(
-    null,
     300,
     (langCode?: string, parent_id?: number) =>
       `category_tree:${langCode ?? "all"}:${parent_id ?? "root"}`,
@@ -97,7 +112,6 @@ export class CategoryService {
   }
 
   @Cached(
-    null,
     300,
     (langCode?: string, parent_id?: number) =>
       `categories:${langCode ?? "all"}:${parent_id ?? "root"}`,

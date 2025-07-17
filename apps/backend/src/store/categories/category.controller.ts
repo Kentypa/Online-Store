@@ -38,4 +38,18 @@ export class CategoryController {
   ): Promise<MasterCategoryNode[]> {
     return this.categoryService.getCategoryTree(langCode, parentId);
   }
+
+  @Get("categories-parent-ids")
+  @ApiOperation({ summary: "Get regions with their translations" })
+  @ApiResponse({
+    status: 200,
+    description: "Categories",
+    type: CategoryTranslation,
+  })
+  @HttpCode(200)
+  async getParentCategoryIds(
+    @Query("categoryId") categoryId: number,
+  ): Promise<number[]> {
+    return this.categoryService.getParentCategoryIds(categoryId);
+  }
 }

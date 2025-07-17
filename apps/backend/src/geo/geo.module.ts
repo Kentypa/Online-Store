@@ -27,6 +27,6 @@ import { CityService } from "./services/city.service";
   ],
   controllers: [GeoController],
   providers: [GeoSeederService, CountryService, RegionService, CityService],
-  exports: [GeoSeederService],
+  exports: [GeoSeederService, CountryService, RegionService, CityService],
 })
 export class GeoModule {}
