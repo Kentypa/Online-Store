@@ -26,6 +26,7 @@ export class ProductsController {
     @Query("regionId") regionId?: number,
     @Query("sortBy") sortBy?: SortProductsBy,
     @Query("categoryId") categoryId?: number,
+    @Query("withReviews") withReviews?: boolean,
   ): Promise<responseProductsDto> {
     return this.productsService.getProducts({
       id,
@@ -35,6 +36,24 @@ export class ProductsController {
       regionId,
       sortBy,
       categoryId,
+      withReviews,
     });
+  }
+
+  @Get("search")
+  @ApiOperation({ summary: "Get regions with their translations" })
+  @ApiResponse({
+    status: 200,
+    description: "Categories",
+    type: ProductTranslation,
+  })
+  @HttpCode(200)
+  async searchProducts(
+    @Query("query") query: string,
+    @Query("langCode") langCode: string,
+    @Query("offset") offset?: number,
+    @Query("limit") limit?: number,
+  ): Promise<responseProductsDto> {
+    return this.productsService.searchProducts(query, langCode, limit, offset);
   }
 }

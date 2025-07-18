@@ -45,6 +45,11 @@ export class CategoryService {
     return ids;
   }
 
+  @Cached(
+    300,
+    (categoryId: number, parents: number[]) =>
+      `category_parent_ids:${categoryId ?? "nothing"}:${Array.isArray(parents) ? parents.join(",") : "no-parents"}`,
+  )
   async getParentCategoryIds(
     categoryId: number,
     parents: number[] = [],

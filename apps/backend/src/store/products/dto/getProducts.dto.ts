@@ -1,5 +1,11 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import {
+  IsBoolean,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from "class-validator";
 import { SortProductsBy } from "../enums/sort-products-by.enum";
 
 export class getProductsDto {
@@ -64,4 +70,13 @@ export class getProductsDto {
     description: "User email",
   })
   sortBy?: SortProductsBy;
+
+  @IsBoolean()
+  @IsOptional()
+  @ApiProperty({
+    example: "test@gmail.com",
+    description: "User email",
+    type: "boolean",
+  })
+  withReviews?: boolean;
 }

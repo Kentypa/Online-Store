@@ -6,7 +6,8 @@ import { ResetPasswordPage } from "@screens/AuthPages/RecoveryPages/ResetPasswor
 import { SignInPage } from "@screens/AuthPages/SignInPage";
 import { SignUpPage } from "@screens/AuthPages/SignUpPage";
 import { HomePage } from "@screens/HomePage";
-import { ProductsPage } from "@screens/ProductsPage";
+import { ProductPage } from "@screens/store/ProductPage";
+import { ProductsPage } from "@screens/store/ProductsPage";
 import { UserSettingsPage } from "@screens/UsersPages/SettingsPage";
 import { ProtectedRoute } from "@wrappers/ProtectedRoute";
 import { FC } from "react";
@@ -14,9 +15,8 @@ import { Routes, Route } from "react-router";
 
 export const ApplicationRoutes: FC = () => {
   const { isSuccess: isAuthenticated } = useUserVerify();
-  const { isSuccess: isUserDataFetched } = useUserData(isAuthenticated);
+  useUserData(isAuthenticated);
 
-  console.log(isUserDataFetched);
   return (
     <Routes>
       <Route path="sign-in" element={<SignInPage />} />
@@ -26,6 +26,7 @@ export const ApplicationRoutes: FC = () => {
       <Route path="forget-password" element={<ForgetPasswordPage />} />
       <Route path="*" element={<HomePage />} />
       <Route path="products" element={<ProductsPage />} />
+      <Route path="product" element={<ProductPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="user">
           <Route path="settings" element={<UserSettingsPage />} />

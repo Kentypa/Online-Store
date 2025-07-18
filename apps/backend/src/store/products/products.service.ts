@@ -23,11 +23,16 @@ export class ProductsService {
     regionId,
     sortBy,
     categoryId,
+    withReviews = false,
   }: getProductsDto): Promise<responseProductsDto> {
     const qb = this.productTranslationRepository
       .createQueryBuilder("translation")
       .leftJoinAndSelect("translation.product", "product")
       .leftJoinAndSelect("product.stats", "stats");
+
+    if (withReviews) {
+      qb.leftJoinAndSelect("product.reviews", "reviews");
+    }
 
     switch (sortBy) {
       case SortProductsBy.TOTAL_SOLD_DESC:
@@ -73,6 +78,34 @@ export class ProductsService {
 
     qb.skip(offset ?? 0);
     qb.take(limit ?? 10);
+
+    const [data, total] = await qb.getManyAndCount();
+
+    return { data, total };
+  }
+
+  async searchProducts(
+    query: string,
+    langCode: string,
+    limit = 10,
+    offset = 0,
+  ): Promise<responseProductsDto> {
+    const qb = this.productTranslationRepository
+      .createQueryBuilder("translation")
+      .leftJoinAndSelect("translation.product", "product")
+      .leftJoinAndSelect("product.stats", "stats")
+      .addSelect(
+        `ts_rank(translation.search_vector, plainto_tsquery('simple', :query))`,
+        "rank",
+      )
+      .where("translation.lang = :langCode", { langCode })
+      .andWhere(
+        "translation.search_vector @@ plainto_tsquery('simple', :query)",
+        { query },
+      )
+      .orderBy("rank", "DESC")
+      .skip(offset)
+      .take(limit);
 
     const [data, total] = await qb.getManyAndCount();
 

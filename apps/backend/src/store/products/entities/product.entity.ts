@@ -12,6 +12,8 @@ import {
 } from "typeorm";
 import { ProductTranslation } from "./product-translation.entity";
 import { ProductStats } from "./product-stats.entity";
+import { Review } from "src/review/entities/review.entity";
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class Product {
@@ -48,12 +50,18 @@ export class Product {
   @OneToMany(() => ProductStats, (stats) => stats.product)
   stats: ProductStats[];
 
+  @OneToMany(() => Review, (review) => review.product)
+  reviews: Review[];
+
   @CreateDateColumn({ name: "created_at" })
+  @Exclude()
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updated_at" })
+  @Exclude()
   updatedAt: Date;
 
   @DeleteDateColumn({ name: "deleted_at" })
+  @Exclude()
   deletedAt: Date | null;
 }

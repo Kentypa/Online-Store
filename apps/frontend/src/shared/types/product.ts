@@ -1,4 +1,5 @@
 import { ProductStats } from "./product-stats";
+import { Review } from "./review";
 
 export type Product = {
   id: number;
@@ -9,6 +10,7 @@ export type Product = {
   other_image_urls: string[];
   category_id: number;
   stats: ProductStats[];
+  reviews: Review[];
   createdAt: string;
   updatedAt: string;
   deletedAt?: Date;

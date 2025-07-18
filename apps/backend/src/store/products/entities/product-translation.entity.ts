@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Product } from "./product.entity";
 import { Language } from "src/shared/entities/language.entity";
+import { Exclude } from "class-transformer";
 
 @Entity()
 export class ProductTranslation {
@@ -25,4 +26,8 @@ export class ProductTranslation {
 
   @Column({ type: "text" })
   description: string;
+
+  @Column({ type: "tsvector", nullable: true })
+  @Exclude()
+  search_vector: string;
 }

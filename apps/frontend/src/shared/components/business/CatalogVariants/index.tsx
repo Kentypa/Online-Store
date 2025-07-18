@@ -6,6 +6,7 @@ import RightArrow from "@icons/angle-right.svg?react";
 import { useNavigate, useSearchParams } from "react-router";
 import { Button } from "@ui/Button";
 import { SortProductsBy } from "@enums/sortProductsBy";
+import { PagesEndponts } from "@enums/pagesEndpoints";
 
 export type CatalogVariantsProps = {
   visible: boolean;
@@ -23,7 +24,7 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
     newParams.set("page", "1");
     newParams.set("sortBy", SortProductsBy.TOTAL_SOLD_DESC.toLowerCase());
 
-    navigate(`/products?${newParams.toString()}`);
+    navigate(`${PagesEndponts.PRODUCTS}?${newParams.toString()}`);
   };
 
   useEffect(() => {

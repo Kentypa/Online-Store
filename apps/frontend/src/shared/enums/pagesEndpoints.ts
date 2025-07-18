@@ -1,5 +1,7 @@
 export enum PagesEndponts {
   HOME = "/",
+  PRODUCT = "/product",
+  PRODUCTS = "/products",
   SIGN_IN = "/sign-in",
   SIGN_UP = "/sign-up",
   FORGET_PASSWORD = "/forget-password",
