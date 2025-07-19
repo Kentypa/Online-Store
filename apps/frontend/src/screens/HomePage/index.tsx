@@ -8,16 +8,12 @@ import { SliderPrevButton } from "@ui/SliderPrevButton";
 import { useTranslation } from "react-i18next";
 import { useProducts } from "@hooks/use-products";
 import { SortProductsBy } from "@enums/sortProductsBy";
-import "swiper/css";
-import { convertCurrency } from "@utils/currencyConverter";
-import { formatCurrency } from "@utils/formatCurrency";
-import { ButtonWithIcon } from "@ui/ButtonWithIcon";
-import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
 import { PaginationButtons } from "@business/PaginationButtons";
 import { useAppSelector } from "@hooks/redux";
 import { userSelector } from "@stores/selectors/userSelector";
 import { useSearchParams } from "react-router";
 import { ProductsList } from "@layout/ProductsList";
+import "swiper/css";
 
 export const HomePage: FC = () => {
   const swiperRef = useRef<SwiperType | null>(null);
@@ -29,7 +25,7 @@ export const HomePage: FC = () => {
   const limit = 10;
   const offset = (currentPage - 1) * limit;
 
-  const { productsData, total, isFetched } = useProducts({
+  const { productsData, total } = useProducts({
     langCode: i18n.language,
     limit,
     offset,

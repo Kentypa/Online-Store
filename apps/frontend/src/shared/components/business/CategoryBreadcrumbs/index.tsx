@@ -4,26 +4,21 @@ import { useParentCategories } from "@hooks/use-parent-categories";
 import { Button } from "@ui/Button";
 import { getCategoriesByIds } from "@utils/getCategoriesWithName";
 import { FC } from "react";
-import { useSearchParams, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import HomeIcon from "@icons/home.svg?react";
 
 type CategoryBreadcrumbsProps = {
   categoryId: number;
+  handleSetNewCategory: (value: string) => void;
 };
 
 export const CategoryBreadcrumbs: FC<CategoryBreadcrumbsProps> = ({
   categoryId,
+  handleSetNewCategory,
 }) => {
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const { categoriesData } = useCategories();
   const { parentIds } = useParentCategories(categoryId);
   const navigate = useNavigate();
-
-  const handleSetNewCategory = (value: string) => {
-    searchParams.set("categoryId", value);
-    setSearchParams(searchParams);
-  };
 
   return (
     <div className="flex items-center gap">

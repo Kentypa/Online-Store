@@ -1,0 +1,46 @@
+:root {
+    --lg-bg-color: rgba(255, 255, 255, 0.1);
+    --lg-highlight: rgba(255, 255, 255, 0.9);
+}
+
+.glass-zoom {
+    box-shadow:
+        0 6px 6px rgba(0, 0, 0, 0.2),
+        0 0 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    isolation: isolate;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: visible;
+}
+
+.glass-filter {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    filter: url(#lg-dist);
+    backdrop-filter: blur(6px);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.glass-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: var(--lg-bg-color);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.glass-specular {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    box-shadow:
+        inset 1px 1px 0 var(--lg-highlight),
+        inset 0 0 8px var(--lg-highlight);
+}

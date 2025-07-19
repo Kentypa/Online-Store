@@ -7,12 +7,17 @@ import "swiper/css";
 import { PaginationButtons } from "@business/PaginationButtons";
 import { useSearchParams } from "react-router";
 import { ProductsSortingList } from "@features/ProductsPage/components/ProductsSortingList";
-import { CategoryBreadcrumbs } from "@features/ProductsPage/components/CategoryBreadcrumbs";
+import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
 import { ProductsList } from "@layout/ProductsList";
 
 export const ProductsPage: FC = () => {
   const { i18n } = useTranslation("products");
+
   const [searchParams, setSearchParams] = useSearchParams();
+  const handleSetNewCategory = (value: string) => {
+    searchParams.set("categoryId", value);
+    setSearchParams(searchParams);
+  };
 
   const currentPage = Number(searchParams.get("page") ?? "1");
   const categoryId = Number(searchParams.get("categoryId") ?? "1");
@@ -47,7 +52,10 @@ export const ProductsPage: FC = () => {
       <div className="flex flex-col w-full px-25 py-16 gap-30">
         <div className="flex flex-col gap-3 items-center">
           <div className="flex flex-col gap-6">
-            <CategoryBreadcrumbs categoryId={categoryId} />
+            <CategoryBreadcrumbs
+              categoryId={categoryId}
+              handleSetNewCategory={handleSetNewCategory}
+            />
             <div className="flex w-full gap-6">
               <ProductsSortingList
                 currentSortingType={currentSortingType}

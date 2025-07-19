@@ -1,90 +1,90 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Inter";
-  src: url("assets/fonts/Inter/Inter-VariableFont.ttf") format("truetype");
+    font-family: "Inter";
+    src: url("assets/fonts/Inter/Inter-VariableFont.ttf") format("truetype");
 }
 
 @theme {
-  --color-primary: #1a1a1a;
-  --color-secondary: #555555;
-  --color-accent: #3b82f6;
-  --color-background: #f9fafb;
-  --color-surface: #ffffff;
-  --color-separator: #e5e7eb;
-  --color-attention: #f63e3b;
+    --color-primary: #1a1a1a;
+    --color-secondary: #555555;
+    --color-accent: #3b82f6;
+    --color-background: #f9fafb;
+    --color-surface: #ffffff;
+    --color-separator: #e5e7eb;
+    --color-attention: #f63e3b;
 
-  --font-inter: "Inter";
+    --font-inter: "Inter";
 }
 
 @utility text-display-large {
-  font-family: "Inter";
-  font-weight: 700;
-  font-size: 48px;
-  line-height: 56px;
-  letter-spacing: -0.5%;
+    font-family: "Inter";
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    letter-spacing: -0.5%;
 }
 
 @utility text-display-medium {
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 44px;
-  letter-spacing: -0.5%;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    letter-spacing: -0.5%;
 }
 
 @utility text-display-small {
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 36px;
-  letter-spacing: -0.3%;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: -0.3%;
 }
 
 @utility text-display-smallest {
-  font-family: "Inter";
-  font-weight: 600;
-  font-size: 22px;
-  line-height: 30px;
-  letter-spacing: -0.2%;
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: -0.2%;
 }
 
 @utility text-body-paragraph {
-  font-family: "Inter";
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: 0;
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
 }
 
 @utility text-body-small {
-  font-family: "Inter";
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: var(--color-secondary);
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--color-secondary);
 }
 
 @utility text-caption {
-  font-family: "Inter";
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
-  letter-spacing: 0;
-  color: var(--color-secondary);
+    font-family: "Inter";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0;
+    color: var(--color-secondary);
 }
 
 body {
-  font-family: var(--font-inter), monospace, serif, sans-serif;
-  color: var(--color-primary);
+    font-family: var(--font-inter), monospace, serif, sans-serif;
+    color: var(--color-primary);
 }
 
 button:enabled {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 button:disabled {
-  cursor: not-allowed;
-  opacity: 0.25;
+    cursor: not-allowed;
+    opacity: 0.25;
 }
