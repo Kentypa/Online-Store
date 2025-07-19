@@ -1,6 +1,6 @@
 :root {
     --lg-bg-color: rgba(255, 255, 255, 0.1);
-    --lg-highlight: rgba(255, 255, 255, 0.9);
+    --lg-highlight: rgba(255, 255, 255, 0.8);
 }
 
 .glass-zoom {
