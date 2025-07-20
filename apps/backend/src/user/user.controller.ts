@@ -8,6 +8,7 @@ import {
   ParseFilePipeBuilder,
   Patch,
   Post,
+  Query,
   Res,
   UploadedFile,
   UseFilters,
@@ -59,6 +60,18 @@ export class UserController {
   @HttpCode(200)
   async getCurrentUser(@UserDecorator() user: User): Promise<GetUserDto> {
     return this.userService.getSafeUser(user.id);
+  }
+
+  @Get("get-by-id")
+  @ApiOperation({ summary: "Get user by ID" })
+  @ApiResponse({
+    status: 200,
+    description: "User information",
+    type: GetUserDto,
+  })
+  @HttpCode(200)
+  async getUserById(@Query("userId") userId: number): Promise<GetUserDto> {
+    return this.userService.getSafeUser(userId);
   }
 
   @Delete("delete-account")

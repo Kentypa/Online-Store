@@ -9,6 +9,7 @@ export type GetProductsDto = {
   regionId?: number;
   sortBy?: SortProductsBy;
   categoryId?: number;
+  withReviews?: boolean;
 };
 
 export function productsService(url: string) {
@@ -20,6 +21,7 @@ export function productsService(url: string) {
     regionId,
     sortBy,
     categoryId,
+    withReviews,
   }: GetProductsDto) => {
     return api
       .get(url, {
@@ -31,6 +33,7 @@ export function productsService(url: string) {
           regionId: regionId,
           sortBy: sortBy,
           categoryId: categoryId,
+          withReviews: withReviews,
         },
       })
       .catch((error) => {

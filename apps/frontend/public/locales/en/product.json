@@ -1,0 +1,21 @@
+{
+  "buttons": {
+    "addToCart": "Add to Cart",
+    "buyNow": "Buy Now",
+    "writeReview": "Write review",
+    "viewAllReviews": "View all reviews"
+  },
+  "labels": {
+    "price": "Price"
+  },
+  "reviews": {
+    "labels": {
+      "reviews": "Reviews"
+    },
+    "info": {
+      "averageUserReview": "Average user reviews",
+      "basedOn": "Based on",
+      "reviews": "reviews"
+    }
+  }
+}

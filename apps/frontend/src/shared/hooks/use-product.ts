@@ -1,4 +1,5 @@
 import { ServiceNames } from "@enums/serviceNames";
+import { calculateAvarageRating } from "@features/ProductPage/utils/calculate-avarage-rating";
 import { GetProductsDto, productsService } from "@services/productsService";
 import { ProductTranslation } from "@shared-types/product-translation";
 import { useQuery } from "@tanstack/react-query";
@@ -22,5 +23,19 @@ export const useProduct = (dto: GetProductsDto) => {
       ]
     : undefined;
 
-  return { productData, productImages, ...otherOptions };
+  const productAvarageRating = isFetched
+    ? calculateAvarageRating(productData.product.reviews)
+    : undefined;
+
+  const productReviewsCount = isFetched
+    ? productData.product.reviews.length
+    : undefined;
+
+  return {
+    productData,
+    productImages,
+    productAvarageRating,
+    productReviewsCount,
+    ...otherOptions,
+  };
 };

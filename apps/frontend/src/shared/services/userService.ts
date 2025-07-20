@@ -12,6 +12,15 @@ export function userService(url: string) {
     });
   };
 
+  const getUserById = async (userId: number) => {
+    return api
+      .get(`${url}/get-by-id`, { params: { userId } })
+      .catch((error) => {
+        console.log(error.toJSON());
+        throw new Error(error.message);
+      });
+  };
+
   const getUser = async () => {
     return api.get(`${url}/me`).catch((error) => {
       console.log(error.toJSON());
@@ -72,5 +81,6 @@ export function userService(url: string) {
     updateLanguageUser,
     requestResetPasswordUser,
     resetPassword,
+    getUserById,
   };
 }
