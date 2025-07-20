@@ -3,5 +3,7 @@ export enum Queries {
   USER = "user",
   GEO = "geo",
   CATEGORY = "category",
+  PRODUCT = "product",
   PRODUCTS = "products",
+  REVIEWS = "review",
 }

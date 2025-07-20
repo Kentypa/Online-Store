@@ -13,13 +13,13 @@ export const UserReviewInfo: FC<UserReviewInfoProps> = ({ userId }) => {
     <div className="flex gap-4">
       {userData && userData.avatarUrl !== null ? (
         <img
-          src={`http://localhost:3000${userData.avatarUrl}`}
+          src={`http://localhost:3000/${userData.avatarUrl}`}
           className="rounded-full size-6 object-cover"
         />
       ) : (
         <EmptyAvatar className="fill-primary size-6" />
       )}
-      {userData && <p>{userData.firstName}</p>}
+      {userData && <p>{userData.firstName ?? userData.email}</p>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
@@ -22,6 +22,9 @@ import ViewReviews from "@icons/view-review.svg?react";
 import "swiper/css";
 import { UserReviewInfo } from "@features/ProductPage/components/UserReviewInfo";
 import { StarsMark } from "@features/ProductPage/components/StarsMark";
+import { CreateReviewModal } from "@features/ProductPage/components/CreateReviewModal";
+import { useWriteReview } from "@features/ProductPage/hooks/use-write-review";
+import { useWriteReviewPopups } from "@features/ProductPage/hooks/use-write-review-popups";
 
 export const ProductPage: FC = () => {
   const [searchParams] = useSearchParams();
@@ -52,8 +55,34 @@ export const ProductPage: FC = () => {
     navigate(`${PagesEndponts.PRODUCTS}?${newParams.toString()}`);
   };
 
+  const {
+    formState,
+    handleChange,
+    handleChangeByValue,
+    handleSubmit,
+    showWriteReviewModal,
+    toggleShowWriteReviewModal,
+    closeReviewModal,
+    isError: userWriteReviewError,
+    isSuccess: userWriteReviewIsSuccess,
+  } = useWriteReview(productId);
+
+  useEffect(() => {
+    if (userWriteReviewIsSuccess) closeReviewModal();
+  }, [closeReviewModal, userWriteReviewIsSuccess]);
+
+  useWriteReviewPopups({ userWriteReviewError });
+
   return (
     <MainContentWrapper>
+      <CreateReviewModal
+        formState={formState}
+        handleChange={handleChange}
+        handleChangeByValue={handleChangeByValue}
+        handleSubmit={handleSubmit}
+        toggleModal={toggleShowWriteReviewModal}
+        visible={showWriteReviewModal}
+      />
       {productData && (
         <div className="flex flex-col py-6 px-18 size-full">
           <div className="flex w-full mb-6">
@@ -212,16 +241,20 @@ export const ProductPage: FC = () => {
                 <ButtonWithIcon
                   icon={<WriteReviewButton className="size-6 fill-white" />}
                   className="text-white p-3 bg-primary rounded-4xl flex justify-center items-center mt-9"
+                  handleClick={toggleShowWriteReviewModal}
                 >
                   {t("buttons.writeReview")}
                 </ButtonWithIcon>
               </div>
-              <div className="flex flex-col gap-9 size-full">
+              <ul className="flex flex-col gap-9 size-full">
                 {productData &&
                   productData.product.reviews
                     .slice(0, showAllReviews ? productReviewsCount : 3)
                     .map((review) => (
-                      <div className="rounded-4xl border-2 border-separator p-6 flex w-full">
+                      <li
+                        key={review.id}
+                        className="rounded-4xl border-2 border-separator p-6 flex w-full"
+                      >
                         <div className="flex flex-col gap-2">
                           <UserReviewInfo userId={review.user_id} />
                           <StarsMark
@@ -233,9 +266,9 @@ export const ProductPage: FC = () => {
                             {review.comment}
                           </p>
                         </div>
-                      </div>
+                      </li>
                     ))}
-                {!showAllReviews && (
+                {!showAllReviews && (productReviewsCount ?? 0) > 3 && (
                   <ButtonWithIcon
                     icon={<ViewReviews className="size-6 fill-white" />}
                     className="flex justify-center items-center p-3 size-full max-w-87.5 bg-primary rounded-4xl"
@@ -244,7 +277,7 @@ export const ProductPage: FC = () => {
                     <p className="text-white">{t("buttons.viewAllReviews")}</p>
                   </ButtonWithIcon>
                 )}
-              </div>
+              </ul>
             </div>
           </div>
         </div>

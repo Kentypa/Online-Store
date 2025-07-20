@@ -1,3 +1,4 @@
+import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
 import { calculateAvarageRating } from "@features/ProductPage/utils/calculate-avarage-rating";
 import { GetProductsDto, productsService } from "@services/productsService";
@@ -8,11 +9,8 @@ export const useProduct = (dto: GetProductsDto) => {
   const { getProducts } = productsService(ServiceNames.PRODUCTS);
 
   const { data, isFetched, ...otherOptions } = useQuery({
-    queryKey: [dto],
-    queryFn: ({ queryKey }) => {
-      const [dto] = queryKey;
-      return getProducts(dto);
-    },
+    queryKey: [Queries.PRODUCT, dto.productId],
+    queryFn: () => getProducts(dto),
   });
 
   const productData: ProductTranslation = data?.data.data[0];

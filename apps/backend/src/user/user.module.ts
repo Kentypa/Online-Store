@@ -26,6 +26,6 @@ import { PasswordResetToken } from "src/shared/entities/user-password-reset-toke
     UserFactory,
     UserDeleteAccountService,
   ],
-  exports: [UserService, UserAccountService],
+  exports: [UserService, UserAccountService, UserRefreshTokenService],
 })
 export class UserModule {}

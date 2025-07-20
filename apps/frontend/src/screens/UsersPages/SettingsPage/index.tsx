@@ -10,7 +10,7 @@ import { LogoutButton } from "@features/UsersPages/SettingsPage/components/ui/bu
 import { useForm } from "@hooks/use-form";
 import { ProfileForm } from "@shared-types/profile-form";
 import { useUserAvatarChange } from "@features/UsersPages/SettingsPage/hooks/use-user-avatar-change";
-import { EditableSettingsInput } from "@features/UsersPages/SettingsPage/EditableSettingsInput";
+import { EditableSettingsInput } from "@features/UsersPages/SettingsPage/components/ui/EditableSettingsInput";
 import { useTranslation } from "react-i18next";
 import { useEditableFields } from "@hooks/use-editable-fields";
 import { Form } from "@forms/Form";
@@ -61,7 +61,7 @@ export const UserSettingsPage: FC = () => {
       lastName,
       phoneNumber,
       region?.id,
-    ]
+    ],
   );
 
   const {
@@ -86,7 +86,7 @@ export const UserSettingsPage: FC = () => {
 
   const { regionsData, isSuccess: isRegionsFetchedSuccess } = useRegions(
     isCountriesFetchedSuccess,
-    formState.countryCode ?? ""
+    formState.countryCode ?? "",
   );
 
   const { citiesData } = useCities(isRegionsFetchedSuccess, formState.regionId);

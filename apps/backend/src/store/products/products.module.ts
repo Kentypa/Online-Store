@@ -27,6 +27,6 @@ import { GeoModule } from "src/geo/geo.module";
   ],
   controllers: [ProductsController],
   providers: [ProductSeederService, ProductsService],
-  exports: [ProductSeederService],
+  exports: [ProductSeederService, ProductsService],
 })
 export class ProductsModule {}

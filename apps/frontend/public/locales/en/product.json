@@ -1,4 +1,16 @@
 {
+  "modals": {
+    "createReview": {
+      "labels": {
+        "rating": "Choose rating",
+        "comment": "Write commentary"
+      },
+      "buttons": {
+        "confirm": "Confirm",
+        "cancel": "Cancel"
+      }
+    }
+  },
   "buttons": {
     "addToCart": "Add to Cart",
     "buyNow": "Buy Now",

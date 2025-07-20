@@ -4,4 +4,5 @@ export enum ServiceNames {
   GEO = "geo",
   CATEGORY = "category",
   PRODUCTS = "products",
+  REVIEWS = "review",
 }
