@@ -1,12 +1,11 @@
-import { PagesEndponts } from "@enums/pagesEndpoints";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { convertCurrency } from "@utils/currencyConverter";
 import { formatCurrency } from "@utils/formatCurrency";
 import { FC } from "react";
-import { useNavigate } from "react-router";
 import { ProductTranslation } from "@shared-types/product-translation";
 import { useTranslation } from "react-i18next";
 import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
+import { useNavigateToProduct } from "@hooks/use-navigate-to-product";
 
 type ProductsListProps = {
   productsData?: ProductTranslation[];
@@ -15,14 +14,7 @@ type ProductsListProps = {
 export const ProductsList: FC<ProductsListProps> = ({ productsData }) => {
   const { t, i18n } = useTranslation("products");
 
-  const navigate = useNavigate();
-
-  const handleNavigateToProductClick = (productId: number) => {
-    const newParams = new URLSearchParams();
-    newParams.set("productId", String(productId));
-
-    navigate(`${PagesEndponts.PRODUCT}?${newParams.toString()}`);
-  };
+  const { handleNavigateToProduct } = useNavigateToProduct();
 
   return (
     <ul className="grid grid-cols-5 gap-[105px]">
@@ -54,7 +46,7 @@ export const ProductsList: FC<ProductsListProps> = ({ productsData }) => {
               icon={<AddToCartIcon className="fill-white size-6" />}
               className="bg-primary text-white flex max-w-32 max-h-12 items-center justify-center size-full rounded-4xl mt-auto"
               handleClick={() =>
-                handleNavigateToProductClick(productData.product_id)
+                handleNavigateToProduct(productData.product_id)
               }
             >
               {t("buttons.buy")}

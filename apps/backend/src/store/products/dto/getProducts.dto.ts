@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
   IsNumber,
@@ -7,6 +8,7 @@ import {
   IsString,
 } from "class-validator";
 import { SortProductsBy } from "../enums/sort-products-by.enum";
+import { Type } from "class-transformer";
 
 export class getProductsDto {
   @IsString()
@@ -18,14 +20,15 @@ export class getProductsDto {
   })
   langCode?: string;
 
-  @IsNumber()
+  @Type(() => Number)
+  @IsArray()
   @IsOptional()
   @ApiProperty({
     example: "test@gmail.com",
     description: "User email",
     type: "string",
   })
-  id?: number;
+  ids?: number[];
 
   @IsNumber()
   @IsOptional()
@@ -79,4 +82,13 @@ export class getProductsDto {
     type: "boolean",
   })
   withReviews?: boolean;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty({
+    example: "test@gmail.com",
+    description: "User email",
+    type: "string",
+  })
+  query?: string;
 }

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserData } from "@shared-types/user-data";
 
 const initialState: UserData = {
+  id: 0,
   avatarUrl: "",
   email: "",
   authLoading: true,
@@ -13,6 +14,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     changeByData: (state, action: PayloadAction<UserData>) => {
+      state.id = action.payload.id;
       state.email = action.payload.email;
       state.firstName = action.payload.firstName;
       state.lastName = action.payload.lastName;
@@ -20,6 +22,7 @@ export const userSlice = createSlice({
       state.region = action.payload.region;
       state.country = action.payload.country;
       state.phoneNumber = action.payload.phoneNumber;
+      state.cart = action.payload.cart;
       state.avatarUrl = action.payload.avatarUrl
         ? `http://localhost:3000/${action.payload.avatarUrl}`
         : "";

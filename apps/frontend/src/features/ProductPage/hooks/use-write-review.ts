@@ -24,7 +24,7 @@ export const useWriteReview = (productId: number) => {
       writeReview({ ...data, productId }),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [Queries.PRODUCT, productId],
+        queryKey: [Queries.PRODUCT, [productId]],
       });
     },
   });

@@ -1,0 +1,12 @@
+{
+  "buttons": {
+    "remove": "Remove",
+    "checkout": "Checkout"
+  },
+  "labels": {
+    "each": "Each",
+    "quantity": "Quantity",
+    "total": "Total",
+    "totalPrice": "Total price"
+  }
+}

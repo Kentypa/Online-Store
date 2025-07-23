@@ -11,7 +11,4 @@ export type Product = {
   category_id: number;
   stats: ProductStats[];
   reviews: Review[];
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: Date;
 };

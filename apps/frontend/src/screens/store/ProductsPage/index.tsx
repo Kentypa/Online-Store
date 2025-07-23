@@ -3,12 +3,12 @@ import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
 import { useProducts } from "@hooks/use-products";
 import { SortProductsBy } from "@enums/sortProductsBy";
-import "swiper/css";
 import { PaginationButtons } from "@business/PaginationButtons";
 import { useSearchParams } from "react-router";
 import { ProductsSortingList } from "@features/ProductsPage/components/ProductsSortingList";
 import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
 import { ProductsList } from "@layout/ProductsList";
+import "swiper/css";
 
 export const ProductsPage: FC = () => {
   const { i18n } = useTranslation("products");
@@ -21,6 +21,7 @@ export const ProductsPage: FC = () => {
 
   const currentPage = Number(searchParams.get("page") ?? "1");
   const categoryId = Number(searchParams.get("categoryId") ?? "1");
+  const query = searchParams.get("query") ?? "";
   const sortParam = searchParams.get("sortBy") as SortProductsBy | null;
 
   const limit = 10;
@@ -43,6 +44,7 @@ export const ProductsPage: FC = () => {
     offset,
     sortBy: currentSortingType,
     categoryId,
+    query,
   });
 
   const totalPages = Math.ceil(total / limit);

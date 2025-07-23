@@ -22,7 +22,9 @@ export class ReviewsService {
     const user = await this.userService.getById(userId);
     if (!user) throw new BadRequestException("User not found");
 
-    const products = await this.productService.getProducts({ id: productId });
+    const products = await this.productService.getProducts({
+      ids: [productId],
+    });
     if (!products?.data?.length)
       throw new BadRequestException("Product not found");
 

@@ -3,13 +3,14 @@ import { SortProductsBy } from "@enums/sortProductsBy";
 
 export type GetProductsDto = {
   langCode?: string;
-  productId?: number;
+  productsId?: number[];
   offset?: number;
   limit?: number;
   regionId?: number;
   sortBy?: SortProductsBy;
   categoryId?: number;
   withReviews?: boolean;
+  query?: string;
 };
 
 export function productsService(url: string) {
@@ -17,23 +18,25 @@ export function productsService(url: string) {
     langCode,
     limit,
     offset,
-    productId,
+    productsId,
     regionId,
     sortBy,
     categoryId,
     withReviews,
+    query,
   }: GetProductsDto) => {
     return api
       .get(url, {
         params: {
           langCode: langCode,
-          id: productId,
+          ids: productsId,
           offset: offset,
           limit: limit,
           regionId: regionId,
           sortBy: sortBy,
           categoryId: categoryId,
           withReviews: withReviews,
+          query: query,
         },
       })
       .catch((error) => {

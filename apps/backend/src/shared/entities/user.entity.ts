@@ -16,6 +16,7 @@ import { Country } from "src/geo/entities/country.entity";
 import { Region } from "src/geo/entities/region.entity";
 import { City } from "src/geo/entities/city.entity";
 import { PasswordResetToken } from "./user-password-reset-tokens.entity";
+import { CartItem } from "src/cart/entities/cart-item.entity";
 
 @Entity()
 export class User {
@@ -97,6 +98,11 @@ export class User {
     cascade: true,
   })
   passwordResetTokens: PasswordResetToken[];
+
+  @OneToMany(() => CartItem, (cartItem) => cartItem.user, {
+    cascade: true,
+  })
+  cart: CartItem[];
 
   @ApiProperty({
     example: "2025-05-27 15:23:48.941416",

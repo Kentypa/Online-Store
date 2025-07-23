@@ -5,12 +5,15 @@ import {
   ApiOperation,
   ApiResponse,
 } from "@nestjs/swagger";
-import { CountryService } from "../services/country.service";
-import { CountryTranslation } from "../entities/country-translation.entity";
-import { RegionTranslation } from "../entities/region-translation.entity";
-import { RegionService } from "../services/region.service";
-import { CityTranslation } from "../entities/city-translation.entity";
-import { CityService } from "../services/city.service";
+import { CountryService } from "./services/country.service";
+import { CountryTranslation } from "./entities/country-translation.entity";
+import { RegionTranslation } from "./entities/region-translation.entity";
+import { RegionService } from "./services/region.service";
+import { CityTranslation } from "./entities/city-translation.entity";
+import { CityService } from "./services/city.service";
+import { GetCitiesQuery } from "./dto/get-cities.query";
+import { GetRegionsQuery } from "./dto/get-regions.query";
+import { GetCountriesQuery } from "./dto/get-countries.query";
 
 @ApiBearerAuth()
 @ApiTags("geo")
@@ -31,7 +34,7 @@ export class GeoController {
   })
   @HttpCode(200)
   async getCountries(
-    @Query("langCode") langCode?: string,
+    @Query() { langCode }: GetCountriesQuery,
   ): Promise<CountryTranslation[]> {
     return this.countryService.getCountries(langCode);
   }
@@ -45,10 +48,7 @@ export class GeoController {
   })
   @HttpCode(200)
   async getRegions(
-    @Query("langCode") langCode?: string,
-    @Query("countryCode") countryCode?: string,
-    @Query("offset") offset?: number,
-    @Query("limit") limit?: number,
+    @Query() { countryCode, langCode, limit, offset }: GetRegionsQuery,
   ): Promise<RegionTranslation[]> {
     return this.regionService.getRegions(langCode, countryCode, offset, limit);
   }
@@ -62,10 +62,7 @@ export class GeoController {
   })
   @HttpCode(200)
   async getCities(
-    @Query("langCode") langCode?: string,
-    @Query("regionId") regionId?: number,
-    @Query("offset") offset?: number,
-    @Query("limit") limit?: number,
+    @Query() { langCode, limit, offset, regionId }: GetCitiesQuery,
   ): Promise<CityTranslation[]> {
     return this.cityService.getCities(langCode, regionId, offset, limit);
   }

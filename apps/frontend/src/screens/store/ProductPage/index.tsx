@@ -14,17 +14,21 @@ import { ZoomImage } from "@features/ProductPage/components/ZoomImage";
 import { convertCurrency } from "@utils/currencyConverter";
 import { formatCurrency } from "@utils/formatCurrency";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
+import { StarsMark } from "@features/ProductPage/components/StarsMark";
+import { CreateReviewModal } from "@features/ProductPage/components/CreateReviewModal";
+import { useWriteReview } from "@features/ProductPage/hooks/use-write-review";
+import { useWriteReviewPopups } from "@features/ProductPage/hooks/use-write-review-popups";
+import { useAppSelector } from "@hooks/redux";
+import { userSelector } from "@stores/selectors/userSelector";
+import { useAddToCart } from "@hooks/use-add-to-cart";
+import { useAddToCartPopups } from "@features/ProductPage/hooks/use-add-to-cart-popups";
 import Star from "@icons/star.svg?react";
 import ShoppingCart from "@icons/shopping-cart.svg?react";
 import ShoppingCartAdd from "@icons/shopping-cart-add.svg?react";
 import WriteReviewButton from "@icons/write-review.svg?react";
 import ViewReviews from "@icons/view-review.svg?react";
 import "swiper/css";
-import { UserReviewInfo } from "@features/ProductPage/components/UserReviewInfo";
-import { StarsMark } from "@features/ProductPage/components/StarsMark";
-import { CreateReviewModal } from "@features/ProductPage/components/CreateReviewModal";
-import { useWriteReview } from "@features/ProductPage/hooks/use-write-review";
-import { useWriteReviewPopups } from "@features/ProductPage/hooks/use-write-review-popups";
+import { UsersReviews } from "@features/ProductPage/components/UsersReviews";
 
 export const ProductPage: FC = () => {
   const [searchParams] = useSearchParams();
@@ -46,7 +50,7 @@ export const ProductPage: FC = () => {
     productReviewsCount,
   } = useProduct({
     langCode: i18n.language,
-    productId,
+    productsId: [productId],
     withReviews: true,
   });
 
@@ -67,11 +71,32 @@ export const ProductPage: FC = () => {
     isSuccess: userWriteReviewIsSuccess,
   } = useWriteReview(productId);
 
+  const { isAuthenticated, id } = useAppSelector(userSelector);
+
+  const userIsGuest = !isAuthenticated;
+  const userHasLeftReview =
+    productData?.product?.reviews?.some((review) => review.user_id === id) ??
+    false;
+
+  const isReviewed = userIsGuest || userHasLeftReview;
+
   useEffect(() => {
     if (userWriteReviewIsSuccess) closeReviewModal();
   }, [closeReviewModal, userWriteReviewIsSuccess]);
 
   useWriteReviewPopups({ userWriteReviewError });
+
+  const {
+    mutate,
+    isSuccess: addingToCartIsSuccess,
+    isError: addingToCartError,
+  } = useAddToCart();
+
+  useAddToCartPopups({
+    addingToCartError,
+    addingToCartIsSuccess,
+    productName: productData ? productData.title : "",
+  });
 
   return (
     <MainContentWrapper>
@@ -95,51 +120,64 @@ export const ProductPage: FC = () => {
             <div className="flex justify-between gap-27">
               <div className="flex flex-col items-center gap-9.5 p-10 rounded-4xl border-2 border-separator w-auto">
                 <div className="relative w-full h-125 overflow-hidden rounded-4xl max-w-189">
-                  <SliderPrevButton
-                    swiperRef={swiperRef}
-                    className="absolute left-10 top-1/2 -translate-y-1/2 z-10"
-                  />
-                  <SliderNextButton
-                    swiperRef={swiperRef}
-                    className="absolute right-10 top-1/2 -translate-y-1/2 z-10"
-                  />
-                  <Swiper
-                    onSwiper={(swiper) => {
-                      swiperRef.current = swiper;
-                    }}
-                    modules={[Thumbs]}
-                    thumbs={{ swiper: thumbsSwiper }}
-                    slidesPerView={1}
-                    loop={true}
-                    className="size-full"
-                  >
-                    {productImages?.map((src, idx) => (
-                      <SwiperSlide key={idx}>
-                        <ZoomImage src={`http://localhost:3000/public${src}`} />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  {productImages && productImages?.length > 0 && (
+                    <>
+                      <SliderPrevButton
+                        swiperRef={swiperRef}
+                        className="absolute left-10 top-1/2 -translate-y-1/2 z-10"
+                      />
+                      <SliderNextButton
+                        swiperRef={swiperRef}
+                        className="absolute right-10 top-1/2 -translate-y-1/2 z-10"
+                      />
+                      <Swiper
+                        onSwiper={(swiper) => {
+                          swiperRef.current = swiper;
+                        }}
+                        modules={[Thumbs]}
+                        thumbs={{
+                          swiper:
+                            thumbsSwiper && thumbsSwiper?.el
+                              ? thumbsSwiper
+                              : null,
+                        }}
+                        slidesPerView={1}
+                        loop={true}
+                        className="size-full"
+                      >
+                        {productImages?.map((src, idx) => (
+                          <SwiperSlide key={idx}>
+                            <ZoomImage
+                              src={`http://localhost:3000/public${src}`}
+                            />
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                    </>
+                  )}
                 </div>
                 <div className="w-full max-w-189">
-                  <Swiper
-                    modules={[Thumbs]}
-                    onSwiper={setThumbsSwiper}
-                    slidesPerView={4}
-                    spaceBetween={60}
-                    watchSlidesProgress
-                    centeredSlidesBounds={true}
-                    centeredSlides={true}
-                    slideToClickedSlide={true}
-                  >
-                    {productImages?.map((src, idx) => (
-                      <SwiperSlide key={idx} className="cursor-pointer">
-                        <img
-                          src={`http://localhost:3000/public${src}`}
-                          className="w-full size-25 rounded-4xl object-cover"
-                        />
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
+                  {productImages && productImages?.length > 0 && (
+                    <Swiper
+                      modules={[Thumbs]}
+                      onSwiper={setThumbsSwiper}
+                      slidesPerView={4}
+                      spaceBetween={60}
+                      watchSlidesProgress
+                      centeredSlidesBounds={true}
+                      centeredSlides={true}
+                      slideToClickedSlide={true}
+                    >
+                      {productImages?.map((src, idx) => (
+                        <SwiperSlide key={idx} className="cursor-pointer">
+                          <img
+                            src={`http://localhost:3000/public${src}`}
+                            className="w-full size-25 rounded-4xl object-cover"
+                          />
+                        </SwiperSlide>
+                      ))}
+                    </Swiper>
+                  )}
                 </div>
               </div>
               <div className="flex flex-col p-14.5 rounded-4xl border-2 border-separator size-full">
@@ -177,6 +215,9 @@ export const ProductPage: FC = () => {
                       <ButtonWithIcon
                         icon={<ShoppingCartAdd className="size-6 fill-white" />}
                         className="p-3 rounded-4xl bg-primary text-white"
+                        handleClick={() => {
+                          mutate({ productId: productData.product_id });
+                        }}
                       >
                         {t("buttons.addToCart")}
                       </ButtonWithIcon>
@@ -242,32 +283,17 @@ export const ProductPage: FC = () => {
                   icon={<WriteReviewButton className="size-6 fill-white" />}
                   className="text-white p-3 bg-primary rounded-4xl flex justify-center items-center mt-9"
                   handleClick={toggleShowWriteReviewModal}
+                  disabled={isReviewed}
                 >
                   {t("buttons.writeReview")}
                 </ButtonWithIcon>
               </div>
               <ul className="flex flex-col gap-9 size-full">
-                {productData &&
-                  productData.product.reviews
-                    .slice(0, showAllReviews ? productReviewsCount : 3)
-                    .map((review) => (
-                      <li
-                        key={review.id}
-                        className="rounded-4xl border-2 border-separator p-6 flex w-full"
-                      >
-                        <div className="flex flex-col gap-2">
-                          <UserReviewInfo userId={review.user_id} />
-                          <StarsMark
-                            between={6}
-                            rating={review.rating ?? 0}
-                            starSize={12}
-                          />
-                          <p className="text-body-small max-h-15">
-                            {review.comment}
-                          </p>
-                        </div>
-                      </li>
-                    ))}
+                <UsersReviews
+                  productReviewsCount={productReviewsCount ?? 0}
+                  reviews={productData.product.reviews}
+                  showAllReviews={showAllReviews}
+                />
                 {!showAllReviews && (productReviewsCount ?? 0) > 3 && (
                   <ButtonWithIcon
                     icon={<ViewReviews className="size-6 fill-white" />}

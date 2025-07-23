@@ -129,7 +129,7 @@ export class UserService {
   async getById(id: number): Promise<User> {
     const user = await this.userRepository.findOne({
       where: { id },
-      relations: ["language", "city", "country", "region"],
+      relations: ["language", "city", "country", "region", "cart"],
     });
 
     if (!user) {
@@ -137,6 +137,24 @@ export class UserService {
     }
 
     return user;
+  }
+
+  async getByIds(ids: number[]): Promise<User[]> {
+    const users = await this.userRepository
+      .createQueryBuilder("user")
+      .leftJoinAndSelect("user.language", "language")
+      .leftJoinAndSelect("user.city", "city")
+      .leftJoinAndSelect("user.country", "country")
+      .leftJoinAndSelect("user.region", "region")
+      .leftJoinAndSelect("user.cart", "cart")
+      .where("user.id IN (:...ids)", { ids })
+      .getMany();
+
+    if (!users && ids) {
+      throw new NotFoundException(`User with id ${ids.join(",")} not found`);
+    }
+
+    return users;
   }
 
   async remove(id: number) {

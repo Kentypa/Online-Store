@@ -9,20 +9,27 @@ type StarsMarkProps = {
   className?: string;
 };
 
+type StarParams = {
+  width: number;
+  height: number;
+};
+
 export const StarsMark: FC<StarsMarkProps> = ({
   between,
   rating,
   starSize,
   className = "flex fill-primary",
 }) => {
+  const params: StarParams = { height: starSize, width: starSize };
+
   return (
     <ul className={className} style={{ gap: `${between}px` }}>
       {[1, 2, 3, 4, 5].map((_, index) => (
         <li key={index}>
-          {index < (rating ?? 0) ? (
-            <FilledStar width={starSize} height={starSize} />
+          {index < (Math.round(rating) ?? 0) ? (
+            <FilledStar {...params} />
           ) : (
-            <Star width={starSize} height={starSize} />
+            <Star {...params} />
           )}
         </li>
       ))}

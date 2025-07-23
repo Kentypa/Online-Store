@@ -21,6 +21,15 @@ export function userService(url: string) {
       });
   };
 
+  const getUsersByIds = async (usersIds: number[]) => {
+    return api
+      .get(`${url}/get-by-ids`, { params: { usersIds } })
+      .catch((error) => {
+        console.log(error.toJSON());
+        throw new Error(error.message);
+      });
+  };
+
   const getUser = async () => {
     return api.get(`${url}/me`).catch((error) => {
       console.log(error.toJSON());
@@ -82,5 +91,6 @@ export function userService(url: string) {
     requestResetPasswordUser,
     resetPassword,
     getUserById,
+    getUsersByIds,
   };
 }

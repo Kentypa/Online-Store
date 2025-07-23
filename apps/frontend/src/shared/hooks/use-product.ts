@@ -9,7 +9,7 @@ export const useProduct = (dto: GetProductsDto) => {
   const { getProducts } = productsService(ServiceNames.PRODUCTS);
 
   const { data, isFetched, ...otherOptions } = useQuery({
-    queryKey: [Queries.PRODUCT, dto.productId],
+    queryKey: [Queries.PRODUCT, dto.productsId],
     queryFn: () => getProducts(dto),
   });
 

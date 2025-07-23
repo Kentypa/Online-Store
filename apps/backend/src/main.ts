@@ -48,6 +48,7 @@ async function bootstrap() {
   try {
     logger.log("Creating NestJS application...");
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    app.set("query parser", "extended");
     const configService = app.get(ConfigService);
 
     app.useStaticAssets(join(__dirname, "..", "uploads"), {

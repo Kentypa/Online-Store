@@ -9,6 +9,7 @@ export const useProfileNavigation = () => {
     links: [
       { address: "/user/orders", label: t("profileNavigation.orders") },
       { address: "/user/settings", label: t("profileNavigation.userSettings") },
+      { address: "/user/cart", label: t("profileNavigation.userCart") },
     ],
   } as ProfileNavigationProps;
 };

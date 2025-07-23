@@ -74,6 +74,21 @@ export class UserController {
     return this.userService.getSafeUser(userId);
   }
 
+  @Get("get-by-ids")
+  @ApiOperation({ summary: "Get user by ID" })
+  @ApiResponse({
+    status: 200,
+    description: "User information",
+    type: GetUserDto,
+  })
+  @HttpCode(200)
+  async getUserByIds(
+    @Query("usersIds") usersIds: number[],
+  ): Promise<GetUserDto[]> {
+    console.log(usersIds);
+    return this.userService.getByIds(usersIds);
+  }
+
   @Delete("delete-account")
   @UseGuards(JwtAuthGuard)
   @ApiOperation({ summary: "Remove user from database" })

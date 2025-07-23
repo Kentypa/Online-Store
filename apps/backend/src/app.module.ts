@@ -13,6 +13,7 @@ import { CategoryModule } from "./store/categories/categories.module";
 import { ProductsModule } from "./store/products/products.module";
 import { AppCacheModule } from "./cache/cache.module";
 import { ReviewsModule } from "./review/reviews.module";
+import { CartModule } from "./cart/cart.module";
 import projectConfig from "./config/project.config";
 import encryptionConfig from "./config/encryption.config";
 import jwtConfig from "./config/jwt.config";
@@ -29,6 +30,7 @@ import databaseConfig from "./config/database.config";
     CategoryModule,
     ProductsModule,
     ReviewsModule,
+    CartModule,
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,

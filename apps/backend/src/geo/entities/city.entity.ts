@@ -8,20 +8,38 @@ import {
 } from "typeorm";
 import { Region } from "./region.entity";
 import { CityTranslation } from "./city-translation.entity";
-import { Exclude } from "class-transformer";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class City {
+  @ApiProperty({
+    example: 13,
+    description: "City ID",
+    type: "number",
+  })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({
+    example: 13,
+    description: "Region ID",
+    type: "number",
+  })
+  @Column()
+  region_id: number;
+
+  @ApiProperty({
+    description: "Region this city belongs to",
+    type: () => Region,
+  })
   @ManyToOne(() => Region, (region) => region.cities)
   @JoinColumn({ name: "region_id" })
   region: Region;
 
-  @Column()
-  region_id: number;
-
+  @ApiProperty({
+    description: "Translations of the city name into different languages",
+    type: () => [CityTranslation],
+  })
   @OneToMany(() => CityTranslation, (t) => t.city)
   translations: CityTranslation[];
 }

@@ -8,10 +8,11 @@ import { SignUpPage } from "@screens/AuthPages/SignUpPage";
 import { HomePage } from "@screens/HomePage";
 import { ProductPage } from "@screens/store/ProductPage";
 import { ProductsPage } from "@screens/store/ProductsPage";
+import { CartPage } from "@screens/UsersPages/CartPage";
 import { UserSettingsPage } from "@screens/UsersPages/SettingsPage";
 import { ProtectedRoute } from "@wrappers/ProtectedRoute";
-import { FC } from "react";
 import { Routes, Route } from "react-router";
+import { FC } from "react";
 
 export const ApplicationRoutes: FC = () => {
   const { isSuccess: isAuthenticated } = useUserVerify();
@@ -30,6 +31,7 @@ export const ApplicationRoutes: FC = () => {
       <Route element={<ProtectedRoute />}>
         <Route path="user">
           <Route path="settings" element={<UserSettingsPage />} />
+          <Route path="cart" element={<CartPage />} />
         </Route>
       </Route>
     </Routes>

@@ -7,7 +7,7 @@ import { CityTranslation } from "../entities/city-translation.entity";
 export class CityService {
   constructor(
     @InjectRepository(CityTranslation)
-    private regionRepository: Repository<CityTranslation>,
+    private cityRepository: Repository<CityTranslation>,
   ) {}
 
   async getCities(
@@ -45,6 +45,6 @@ export class CityService {
       options.take = limit;
     }
 
-    return this.regionRepository.find(options);
+    return this.cityRepository.find(options);
   }
 }

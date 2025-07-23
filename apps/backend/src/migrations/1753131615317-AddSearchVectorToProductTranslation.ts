@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class AddSearchVectorToProductTranslation1752864299425
+export class AddSearchVectorToProductTranslation1753131615317
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {

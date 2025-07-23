@@ -16,7 +16,7 @@ export class ProductsService {
   ) {}
 
   async getProducts({
-    id,
+    ids,
     langCode,
     limit,
     offset,
@@ -24,6 +24,7 @@ export class ProductsService {
     sortBy,
     categoryId,
     withReviews = false,
+    query,
   }: getProductsDto): Promise<responseProductsDto> {
     const qb = this.productTranslationRepository
       .createQueryBuilder("translation")
@@ -34,27 +35,44 @@ export class ProductsService {
       qb.leftJoinAndSelect("product.reviews", "reviews");
     }
 
-    switch (sortBy) {
-      case SortProductsBy.TOTAL_SOLD_DESC:
-        qb.orderBy("stats.total_sold", "DESC").addOrderBy("product.id", "ASC");
-        break;
-      case SortProductsBy.PRICE_ASC:
-        qb.orderBy("product.price", "ASC");
-        break;
-      case SortProductsBy.PRICE_DESC:
-        qb.orderBy("product.price", "DESC");
-        break;
-      default:
-        qb.orderBy("product.id", "DESC");
-        break;
+    if (query) {
+      qb.addSelect(
+        `ts_rank(translation.search_vector, plainto_tsquery('simple', :query))`,
+        "rank",
+      )
+        .where(
+          "translation.search_vector @@ plainto_tsquery('simple', :query)",
+          { query },
+        )
+        .orderBy("rank", "DESC");
+    }
+
+    if (sortBy) {
+      switch (sortBy) {
+        case SortProductsBy.TOTAL_SOLD_DESC:
+          qb.orderBy("stats.total_sold", "DESC").addOrderBy(
+            "product.id",
+            "ASC",
+          );
+          break;
+        case SortProductsBy.PRICE_ASC:
+          qb.orderBy("product.price", "ASC");
+          break;
+        case SortProductsBy.PRICE_DESC:
+          qb.orderBy("product.price", "DESC");
+          break;
+        default:
+          qb.orderBy("product.id", "DESC");
+          break;
+      }
     }
 
     if (langCode) {
       qb.andWhere("translation.lang = :langCode", { langCode });
     }
 
-    if (id) {
-      qb.andWhere("product.id = :id", { id });
+    if (!query && ids) {
+      qb.andWhere("product.id IN (:...ids)", { ids });
     }
 
     if (categoryId) {
@@ -63,13 +81,10 @@ export class ProductsService {
         categoryTree,
         categoryId,
       );
-      if (categoryIds.length > 0) {
-        qb.andWhere("product.category_id IN (:...categoryIds)", {
-          categoryIds,
-        });
-      } else {
-        qb.andWhere("FALSE");
-      }
+
+      qb.andWhere("product.category_id IN (:...categoryIds)", {
+        categoryIds,
+      });
     }
 
     if (regionId) {
@@ -78,34 +93,6 @@ export class ProductsService {
 
     qb.skip(offset ?? 0);
     qb.take(limit ?? 10);
-
-    const [data, total] = await qb.getManyAndCount();
-
-    return { data, total };
-  }
-
-  async searchProducts(
-    query: string,
-    langCode: string,
-    limit = 10,
-    offset = 0,
-  ): Promise<responseProductsDto> {
-    const qb = this.productTranslationRepository
-      .createQueryBuilder("translation")
-      .leftJoinAndSelect("translation.product", "product")
-      .leftJoinAndSelect("product.stats", "stats")
-      .addSelect(
-        `ts_rank(translation.search_vector, plainto_tsquery('simple', :query))`,
-        "rank",
-      )
-      .where("translation.lang = :langCode", { langCode })
-      .andWhere(
-        "translation.search_vector @@ plainto_tsquery('simple', :query)",
-        { query },
-      )
-      .orderBy("rank", "DESC")
-      .skip(offset)
-      .take(limit);
 
     const [data, total] = await qb.getManyAndCount();
 

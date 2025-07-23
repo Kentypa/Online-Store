@@ -44,6 +44,7 @@
   "profileNavigation": {
     "section": "Profile",
     "orders": "Orders",
-    "userSettings": "User settings"
+    "userSettings": "User settings",
+    "userCart": "Cart"
   }
 }

@@ -8,7 +8,7 @@ import { City } from "./entities/city.entity";
 import { Country } from "./entities/country.entity";
 import { Region } from "./entities/region.entity";
 import { GeoSeederService } from "./seeds/geo-seeder.service";
-import { GeoController } from "./controllers/geo.controller";
+import { GeoController } from "./geo.controller";
 import { CountryService } from "./services/country.service";
 import { RegionService } from "./services/region.service";
 import { CityService } from "./services/city.service";

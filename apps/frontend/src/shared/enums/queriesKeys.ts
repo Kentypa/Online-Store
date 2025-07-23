@@ -5,5 +5,7 @@ export enum Queries {
   CATEGORY = "category",
   PRODUCT = "product",
   PRODUCTS = "products",
+  SEARCH_PRODUCTS = "searchProducts",
   REVIEWS = "review",
+  CART = "cart",
 }
