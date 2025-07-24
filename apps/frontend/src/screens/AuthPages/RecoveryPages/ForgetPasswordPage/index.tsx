@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { FormField } from "@forms/FormField";
 import { useForgetPassword } from "@features/AuthPages/RecoveryPages/ForgetPasswordPage/hooks/use-forget-password";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
 import { useForgetPasswordPagePopups } from "@features/AuthPages/RecoveryPages/ForgetPasswordPage/hooks/use-forget-password-popups";
-import { useRecoveryForm } from "@hooks/use-recovery-form";
+import { useRecoveryForm } from "@hooks/auth/use-recovery-form";
 import { RecoveryPageLayout } from "@layout/RecoveryPageLayout";
+import { useNavigateOnSuccess } from "@hooks/navigation/use-navigate-on-success";
 import RecoveryIcon from "@icons/recovery.svg?react";
 
 export const ForgetPasswordPage: FC = () => {

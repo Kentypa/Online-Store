@@ -1,7 +1,7 @@
 import { PopupMessageType } from "@enums/popupMessageType";
+import { useAppDispatch } from "@hooks/core/redux";
 import { popupsListPush } from "@stores/popupsList/popupsListSlice";
 import { useCallback } from "react";
-import { useAppDispatch } from "@hooks/redux";
 
 export type usePushPopupArgs = {
   message: string;
@@ -19,9 +19,9 @@ export const usePushPopup = () => {
           message,
           messageType,
           key: key ?? Date.now() + message,
-        })
+        }),
       );
     },
-    [dispatch]
+    [dispatch],
   );
 };

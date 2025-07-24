@@ -2,11 +2,11 @@ import { ChangeEvent, FC, FormEvent, useMemo } from "react";
 import { Button } from "@ui/Button";
 import { Input } from "@forms/Input";
 import { Modal } from "@modals/Modal";
-import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
 import { useTranslation } from "react-i18next";
 import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
+import { useIsNotSubmitable } from "@hooks/form/use-is-not-submitable";
 
 type DeleteAccountModalProps = {
   visible: boolean;

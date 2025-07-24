@@ -2,17 +2,17 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
-import { useUserData } from "@hooks/use-user-data";
-import { useUserVerify } from "@hooks/use-user-validate";
+import { useUserData } from "@hooks/user/use-user-data";
+import { useUserVerify } from "@hooks/auth/use-user-validate";
 import { Form } from "@forms/Form";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { useAuthSetup } from "@features/AuthPages/SignInPage/hooks/use-auth-setup";
 import { useSignIn } from "@features/AuthPages/SignInPage/hooks/use-sign-in";
 import { useSignInPopups } from "@features/AuthPages/SignInPage/hooks/use-sign-up-popups";
 import { AuthFormFields } from "@forms/AuthFormFields";
-import { useAuthForm } from "@hooks/use-auth-form";
+import { useAuthForm } from "@hooks/auth/use-auth-form";
 import { AuthPageLayout } from "@layout/AuthPageLayout";
+import { useNavigateOnSuccess } from "@hooks/navigation/use-navigate-on-success";
 import SignInIcon from "@icons/sign.svg?react";
 
 export const SignInPage: FC = () => {

@@ -1,4 +1,4 @@
-import { useProfileNavigation } from "@hooks/use-profile-navigation";
+import { useProfileNavigation } from "@hooks/user/use-profile-navigation";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { ProfileNavigation } from "@layout/ProfileNavigation";
 import { ChangeEvent, FC, useMemo } from "react";
@@ -7,28 +7,28 @@ import { SaveChangesButton } from "@features/UsersPages/SettingsPage/components/
 import { ChangePasswordButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/ChangePasswordButton";
 import { DeleteAccountButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/DeleteAccountButton";
 import { LogoutButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/LogoutButton";
-import { useForm } from "@hooks/use-form";
+import { useForm } from "@hooks/form/use-form";
 import { useUserAvatarChange } from "@features/UsersPages/SettingsPage/hooks/use-user-avatar-change";
 import { EditableSettingsInput } from "@features/UsersPages/SettingsPage/components/ui/EditableSettingsInput";
 import { useTranslation } from "react-i18next";
-import { useEditableFields } from "@hooks/use-editable-fields";
 import { Form } from "@forms/Form";
 import { Option } from "@forms/Option";
 import { Select } from "@forms/Select";
 import { useCountries } from "@features/UsersPages/SettingsPage/hooks/useCountries";
 import { useRegions } from "@features/UsersPages/SettingsPage/hooks/useRegions";
 import { useCities } from "@features/UsersPages/SettingsPage/hooks/useCities";
-import { useUpdateUser } from "@hooks/use-update-user";
-import { useAppSelector } from "@hooks/redux";
+import { useUpdateUser } from "@hooks/user/use-update-user";
+import { useAppSelector } from "@hooks/core/redux";
 import { userSelector } from "@stores/selectors/userSelector";
 import { useDeleteAccount } from "@features/UsersPages/SettingsPage/hooks/use-delete-account";
 import { useEditProfilePopups } from "@features/UsersPages/SettingsPage/hooks/use-edit-page-popups";
 import { DeleteAccountModal } from "@features/UsersPages/SettingsPage/components/modals/DeleteAccountModal";
-import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { useLogout } from "@features/UsersPages/SettingsPage/hooks/use-logout";
 import { useChangePassword } from "@features/UsersPages/SettingsPage/hooks/use-change-password";
 import { ChangePasswordModal } from "@features/UsersPages/SettingsPage/components/modals/ChangePasswordModal";
 import { ProfileForm } from "@shared-types/formData/profile-form";
+import { useIsNotSubmitable } from "@hooks/form/use-is-not-submitable";
+import { useEditableFields } from "@hooks/form/use-editable-fields";
 
 export const UserSettingsPage: FC = () => {
   const profileNavigation = useProfileNavigation();

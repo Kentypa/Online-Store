@@ -1,4 +1,4 @@
-import { useFooterColumns } from "@hooks/use-footer-columns";
+import { useFooterColumns } from "@hooks/ui/use-footer-columns";
 import { FooterColumn } from "@layout/FooterColumn";
 import { FC } from "react";
 

@@ -2,14 +2,14 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
 import { Form } from "@forms/Form";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { useSignUp } from "@features/AuthPages/SignUpPage/hooks/use-sign-up";
 import { useSignUpPopups } from "@features/AuthPages/SignUpPage/hooks/use-sign-up-popups";
 import { AuthFormFields } from "@forms/AuthFormFields";
-import { useAuthForm } from "@hooks/use-auth-form";
+import { useAuthForm } from "@hooks/auth/use-auth-form";
 import { AuthPageLayout } from "@layout/AuthPageLayout";
+import { useNavigateOnSuccess } from "@hooks/navigation/use-navigate-on-success";
 import SignUpIcon from "@icons/sign.svg?react";
 
 export const SignUpPage: FC = () => {

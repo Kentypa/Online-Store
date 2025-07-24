@@ -1,4 +1,4 @@
-import { useAppSelector } from "@hooks/redux";
+import { useAppSelector } from "@hooks/core/redux";
 import { LoadingWheel } from "@overlays/LoadingWheel";
 import { userSelector } from "@selectors/userSelector";
 import { FC } from "react";

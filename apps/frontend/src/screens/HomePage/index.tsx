@@ -6,13 +6,13 @@ import { Pagination } from "swiper/modules";
 import { SliderNextButton } from "@ui/SliderNextButton";
 import { SliderPrevButton } from "@ui/SliderPrevButton";
 import { useTranslation } from "react-i18next";
-import { useProducts } from "@hooks/use-products";
+import { useProducts } from "@hooks/store/use-products";
 import { SortProductsBy } from "@enums/sortProductsBy";
 import { PaginationButtons } from "@business/PaginationButtons";
-import { useAppSelector } from "@hooks/redux";
 import { userSelector } from "@stores/selectors/userSelector";
 import { useSearchParams } from "react-router";
 import { ProductsList } from "@layout/ProductsList";
+import { useAppSelector } from "@hooks/core/redux";
 import "swiper/css";
 
 export const HomePage: FC = () => {

@@ -4,7 +4,7 @@ import { userService } from "@services/userService";
 import { changeByData } from "@stores/user/userSlice";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useAppDispatch } from "@hooks/redux";
+import { useAppDispatch } from "@hooks/core/redux";
 import { UserData } from "@shared-types/auth/user-data";
 
 export const useUserData = (enabled: boolean = true) => {

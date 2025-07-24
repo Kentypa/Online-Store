@@ -4,10 +4,10 @@ import { FormField } from "@forms/FormField";
 import { useResetPassword } from "@features/AuthPages/RecoveryPages/ResetPasswordPage/hooks/use-reset-password";
 import { useResetPasswordPagePopups } from "@features/AuthPages/RecoveryPages/ResetPasswordPage/hooks/use-reset-password-popups";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
 import { useSearchParams } from "react-router";
-import { useRecoveryForm } from "@hooks/use-recovery-form";
+import { useRecoveryForm } from "@hooks/auth/use-recovery-form";
 import { RecoveryPageLayout } from "@layout/RecoveryPageLayout";
+import { useNavigateOnSuccess } from "@hooks/navigation/use-navigate-on-success";
 import RecoveryIcon from "@icons/recovery.svg?react";
 
 export const ResetPasswordPage: FC = () => {

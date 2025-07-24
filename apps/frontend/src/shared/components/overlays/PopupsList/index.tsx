@@ -1,4 +1,4 @@
-import { useAppSelector } from "@hooks/redux";
+import { useAppSelector } from "@hooks/core/redux";
 import { Popup } from "@modals/PopUp";
 import { popupsListSelector } from "@selectors/popupsListSelector";
 import { FC } from "react";
@@ -19,6 +19,6 @@ export const PopupList: FC = () => {
         />
       ))}
     </div>,
-    document.body
+    document.body,
   );
 };

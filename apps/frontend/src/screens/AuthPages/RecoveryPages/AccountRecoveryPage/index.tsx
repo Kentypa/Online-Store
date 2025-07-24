@@ -4,10 +4,10 @@ import { AuthFormFields } from "@forms/AuthFormFields";
 import { PagesEndponts } from "@enums/pagesEndpoints";
 import { useRecoveryAccount } from "@features/RecoveryAccountPage/hooks/use-recovery-account";
 import { useRecoveryPagePopups } from "@features/AuthPages/RecoveryPages/AccountRecoveryPage/hooks/use-account-recovery-popups";
-import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
-import { useRecoveryForm } from "@hooks/use-recovery-form";
+import { useRecoveryForm } from "@hooks/auth/use-recovery-form";
 import { RecoveryPageLayout } from "@layout/RecoveryPageLayout";
 import RecoveryIcon from "@icons/recovery.svg?react";
+import { useNavigateOnSuccess } from "@hooks/navigation/use-navigate-on-success";
 
 export const AccountRecoveryPage: FC = () => {
   const { t } = useTranslation(["recovery"]);

@@ -4,7 +4,7 @@ import { formatCurrency } from "@utils/formatCurrency";
 import { FC } from "react";
 import { ProductTranslation } from "@shared-types/storeTypes/products/product-translation";
 import { useTranslation } from "react-i18next";
-import { useNavigateToProduct } from "@hooks/use-navigate-to-product";
+import { useNavigateToProduct } from "@hooks/navigation/use-navigate-to-product";
 import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
 
 type ProductsListProps = {

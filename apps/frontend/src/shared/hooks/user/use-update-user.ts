@@ -3,7 +3,7 @@ import { ServiceNames } from "@enums/serviceNames";
 import { userService } from "@services/userService";
 import { changeByData } from "@stores/user/userSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-import { useAppDispatch } from "@hooks/redux";
+import { useAppDispatch } from "@hooks/core/redux";
 import { ProfileForm } from "@shared-types/formData/profile-form";
 import { UserData } from "@shared-types/auth/user-data";
 

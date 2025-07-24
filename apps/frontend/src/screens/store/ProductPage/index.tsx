@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
-import { useProduct } from "@hooks/use-product";
+import { useProduct } from "@hooks/store/use-product";
 import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
 import { SliderNextButton } from "@ui/SliderNextButton";
 import { SliderPrevButton } from "@ui/SliderPrevButton";
@@ -18,9 +18,8 @@ import { StarsMark } from "@features/ProductPage/components/StarsMark";
 import { CreateReviewModal } from "@features/ProductPage/components/CreateReviewModal";
 import { useWriteReview } from "@features/ProductPage/hooks/use-write-review";
 import { useWriteReviewPopups } from "@features/ProductPage/hooks/use-write-review-popups";
-import { useAppSelector } from "@hooks/redux";
 import { userSelector } from "@stores/selectors/userSelector";
-import { useAddToCart } from "@hooks/use-add-to-cart";
+import { useAddToCart } from "@hooks/store/use-add-to-cart";
 import { useAddToCartPopups } from "@features/ProductPage/hooks/use-add-to-cart-popups";
 import Star from "@icons/star.svg?react";
 import ShoppingCart from "@icons/shopping-cart.svg?react";
@@ -29,6 +28,7 @@ import WriteReviewButton from "@icons/write-review.svg?react";
 import ViewReviews from "@icons/view-review.svg?react";
 import "swiper/css";
 import { UsersReviews } from "@features/ProductPage/components/UsersReviews";
+import { useAppSelector } from "@hooks/core/redux";
 
 export const ProductPage: FC = () => {
   const [searchParams] = useSearchParams();

@@ -2,13 +2,13 @@ import { ChangeEvent, FC, FormEvent, useMemo } from "react";
 import { Button } from "@ui/Button";
 import { Input } from "@forms/Input";
 import { Modal } from "@modals/Modal";
-import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
 import { useTranslation } from "react-i18next";
 import { WriteReviewDto } from "@features/ProductPage/types/write-review-dto";
 import FilledStar from "@icons/star-filled.svg?react";
 import Star from "@icons/star.svg?react";
+import { useIsNotSubmitable } from "@hooks/form/use-is-not-submitable";
 
 type CreateReviewModalProps = {
   visible: boolean;

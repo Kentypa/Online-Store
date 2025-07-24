@@ -1,7 +1,7 @@
 import { PagesEndponts } from "@enums/pagesEndpoints";
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { useAppDispatch } from "@hooks/redux";
+import { useAppDispatch } from "@hooks/core/redux";
 import { authService } from "@services/authService";
 import { logout } from "@stores/user/userSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";

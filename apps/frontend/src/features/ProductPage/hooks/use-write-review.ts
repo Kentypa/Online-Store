@@ -1,10 +1,10 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { useForm } from "@hooks/use-form";
 import { reviewsService } from "@services/reviewsService";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { WriteReviewDto } from "../types/write-review-dto";
+import { useForm } from "@hooks/form/use-form";
 
 export const useWriteReview = (productId: number) => {
   const initialState = useMemo(() => false, []);

@@ -7,7 +7,7 @@ import {
 } from "@stores/user/userSlice";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useAppDispatch } from "@hooks/redux";
+import { useAppDispatch } from "@hooks/core/redux";
 
 export const useUserVerify = (enabled: boolean = true) => {
   const dispatch = useAppDispatch();
