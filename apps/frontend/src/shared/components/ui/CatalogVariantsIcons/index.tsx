@@ -1,5 +1,4 @@
 import { FC, SVGProps } from "react";
-
 import NotFoundIcon from "@icons/not-found.svg?react";
 import ElectronicsIcon from "@icons/categories/electronics.svg?react";
 import HomeGardenIcon from "@icons/categories/home-garden.svg?react";

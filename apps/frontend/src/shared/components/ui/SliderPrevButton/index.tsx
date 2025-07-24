@@ -1,5 +1,5 @@
-import { SwiperButtonProps } from "@shared-types/swiper-button-props";
 import { Button } from "@ui/Button";
+import { SwiperButtonProps } from "@shared-types/ui/swiper-button-props";
 import LeftArrow from "@icons/angle-left.svg?react";
 
 export const SliderPrevButton = ({

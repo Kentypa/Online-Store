@@ -9,6 +9,7 @@ export class GetUserDto {
   @ApiProperty({
     example: 1,
     description: "ID of user",
+    type: "number",
   })
   @IsNumber()
   id: number;
@@ -16,6 +17,7 @@ export class GetUserDto {
   @ApiProperty({
     example: "test@gmail.com",
     description: "User email",
+    type: "string",
   })
   @IsString()
   email: string;
@@ -24,6 +26,8 @@ export class GetUserDto {
     example: "Igor",
     description: "User firstname",
     nullable: true,
+    type: "string",
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -33,6 +37,8 @@ export class GetUserDto {
     example: "Voitenko",
     description: "User lastname",
     nullable: true,
+    type: "string",
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -42,6 +48,8 @@ export class GetUserDto {
     example: "+88005553535",
     description: "User phone number",
     nullable: true,
+    type: "string",
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -51,6 +59,8 @@ export class GetUserDto {
     example: "/uploads/users/avatars/1748361610393-2ee0737ab7ef.gif",
     description: "Path to user avatar",
     nullable: true,
+    type: "string",
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -60,6 +70,8 @@ export class GetUserDto {
     example: "en",
     description: "User language code",
     nullable: true,
+    type: () => Language,
+    required: false,
   })
   @IsOptional()
   @IsString()
@@ -69,6 +81,8 @@ export class GetUserDto {
     example: "US",
     description: "User country code",
     nullable: true,
+    required: false,
+    type: () => Country,
   })
   @IsOptional()
   @IsString()
@@ -78,6 +92,8 @@ export class GetUserDto {
     example: 1,
     description: "Region ID",
     nullable: true,
+    type: () => Region,
+    required: false,
   })
   @IsOptional()
   @IsNumber()
@@ -87,6 +103,8 @@ export class GetUserDto {
     example: 1,
     description: "City ID",
     nullable: true,
+    type: () => City,
+    required: true,
   })
   @IsOptional()
   @IsNumber()
@@ -95,6 +113,8 @@ export class GetUserDto {
   @ApiProperty({
     example: "2025-05-27 15:23:48.941416",
     description: "Date of user creation",
+    type: () => Date,
+    required: false,
   })
   @IsOptional()
   createdAt?: Date;
@@ -102,6 +122,8 @@ export class GetUserDto {
   @ApiProperty({
     example: "2025-05-27 15:23:48.941416",
     description: "Date of last user update",
+    type: () => Date,
+    required: false,
   })
   @IsOptional()
   updatedAt?: Date;
@@ -109,6 +131,7 @@ export class GetUserDto {
   @ApiProperty({
     example: "2025-05-27 15:23:48.941416",
     description: "Date of user deletion",
+    type: () => Date,
     required: false,
   })
   @IsOptional()

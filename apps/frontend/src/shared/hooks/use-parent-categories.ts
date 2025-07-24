@@ -10,12 +10,10 @@ export const useParentCategories = (categoryId: number) => {
     ServiceNames.CATEGORY,
     i18n.language,
   );
-  const { data, ...otherOptions } = useQuery({
+  const { ...otherOptions } = useQuery<number[]>({
     queryKey: [Queries.CATEGORY, i18n.language, categoryId],
     queryFn: () => getParentCategories(categoryId),
   });
 
-  const parentIds: number[] | undefined = data?.data;
-
-  return { parentIds, ...otherOptions };
+  return { ...otherOptions };
 };

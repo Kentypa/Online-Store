@@ -18,7 +18,7 @@ import { User } from "./user.entity";
 export class UserRefreshToken {
   @ApiProperty({
     example: "12",
-    description: "User stats ID",
+    description: "User ID",
     type: "number",
   })
   @PrimaryColumn({ type: "integer" })
@@ -26,12 +26,16 @@ export class UserRefreshToken {
 
   @ApiProperty({
     example: "124",
-    description: "Count of coins which user get after click on the game field",
+    description: "Device UUID",
     type: "number",
   })
   @PrimaryColumn({ type: "uuid" })
   deviceId: string;
 
+  @ApiProperty({
+    description: "Relationships with user column in database",
+    type: () => User,
+  })
   @ManyToOne(() => User, (user) => user.refreshTokens, {
     onDelete: "CASCADE",
   })

@@ -2,10 +2,10 @@ import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { convertCurrency } from "@utils/currencyConverter";
 import { formatCurrency } from "@utils/formatCurrency";
 import { FC } from "react";
-import { ProductTranslation } from "@shared-types/product-translation";
+import { ProductTranslation } from "@shared-types/storeTypes/products/product-translation";
 import { useTranslation } from "react-i18next";
-import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
 import { useNavigateToProduct } from "@hooks/use-navigate-to-product";
+import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
 
 type ProductsListProps = {
   productsData?: ProductTranslation[];

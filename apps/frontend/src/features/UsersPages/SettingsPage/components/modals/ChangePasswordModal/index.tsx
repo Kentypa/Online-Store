@@ -5,8 +5,8 @@ import { Modal } from "@modals/Modal";
 import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
-import { ChangePasswordFormData } from "@shared-types/change-password-form-data";
 import { useTranslation } from "react-i18next";
+import { ChangePasswordFormData } from "@shared-types/formData/change-password-form-data";
 
 type ChangePasswordModalProps = {
   visible: boolean;
@@ -25,7 +25,7 @@ export const ChangePasswordModal: FC<ChangePasswordModalProps> = ({
 }) => {
   const initialState = useMemo(
     () => ({ oldPassword: "", newPassword: "" }),
-    []
+    [],
   );
 
   const changesIsNotSubmitable = useIsNotSubmitable({

@@ -21,6 +21,10 @@ export class PasswordResetToken {
   })
   id: number;
 
+  @ApiProperty({
+    description: "Relationships with user column in database",
+    type: () => User,
+  })
   @ManyToOne(() => User, (user) => user.passwordResetTokens, {
     onDelete: "CASCADE",
   })

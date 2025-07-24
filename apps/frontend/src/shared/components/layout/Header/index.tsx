@@ -10,11 +10,11 @@ import { PagesEndponts } from "@enums/pagesEndpoints";
 import { useSearch } from "@hooks/use-search";
 import { useForm } from "@hooks/use-form";
 import { useNavigateToProduct } from "@hooks/use-navigate-to-product";
+import { useNavigateToProducts } from "@hooks/use-navigate-to-products";
 import StoreLogo from "@icons/logo-website.svg?react";
 import CatalogIcon from "@icons/catalog.svg?react";
 import UserIcon from "@icons/user.svg?react";
 import ShopCartIcon from "@icons/shopping-cart.svg?react";
-import { useNavigateToProducts } from "@hooks/use-navigate-to-products";
 
 type SearchProps = {
   query: string;
@@ -95,7 +95,7 @@ export const Header: FC = () => {
         </Button>
         <Button
           handleClick={() => {
-            navigate(PagesEndponts.USER_ORDERS);
+            navigate(PagesEndponts.USER_CART);
           }}
         >
           <ShopCartIcon className="size-6 fill-white hover:fill-accent" />

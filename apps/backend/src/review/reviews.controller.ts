@@ -28,15 +28,11 @@ export class ReviewsController {
   @UseGuards(JwtAuthGuard)
   @HttpCode(201)
   async writeReview(
-    @Body() writeReviewDto: WriteReviewDto,
+    @Body() { comment, productId, rating }: WriteReviewDto,
     @UserDecorator() user: User,
   ): Promise<Review> {
     return this.reviewService.writeReview(
-      {
-        comment: writeReviewDto.comment,
-        productId: writeReviewDto.productId,
-        rating: writeReviewDto.rating,
-      },
+      { comment, productId, rating },
       user.id,
     );
   }

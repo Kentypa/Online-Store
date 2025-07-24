@@ -1,12 +1,12 @@
 import { ChangeEvent, FC, FormEvent, useMemo } from "react";
 import { Button } from "@ui/Button";
-import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
 import { Input } from "@forms/Input";
 import { Modal } from "@modals/Modal";
 import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
 import { useTranslation } from "react-i18next";
+import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
 
 type DeleteAccountModalProps = {
   visible: boolean;
@@ -25,7 +25,7 @@ export const DeleteAccountModal: FC<DeleteAccountModalProps> = ({
 }) => {
   const initialState = useMemo(
     () => ({ password: "", passwordRepeat: "" }),
-    []
+    [],
   );
 
   const changesIsNotSubmitable = useIsNotSubmitable({

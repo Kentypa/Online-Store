@@ -11,6 +11,7 @@ export const InputPassword: FC<InputProps> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClick = () => setShowPassword(!showPassword);
+  const eyeClassName = "fill-separator size-6";
 
   return (
     <div className="container relative">
@@ -26,9 +27,9 @@ export const InputPassword: FC<InputProps> = ({
         className="absolute top-1/2 right-3 -translate-y-1/2"
       >
         {showPassword ? (
-          <OpenedEye className="fill-separator size-6" />
+          <OpenedEye className={eyeClassName} />
         ) : (
-          <ClosedEye className="fill-separator size-6" />
+          <ClosedEye className={eyeClassName} />
         )}
       </Button>
     </div>

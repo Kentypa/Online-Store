@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { FindManyOptions, Repository } from "typeorm";
 import { CityTranslation } from "../entities/city-translation.entity";
+import { Cached } from "src/shared/decorators/cached.decorator";
 
 @Injectable()
 export class CityService {
@@ -10,6 +11,11 @@ export class CityService {
     private cityRepository: Repository<CityTranslation>,
   ) {}
 
+  @Cached(
+    300,
+    (langCode?: string, regionId?: number, offset?: number, limit?: number) =>
+      `city:${langCode ?? "all"}:${regionId ?? "all"}:${offset ?? "all"}:${limit ?? "all"}`,
+  )
   async getCities(
     langCode?: string,
     regionId?: number,

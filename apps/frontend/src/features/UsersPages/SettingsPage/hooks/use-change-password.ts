@@ -1,6 +1,6 @@
 import { useForm } from "@hooks/use-form";
 import { useUpdateUser } from "@hooks/use-update-user";
-import { ChangePasswordFormData } from "@shared-types/change-password-form-data";
+import { ChangePasswordFormData } from "@shared-types/formData/change-password-form-data";
 import { useState, useMemo, useEffect, useCallback } from "react";
 
 export const useChangePassword = () => {
@@ -8,12 +8,12 @@ export const useChangePassword = () => {
 
   const toggleShowChangePasswordModal = useCallback(
     () => setShowAccountModal((prev) => !prev),
-    []
+    [],
   );
 
   const initalState = useMemo<ChangePasswordFormData>(
     () => ({ oldPassword: "", newPassword: "" }),
-    []
+    [],
   );
 
   const { handleUpdatedUser, isSuccess, ...otherOptions } =

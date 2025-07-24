@@ -1,20 +1,17 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
 import { userService } from "@services/userService";
-import { UserData } from "@shared-types/user-data";
+import { UserData } from "@shared-types/auth/user-data";
 import { useQuery } from "@tanstack/react-query";
 
 export const useUsers = (userIds: number[]) => {
   const { getUsersByIds } = userService(ServiceNames.USER);
 
-  const { data, isFetched, ...otherOptions } = useQuery({
+  const { ...otherOptions } = useQuery<UserData[]>({
     queryKey: [Queries.USER, userIds],
     queryFn: () => getUsersByIds(userIds),
+    enabled: userIds.length > 0,
   });
 
-  const usersData: UserData[] | undefined = isFetched
-    ? (data?.data as UserData[])
-    : undefined;
-
-  return { usersData, ...otherOptions };
+  return { ...otherOptions };
 };

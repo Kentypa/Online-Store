@@ -1,6 +1,3 @@
-/**
- * Formats number as currency for given locale.
- */
 export const formatCurrency = (
   value: number,
   currency: string,

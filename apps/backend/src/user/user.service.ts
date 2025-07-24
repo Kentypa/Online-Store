@@ -200,7 +200,7 @@ export class UserService {
 
     if (dto.regionId) {
       const region = await this.dataSource.getRepository(Region).findOne({
-        where: { id: Number(dto.regionId) },
+        where: { id: dto.regionId },
       });
       if (!region) throw new NotFoundException("Region not found");
       user.region = region;
@@ -208,7 +208,7 @@ export class UserService {
 
     if (dto.cityId) {
       const city = await this.dataSource.getRepository(City).findOne({
-        where: { id: Number(dto.cityId) },
+        where: { id: dto.cityId },
       });
       if (!city) throw new NotFoundException("City not found");
       user.city = city;

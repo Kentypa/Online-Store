@@ -16,8 +16,8 @@ export const CategoryBreadcrumbs: FC<CategoryBreadcrumbsProps> = ({
   categoryId,
   handleSetNewCategory,
 }) => {
-  const { categoriesData } = useCategories();
-  const { parentIds } = useParentCategories(categoryId);
+  const { data: categoriesData } = useCategories();
+  const { data: parentIds } = useParentCategories(categoryId);
   const navigate = useNavigate();
 
   return (

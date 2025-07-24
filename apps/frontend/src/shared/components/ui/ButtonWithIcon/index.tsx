@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Button, ButtonProps } from "@ui/Button";
-import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/components/component-with-children";
 
 type ButtonWithIconProps = ButtonProps & {
   icon: ReactNode;

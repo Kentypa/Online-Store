@@ -8,7 +8,6 @@ import { ChangePasswordButton } from "@features/UsersPages/SettingsPage/componen
 import { DeleteAccountButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/DeleteAccountButton";
 import { LogoutButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/LogoutButton";
 import { useForm } from "@hooks/use-form";
-import { ProfileForm } from "@shared-types/profile-form";
 import { useUserAvatarChange } from "@features/UsersPages/SettingsPage/hooks/use-user-avatar-change";
 import { EditableSettingsInput } from "@features/UsersPages/SettingsPage/components/ui/EditableSettingsInput";
 import { useTranslation } from "react-i18next";
@@ -29,6 +28,7 @@ import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
 import { useLogout } from "@features/UsersPages/SettingsPage/hooks/use-logout";
 import { useChangePassword } from "@features/UsersPages/SettingsPage/hooks/use-change-password";
 import { ChangePasswordModal } from "@features/UsersPages/SettingsPage/components/modals/ChangePasswordModal";
+import { ProfileForm } from "@shared-types/formData/profile-form";
 
 export const UserSettingsPage: FC = () => {
   const profileNavigation = useProfileNavigation();
@@ -71,6 +71,7 @@ export const UserSettingsPage: FC = () => {
   } = useUpdateUser(initialState);
   const { formState, handleChange, handleChangeByValue, handleSubmit } =
     useForm<ProfileForm>(initialState, handleUpdatedUser);
+
   const {
     avatarPreview,
     handleAvatarChange,
@@ -81,28 +82,31 @@ export const UserSettingsPage: FC = () => {
   const { t } = useTranslation("user-settings");
   const { editFields, toggleEdit } = useEditableFields({ email: false });
 
-  const { countriesData, isSuccess: isCountriesFetchedSuccess } =
+  const { data: countriesData, isSuccess: isCountriesFetchedSuccess } =
     useCountries();
 
-  const { regionsData, isSuccess: isRegionsFetchedSuccess } = useRegions(
+  const { data: regionsData, isSuccess: isRegionsFetchedSuccess } = useRegions(
     isCountriesFetchedSuccess,
     formState.countryCode ?? "",
   );
 
-  const { citiesData } = useCities(isRegionsFetchedSuccess, formState.regionId);
+  const { data: citiesData } = useCities(
+    isRegionsFetchedSuccess,
+    formState.regionId,
+  );
 
   const handleLocationChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
 
     if (name === "countryCode") {
       handleChangeByValue("countryCode", value);
-      handleChangeByValue("regionId", "");
-      handleChangeByValue("cityId", "");
+      handleChangeByValue("regionId", undefined);
+      handleChangeByValue("cityId", undefined);
     } else if (name === "regionId") {
-      handleChangeByValue("regionId", value);
-      handleChangeByValue("cityId", "");
+      handleChangeByValue("regionId", Number(value));
+      handleChangeByValue("cityId", undefined);
     } else if (name === "cityId") {
-      handleChangeByValue("cityId", value);
+      handleChangeByValue("cityId", Number(value));
     }
   };
 

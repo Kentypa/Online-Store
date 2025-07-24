@@ -1,6 +1,5 @@
 import api from "@config/axios";
 import { ServiceNames } from "@enums/serviceNames";
-import { TokenValidatingStatus } from "@shared-types/token-validating-status";
 import {
   changeAuthLoading,
   changeIsAuthenticated,
@@ -9,6 +8,7 @@ import { delay } from "@utils/delay";
 import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
 import { store } from "@stores/store";
 import { BACKEND_URL } from "@config/config";
+import { TokenValidatingStatus } from "@shared-types/auth/token-validating-status";
 
 let isRefreshing = false;
 

@@ -1,4 +1,4 @@
-import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/components/component-with-children";
 import { createPortal } from "react-dom";
 
 type ModalProps = {
@@ -22,7 +22,7 @@ export const Modal: ComponentWithChildren<ModalProps> = ({
               {children}
             </div>
           </div>,
-          document.body
+          document.body,
         )}
     </>
   );

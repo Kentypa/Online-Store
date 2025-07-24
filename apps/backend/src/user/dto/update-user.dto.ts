@@ -1,5 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsOptional, IsString, MaxLength } from "class-validator";
+import { Type } from "class-transformer";
+import {
+  IsEmail,
+  IsNumber,
+  IsOptional,
+  IsString,
+  MaxLength,
+} from "class-validator";
 
 export class UpdateUserDto {
   @IsOptional()
@@ -8,6 +15,8 @@ export class UpdateUserDto {
     example: "test@gmail.com",
     description: "User email",
     type: "string",
+    maxLength: 320,
+    required: false,
   })
   @MaxLength(320)
   email?: string;
@@ -18,6 +27,8 @@ export class UpdateUserDto {
     example: "Igor",
     description: "First name",
     type: "string",
+    maxLength: 64,
+    required: false,
   })
   @MaxLength(64)
   firstName?: string;
@@ -28,6 +39,7 @@ export class UpdateUserDto {
     example: "Voitenko",
     description: "Last name",
     type: "string",
+    required: false,
   })
   @MaxLength(64)
   lastName?: string;
@@ -38,6 +50,8 @@ export class UpdateUserDto {
     example: "+88005553535",
     description: "Phone number",
     type: "string",
+    maxLength: 20,
+    required: false,
   })
   @MaxLength(20)
   phoneNumber?: string;
@@ -48,6 +62,7 @@ export class UpdateUserDto {
     example: "en",
     description: "Language code",
     type: "string",
+    required: false,
   })
   languageCode?: string;
 
@@ -57,32 +72,37 @@ export class UpdateUserDto {
     example: "US",
     description: "Country code",
     type: "string",
+    required: false,
   })
   countryCode?: string;
 
   @IsOptional()
-  @IsString()
+  @Type(() => Number)
+  @IsNumber()
   @ApiProperty({
     example: 1,
     description: "Region ID",
-    type: "string",
+    type: "number",
+    required: false,
   })
-  regionId?: string;
+  regionId?: number;
 
   @IsOptional()
-  @IsString()
+  @Type(() => Number)
+  @IsNumber()
   @ApiProperty({
     example: 1,
     description: "City ID",
-    type: "string",
+    type: "number",
   })
-  cityId?: string;
+  cityId?: number;
 
   @IsOptional()
   @IsString()
   @ApiProperty({
     example: "/uploads/users/avatars/avatar.jpg",
     description: "Path to avatar",
+    required: false,
     type: "string",
   })
   avatarUrl?: string;
@@ -92,6 +112,8 @@ export class UpdateUserDto {
   @ApiProperty({
     example: "oldPassword123",
     description: "Old password",
+    required: false,
+    type: "string",
   })
   oldPassword?: string;
 
@@ -100,6 +122,8 @@ export class UpdateUserDto {
   @ApiProperty({
     example: "newPassword123",
     description: "New password",
+    required: false,
+    type: "string",
   })
   newPassword?: string;
 }

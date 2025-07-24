@@ -7,12 +7,22 @@ import {
   Column,
 } from "typeorm";
 import { Product } from "./product.entity";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
 export class ProductStats {
+  @ApiProperty({
+    example: 13,
+    description: "Product stats ID",
+    type: "number",
+  })
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty({
+    description: "Product stats relationships in database",
+    type: () => Product,
+  })
   @ManyToOne(() => Product, (product) => product.stats, {
     nullable: false,
     onDelete: "CASCADE",
@@ -20,22 +30,50 @@ export class ProductStats {
   @JoinColumn({ name: "product_id" })
   product: Product;
 
+  @ApiProperty({
+    example: 13,
+    description: "Product ID",
+    type: "number",
+  })
   @Column({ name: "product_id" })
   product_id: number;
 
+  @ApiProperty({
+    description: "Relationships in database with region column",
+    type: () => Region,
+  })
   @ManyToOne(() => Region, { nullable: false, onDelete: "CASCADE" })
   @JoinColumn({ name: "region_id" })
   region: Region;
 
+  @ApiProperty({
+    example: 13,
+    description: "Region ID",
+    type: "number",
+  })
   @Column({ name: "region_id" })
   region_id: number;
 
+  @ApiProperty({
+    example: 13,
+    description: "Product total solds",
+    type: "number",
+  })
   @Column({ type: "integer", default: 0 })
   total_sold: number;
 
+  @ApiProperty({
+    example: "ALL_WEEK",
+    description: "Period type code",
+    type: "string",
+  })
   @Column({ type: "varchar", length: 20 })
   period_type_code: string;
 
+  @ApiProperty({
+    description: "Period date",
+    type: () => Date,
+  })
   @Column({ type: "date" })
   period_date: Date;
 }

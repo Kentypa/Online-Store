@@ -1,22 +1,21 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
 import { userService } from "@services/userService";
-import { ProfileForm } from "@shared-types/profile-form";
 import { changeByData } from "@stores/user/userSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useAppDispatch } from "@hooks/redux";
-import { UserData } from "@shared-types/user-data";
+import { ProfileForm } from "@shared-types/formData/profile-form";
+import { UserData } from "@shared-types/auth/user-data";
 
-export const useUpdateUser = (data: ProfileForm) => {
-  const {
-    cityId,
-    countryCode,
-    email,
-    firstName,
-    lastName,
-    phoneNumber,
-    regionId,
-  } = data;
+export const useUpdateUser = ({
+  cityId,
+  countryCode,
+  email,
+  firstName,
+  lastName,
+  phoneNumber,
+  regionId,
+}: ProfileForm) => {
   const { updateUserData } = userService(ServiceNames.USER);
   const queryClient = useQueryClient();
   const dispatch = useAppDispatch();
@@ -33,7 +32,7 @@ export const useUpdateUser = (data: ProfileForm) => {
           avatarUrl: updatedUser.avatarUrl
             ? `http://localhost:3000/${updatedUser.avatarUrl}`
             : "",
-        })
+        }),
       );
       queryClient.refetchQueries({ queryKey: [Queries.USER] });
     },

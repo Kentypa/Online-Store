@@ -1,4 +1,4 @@
-import { LinkItem } from "@shared-types/link-item";
+import { LinkItem } from "@shared-types/components/link-item";
 import { FC } from "react";
 import { NavLink } from "react-router";
 

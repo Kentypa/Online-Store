@@ -3,7 +3,7 @@ import { ServiceNames } from "@enums/serviceNames";
 import { useAppDispatch } from "@hooks/redux";
 import { useForm } from "@hooks/use-form";
 import { userService } from "@services/userService";
-import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
+import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
 import { logout } from "@stores/user/userSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
@@ -30,7 +30,7 @@ export const useDeleteAccount = () => {
 
   const initalState = useMemo<DeleteAccountFormData>(
     () => ({ password: "", passwordRepeat: "" }),
-    []
+    [],
   );
 
   const { formState, handleChange, handleSubmit } =

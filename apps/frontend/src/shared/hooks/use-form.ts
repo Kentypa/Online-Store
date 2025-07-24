@@ -8,7 +8,7 @@ import {
 
 export function useForm<T extends Record<string, unknown>>(
   initialState: T,
-  onSubmit?: (formState: T) => void
+  onSubmit?: (formState: T) => void,
 ) {
   const [formState, setFormState] = useState<T>(initialState);
 
@@ -24,7 +24,7 @@ export function useForm<T extends Record<string, unknown>>(
         [name]: value,
       }));
     },
-    []
+    [],
   );
 
   const handleSubmit = useCallback(
@@ -32,17 +32,17 @@ export function useForm<T extends Record<string, unknown>>(
       e.preventDefault();
       onSubmit?.(formState);
     },
-    [formState, onSubmit]
+    [formState, onSubmit],
   );
 
   const handleChangeByValue = useCallback(
-    (name: keyof T, value: T[keyof T]) => {
+    <K extends keyof T>(name: K, value: T[K]) => {
       setFormState((prevState) => ({
         ...prevState,
         [name]: value,
       }));
     },
-    []
+    [],
   );
 
   return { formState, handleChange, handleChangeByValue, handleSubmit };

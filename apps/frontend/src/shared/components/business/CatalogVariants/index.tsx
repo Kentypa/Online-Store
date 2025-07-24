@@ -1,19 +1,19 @@
 import { useCategories } from "@hooks/use-categories";
 import { CatalogVariantsIcons } from "@ui/CatalogVariantsIcons";
 import { FC, useEffect, useState } from "react";
-import { CategoryRoot } from "@shared-types/category-root";
-import RightArrow from "@icons/angle-right.svg?react";
 import { useNavigate, useSearchParams } from "react-router";
 import { Button } from "@ui/Button";
 import { SortProductsBy } from "@enums/sortProductsBy";
 import { PagesEndponts } from "@enums/pagesEndpoints";
+import { CategoryRoot } from "@shared-types/storeTypes/categories/category-root";
+import RightArrow from "@icons/angle-right.svg?react";
 
 export type CatalogVariantsProps = {
   visible: boolean;
 };
 
 export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
-  const { categoriesData, isLoading, isSuccess } = useCategories();
+  const { data: categoriesData, isLoading, isSuccess } = useCategories();
   const [currentCategory, setCurrentCategory] = useState<CategoryRoot>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

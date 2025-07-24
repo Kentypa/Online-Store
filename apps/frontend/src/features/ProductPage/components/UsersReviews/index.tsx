@@ -1,8 +1,8 @@
-import { Review } from "@shared-types/review";
 import { FC, useMemo } from "react";
 import { StarsMark } from "../StarsMark";
 import { useUsers } from "@hooks/use-users";
 import { UserReviewInfo } from "../UserReviewInfo";
+import { Review } from "@shared-types/storeTypes/products/review";
 
 type UsersReviewsProps = {
   reviews: Review[];
@@ -16,7 +16,7 @@ export const UsersReviews: FC<UsersReviewsProps> = ({
   productReviewsCount,
 }) => {
   const userIds = useMemo(() => reviews.map((r) => r.user_id), [reviews]);
-  const { usersData } = useUsers(userIds);
+  const { data: usersData } = useUsers(userIds);
 
   const usersById = useMemo(() => {
     if (!usersData) return {};

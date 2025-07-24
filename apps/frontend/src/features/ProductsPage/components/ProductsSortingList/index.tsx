@@ -1,8 +1,8 @@
 import { SortProductsBy } from "@enums/sortProductsBy";
 import { ExpandSelectionList } from "@ui/ExpandSelectionList";
 import { FC } from "react";
-import SortIcon from "@icons/sort.svg?react";
 import { useTranslation } from "react-i18next";
+import SortIcon from "@icons/sort.svg?react";
 
 type ProductsSortingListProps = {
   handleSetSortingType: (value: SortProductsBy) => void;

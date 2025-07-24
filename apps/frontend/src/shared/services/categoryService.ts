@@ -1,24 +1,22 @@
 import api from "@config/axios";
+import { CategoryRoot } from "@shared-types/storeTypes/categories/category-root";
+import { apiErrorHandler } from "@utils/apiErrorHandler";
 
 export function categoryService(url: string, langCode: string) {
   const getCategories = async () => {
-    return api
-      .get(`${url}/categories-tree`, { params: { langCode: langCode } })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<CategoryRoot[]>(`${url}/categories-tree`, {
+        params: { langCode },
+      }),
+    );
   };
 
   const getParentCategories = async (categoryId: number) => {
-    return api
-      .get(`${url}/categories-parent-ids`, {
-        params: { categoryId: categoryId },
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<number[]>(`${url}/categories-parent-ids`, {
+        params: { categoryId },
+      }),
+    );
   };
 
   return { getCategories, getParentCategories };

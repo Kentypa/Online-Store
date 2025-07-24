@@ -1,71 +1,44 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { ButtonWithIcon } from "@ui/ButtonWithIcon";
-import { useSignUp } from "@features/AuthPages/SignUpPage/hooks/use-sign-up";
-import { useIsNotSubmitable } from "@hooks/use-is-not-submitable";
-import { useForm } from "@hooks/use-form";
-import { useSignUpPopups } from "@features/AuthPages/SignUpPage/hooks/use-sign-up-popups";
 import { useNavigateOnSuccess } from "@hooks/use-navigate-on-success";
 import { Form } from "@forms/Form";
-import { FormField } from "@forms/FormField";
-import SiteLogo from "@icons/logo-website.svg?react";
+import { ButtonWithIcon } from "@ui/ButtonWithIcon";
+import { useSignUp } from "@features/AuthPages/SignUpPage/hooks/use-sign-up";
+import { useSignUpPopups } from "@features/AuthPages/SignUpPage/hooks/use-sign-up-popups";
+import { AuthFormFields } from "@forms/AuthFormFields";
+import { useAuthForm } from "@hooks/use-auth-form";
+import { AuthPageLayout } from "@layout/AuthPageLayout";
 import SignUpIcon from "@icons/sign.svg?react";
 
 export const SignUpPage: FC = () => {
   const { t } = useTranslation(["sign-up"]);
 
   const {
-    isSuccess,
+    isSuccess: signUpSuccess,
     mutate: signUpMutate,
     isError: userSignUpIsError,
   } = useSignUp();
 
-  const initialState = useMemo(() => ({ email: "", password: "" }), []);
-  const { formState, handleChange, handleSubmit } = useForm(
-    initialState,
-    (formState) => {
-      signUpMutate(formState);
-    }
-  );
+  const { handleChange, handleSubmit, isSubmitDisabled } =
+    useAuthForm(signUpMutate);
 
-  const isSubmitDisabled = useIsNotSubmitable({
-    allRequired: true,
-    initialState,
-    state: formState,
-  });
-
-  useNavigateOnSuccess(isSuccess, PagesEndponts.SIGN_IN);
+  useNavigateOnSuccess(signUpSuccess, PagesEndponts.SIGN_IN);
   useSignUpPopups({ userSignUpIsError });
 
   return (
-    <div className="mt-30 flex flex-col gap-17.5 items-center">
-      <SiteLogo className="fill-primary size-30" />
-      <h2 className="text-display-medium">{t("welcomeMessage")}</h2>
-      <h3 className="text-display-smallest">{t("signUpLabel")}</h3>
+    <AuthPageLayout title={t("welcomeMessage")} subtitle={t("signUpLabel")}>
       <Form
         handleSubmit={handleSubmit}
         className="flex flex-col max-w-112 w-full"
       >
         <div className="flex flex-col gap-8.75">
-          <div className="flex flex-col gap-9.5">
-            <FormField
-              label={t("email")}
-              name="email"
-              handleChange={handleChange}
-            />
-            <FormField
-              label={t("password")}
-              name="password"
-              handleChange={handleChange}
-              type="password"
-            />
-          </div>
+          <AuthFormFields handleChange={handleChange} t={t} />
           <ButtonWithIcon
+            disabled={isSubmitDisabled}
             className="text-body-paragraph text-white p-3 w-full flex justify-center rounded-4xl bg-primary"
             icon={<SignUpIcon className="fill-white size-6" />}
-            disabled={isSubmitDisabled}
           >
             {t("button.signUp")}
           </ButtonWithIcon>
@@ -77,6 +50,6 @@ export const SignUpPage: FC = () => {
           </p>
         </div>
       </Form>
-    </div>
+    </AuthPageLayout>
   );
 };

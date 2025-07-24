@@ -2,8 +2,8 @@ import { Controller, Get, HttpCode, Query } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { ProductsService } from "./products.service";
 import { ProductTranslation } from "./entities/product-translation.entity";
-import { SortProductsBy } from "./enums/sort-products-by.enum";
-import { responseProductsDto } from "./dto/responseProducts.dto";
+import { responseProductsDto } from "./dto/response-products.dto";
+import { GetProductsQuery } from "./dto/get-products.query";
 
 @ApiTags("products")
 @Controller("products")
@@ -19,20 +19,21 @@ export class ProductsController {
   })
   @HttpCode(200)
   async getProducts(
-    @Query("langCode") langCode?: string,
-    @Query("ids") ids?: string,
-    @Query("offset") offset?: number,
-    @Query("limit") limit?: number,
-    @Query("regionId") regionId?: number,
-    @Query("sortBy") sortBy?: SortProductsBy,
-    @Query("categoryId") categoryId?: number,
-    @Query("withReviews") withReviews?: boolean,
-    @Query("query") query?: string,
+    @Query()
+    {
+      categoryId,
+      ids,
+      langCode,
+      limit,
+      offset,
+      query,
+      regionId,
+      sortBy,
+      withReviews,
+    }: GetProductsQuery,
   ): Promise<responseProductsDto> {
-    const parsedIds = ids?.split(",").map(Number).filter(Boolean);
-
     return this.productsService.getProducts({
-      ids: parsedIds,
+      ids,
       langCode,
       limit,
       offset,

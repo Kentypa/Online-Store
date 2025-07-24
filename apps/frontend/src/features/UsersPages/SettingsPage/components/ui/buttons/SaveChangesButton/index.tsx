@@ -1,8 +1,8 @@
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import UserChangeIcon from "@icons/user-change.svg?react";
 import { ButtonProps } from "@ui/Button";
+import UserChangeIcon from "@icons/user-change.svg?react";
 
 export const SaveChangesButton: FC<ButtonProps> = ({ ...options }) => {
   const { t } = useTranslation("user-settings");

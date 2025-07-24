@@ -9,6 +9,7 @@ export class BaseUserDto {
     example: "test@gmail.com",
     description: "User email",
     type: "string",
+    maxLength: 320,
   })
   email: string;
 }

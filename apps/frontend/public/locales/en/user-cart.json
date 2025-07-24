@@ -7,6 +7,21 @@
     "each": "Each",
     "quantity": "Quantity",
     "total": "Total",
-    "totalPrice": "Total price"
+    "totalPrice": "Total price",
+    "checkoutForm": "Checkout form"
+  },
+  "form": {
+    "inputs": {
+      "name": "Name",
+      "email": "email",
+      "shippingAddress": "Shipping Address",
+      "variants": {
+        "standartDelivery": "Standart Delivery",
+        "expressDelivery": "Express Delivery"
+      },
+      "cardNumber": "Card Number",
+      "cardYear": "MM/YY",
+      "cvc": "CVC"
+    }
   }
 }

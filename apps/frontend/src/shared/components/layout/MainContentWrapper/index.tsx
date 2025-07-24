@@ -1,6 +1,6 @@
 import { Footer } from "@layout/Footer";
 import { Header } from "@layout/Header";
-import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/components/component-with-children";
 
 export const MainContentWrapper: ComponentWithChildren = ({ children }) => {
   return (

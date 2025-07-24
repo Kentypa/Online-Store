@@ -9,8 +9,11 @@ import { useProducts } from "@hooks/use-products";
 import { Button } from "@ui/Button";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { useRemoveItemFromCart } from "@features/CartPage/hooks/use-remove-cart";
-import LockIcon from "@icons/lock.svg?react";
 import { useUpdateQuantity } from "@features/CartPage/hooks/use-update-quantity";
+import { Input } from "@forms/Input";
+import { Select } from "@forms/Select";
+import { Option } from "@forms/Option";
+import LockIcon from "@icons/lock.svg?react";
 
 export const CartPage: FC = () => {
   const profileNavigation = useProfileNavigation();
@@ -18,7 +21,6 @@ export const CartPage: FC = () => {
   const { t, i18n } = useTranslation("user-cart");
 
   const cartProductsIds = cart?.map((item) => item.product_id) || [];
-
   const shouldFetchProducts = cartProductsIds.length > 0;
 
   const { productsData } = useProducts(
@@ -41,10 +43,12 @@ export const CartPage: FC = () => {
   }, [cart]);
 
   const { mutate: updateQuantityMutate } = useUpdateQuantity();
+  const { mutate: removeFromCartMutate } = useRemoveItemFromCart();
+  const handleRemoveItemFromCart = (productId: number) =>
+    removeFromCartMutate(productId);
 
   const handleQuantityChange = (productId: number, value: number) => {
     setQuantities((prev) => ({ ...prev, [productId]: value }));
-
     updateQuantityMutate({ productId, newQuantity: value });
   };
 
@@ -59,10 +63,6 @@ export const CartPage: FC = () => {
       const quantity = quantities[product.product_id] ?? 1;
       return acc + price * quantity;
     }, 0) ?? 0;
-
-  const { mutate: removeFromCartMutate } = useRemoveItemFromCart();
-  const handleRemoveItemFromCart = (productId: number) =>
-    removeFromCartMutate(productId);
 
   return (
     <MainContentWrapper>
@@ -92,7 +92,7 @@ export const CartPage: FC = () => {
                         {t("buttons.remove")}
                       </Button>
                     </div>
-                    <div className="ml-auto flex flex-row gap-6 items-center">
+                    <div className="ml-auto flex flex-row gap-3">
                       <div>
                         <h4>{t("labels.each")}</h4>
                         <p className="font-semibold">{product.product.price}</p>
@@ -146,6 +146,62 @@ export const CartPage: FC = () => {
                 >
                   <p className="text-white">{t("buttons.checkout")}</p>
                 </ButtonWithIcon>
+
+                <div className="flex flex-col gap-4 mt-6">
+                  <h3 className="text-display-smallest">
+                    {t("labels.checkoutForm")}
+                  </h3>
+
+                  <Input
+                    type="text"
+                    name="name"
+                    placeholder={t("form.inputs.name")}
+                    className="border-2 border-separator px-4 py-2 rounded-4xl"
+                  />
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder={t("form.inputs.email")}
+                    className="border-2 border-separator px-4 py-2 rounded-4xl"
+                  />
+                  <Input
+                    type="text"
+                    name="address"
+                    placeholder={t("form.inputs.shippingAddress")}
+                    className="border-2 border-separator px-4 py-2 rounded-4xl"
+                  />
+                  <Select
+                    name="deliveryMethod"
+                    className="border-2 border-separator px-4 py-2 rounded-4xl"
+                  >
+                    <Option value="standard">
+                      {t("form.inputs.variants.standartDelivery")}
+                    </Option>
+                    <Option value="express">
+                      {t("form.inputs.variants.expressDelivery")}
+                    </Option>
+                  </Select>
+                  <Input
+                    type="text"
+                    name="cardNumber"
+                    placeholder={t("form.inputs.cardNumber")}
+                    className="border-2 border-separator px-4 py-2 rounded-4xl"
+                  />
+                  <div className="flex flex-col gap-4">
+                    <Input
+                      type="text"
+                      name="expiryDate"
+                      placeholder={t("form.inputs.cardYear")}
+                      className="border-2 border-separator px-4 py-2 rounded-4xl"
+                    />
+                    <Input
+                      type="text"
+                      name="cvc"
+                      placeholder={t("form.inputs.cvc")}
+                      className="border-2 border-separator px-4 py-2 rounded-4xl"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </>

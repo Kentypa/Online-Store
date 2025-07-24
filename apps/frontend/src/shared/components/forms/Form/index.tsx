@@ -1,4 +1,4 @@
-import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/components/component-with-children";
 import { FormHTMLAttributes, FormEvent } from "react";
 
 export type FormProps = {

@@ -9,4 +9,5 @@ export enum PagesEndponts {
   RESET_PASSWORD = "/reset-password",
   USER_ORDERS = "/user/orders",
   USER_SETTINGS = "/user/settings",
+  USER_CART = "/user/cart",
 }

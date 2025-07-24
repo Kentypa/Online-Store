@@ -1,12 +1,12 @@
 import { useEditableFields } from "@hooks/use-editable-fields";
 import { useTranslation } from "react-i18next";
-import { EditableSettingsInputProps } from "../EditableSettingsInput";
 import { ChangeEvent } from "react";
 import { editableSettingsKeys } from "../settings/editableSettingsKeys";
+import { EditableSettingsInputProps } from "../components/ui/EditableSettingsInput";
 
 export const useEditableSettings = (
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void,
-  formState: Record<string, string>
+  formState: Record<string, string>,
 ): EditableSettingsInputProps[] => {
   const { t } = useTranslation("user-settings");
 
@@ -14,7 +14,7 @@ export const useEditableSettings = (
     editableSettingsKeys.map((obj) => {
       const labelKey = Object.keys(obj)[0];
       return [labelKey, false];
-    })
+    }),
   );
 
   const editableFields = useEditableFields(editableFieldsInitialState);

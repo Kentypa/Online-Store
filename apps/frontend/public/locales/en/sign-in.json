@@ -9,6 +9,7 @@
   },
   "link": {
     "message": "Still don't have an account?",
-    "signUp": "Sign up"
+    "signUp": "Sign up",
+    "recovery": "Wanna recover your account?"
   }
 }

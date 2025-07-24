@@ -1,17 +1,7 @@
 import api from "@config/axios";
-import { SortProductsBy } from "@enums/sortProductsBy";
-
-export type GetProductsDto = {
-  langCode?: string;
-  productsId?: number[];
-  offset?: number;
-  limit?: number;
-  regionId?: number;
-  sortBy?: SortProductsBy;
-  categoryId?: number;
-  withReviews?: boolean;
-  query?: string;
-};
+import { GetProductsDto } from "@shared-types/storeTypes/products/dto/get-products-dto";
+import { GetProductsWithTotal } from "@shared-types/storeTypes/products/dto/get-products-with-total.dto";
+import { apiErrorHandler } from "@utils/apiErrorHandler";
 
 export function productsService(url: string) {
   const getProducts = async ({
@@ -25,24 +15,21 @@ export function productsService(url: string) {
     withReviews,
     query,
   }: GetProductsDto) => {
-    return api
-      .get(url, {
+    return apiErrorHandler(() =>
+      api.get<GetProductsWithTotal>(url, {
         params: {
-          langCode: langCode,
+          langCode,
           ids: productsId,
-          offset: offset,
-          limit: limit,
-          regionId: regionId,
-          sortBy: sortBy,
-          categoryId: categoryId,
-          withReviews: withReviews,
-          query: query,
+          offset,
+          limit,
+          regionId,
+          sortBy,
+          categoryId,
+          withReviews,
+          query,
         },
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+      }),
+    );
   };
 
   return { getProducts };

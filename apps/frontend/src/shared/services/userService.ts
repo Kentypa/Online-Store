@@ -1,85 +1,60 @@
-import api from "@config/axios";
 import { ResetPasswordDto } from "@features/AuthPages/RecoveryPages/ResetPasswordPage/dto/reset-password-dto";
-import { DeleteAccountFormData } from "@shared-types/delete-account-form-data";
-import { formObject } from "@shared-types/form-object";
-import { UserData } from "@shared-types/user-data";
+import { UserData } from "@shared-types/auth/user-data";
+import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
+import { formObject } from "@shared-types/formData/form-object";
+import { apiErrorHandler } from "@utils/apiErrorHandler";
+import api from "@config/axios";
 
 export function userService(url: string) {
   const deleteAccount = async (data: DeleteAccountFormData) => {
-    return api.delete(`${url}/delete-account`, { data }).catch((error) => {
-      console.log(error.toJSON());
-      throw new Error(error.message);
-    });
+    return apiErrorHandler(() => api.delete(`${url}/delete-account`, { data }));
   };
 
   const getUserById = async (userId: number) => {
-    return api
-      .get(`${url}/get-by-id`, { params: { userId } })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<UserData>(`${url}/get-by-id`, { params: { userId } }),
+    );
   };
 
-  const getUsersByIds = async (usersIds: number[]) => {
-    return api
-      .get(`${url}/get-by-ids`, { params: { usersIds } })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+  const getUsersByIds = (usersIds: number[]) => {
+    return apiErrorHandler(() =>
+      api.get<UserData[]>(`${url}/get-by-ids`, { params: { usersIds } }),
+    );
   };
 
   const getUser = async () => {
-    return api.get(`${url}/me`).catch((error) => {
-      console.log(error.toJSON());
-      throw new Error(error.message);
-    });
+    return apiErrorHandler(() => api.get<UserData>(`${url}/me`));
   };
 
   const updateUserData = async (data: FormData): Promise<UserData> => {
-    const response = await api
-      .patch<UserData>(`${url}/update`, data)
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
-    return response.data;
+    return apiErrorHandler(() => api.patch<UserData>(`${url}/update`, data));
   };
 
   const recoveryUser = async (formState: formObject<string>) => {
-    return api.post(`${url}/recovery-account`, formState).catch((error) => {
-      console.log(error.toJSON());
-      throw new Error(error.message);
-    });
+    return apiErrorHandler(() =>
+      api.post(`${url}/recovery-account`, formState),
+    );
   };
 
   const requestResetPasswordUser = async (formState: formObject<string>) => {
-    return api
-      .post(`${url}/request-password-reset`, formState)
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.post(`${url}/request-password-reset`, formState),
+    );
   };
 
-  const resetPassword = async (resetPasswordDto: ResetPasswordDto) => {
-    const { newPassword, resetToken } = resetPasswordDto;
-    return api
-      .post(`${url}/reset-password`, { newPassword, resetToken })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+  const resetPassword = async ({
+    newPassword,
+    resetToken,
+  }: ResetPasswordDto) => {
+    return apiErrorHandler(() =>
+      api.post(`${url}/reset-password`, { newPassword, resetToken }),
+    );
   };
 
   const updateLanguageUser = async (languageCode: string) => {
-    return api
-      .patch(`${url}/update`, { languageCode: languageCode })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.patch(`${url}/update`, { languageCode: languageCode }),
+    );
   };
 
   return {

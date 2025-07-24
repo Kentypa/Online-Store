@@ -15,21 +15,17 @@ export const FormField: FC<FormFieldProps> = ({
   name,
   handleChange,
   type = "text",
-}) => (
-  <div className="flex flex-col gap-5">
-    <Label className="text-body-small">{label}</Label>
-    {type === "password" ? (
-      <InputPassword
+}) => {
+  const InputComponent = type === "password" ? InputPassword : Input;
+
+  return (
+    <div className="flex flex-col gap-5">
+      <Label className="text-body-small">{label}</Label>
+      <InputComponent
         name={name}
         handleChange={handleChange}
         className="w-full rounded-4xl p-3 border-separator border-2 max-h-12"
       />
-    ) : (
-      <Input
-        name={name}
-        handleChange={handleChange}
-        className="w-full rounded-4xl p-3 border-separator border-2 max-h-12"
-      />
-    )}
-  </div>
-);
+    </div>
+  );
+};

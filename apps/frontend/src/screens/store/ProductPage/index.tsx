@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router";
@@ -97,6 +97,17 @@ export const ProductPage: FC = () => {
     addingToCartIsSuccess,
     productName: productData ? productData.title : "",
   });
+
+  const { cart } = useAppSelector(userSelector);
+
+  const isAlreadyInCart = useMemo(
+    () =>
+      cart?.some(
+        (cartItem) =>
+          cartItem.product_id === productId || addingToCartIsSuccess,
+      ),
+    [cart, productId, addingToCartIsSuccess],
+  );
 
   return (
     <MainContentWrapper>
@@ -218,12 +229,14 @@ export const ProductPage: FC = () => {
                         handleClick={() => {
                           mutate({ productId: productData.product_id });
                         }}
+                        disabled={isAlreadyInCart}
                       >
                         {t("buttons.addToCart")}
                       </ButtonWithIcon>
                       <ButtonWithIcon
                         icon={<ShoppingCart className="size-6 fill-white" />}
                         className="p-3 rounded-4xl bg-primary text-white"
+                        disabled={true}
                       >
                         {t("buttons.buyNow")}
                       </ButtonWithIcon>

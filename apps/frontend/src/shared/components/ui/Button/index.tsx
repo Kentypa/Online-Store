@@ -1,4 +1,4 @@
-import { ComponentWithChildren } from "@shared-types/component-with-children";
+import { ComponentWithChildren } from "@shared-types/components/component-with-children";
 import { ButtonHTMLAttributes } from "react";
 
 export type ButtonProps = {

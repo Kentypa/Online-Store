@@ -77,28 +77,56 @@ export class User {
   @Column({ type: "varchar", length: 512, nullable: true })
   avatarUrl: string;
 
+  @ApiProperty({
+    description: "Relationships with language in database",
+    type: () => Language,
+  })
   @ManyToOne(() => Language, (language) => language.code)
   language: Language;
 
+  @ApiProperty({
+    description: "Relationships with country in database",
+    type: () => Country,
+  })
   @ManyToOne(() => Country, (country) => country.code)
   country: Country;
 
+  @ApiProperty({
+    description: "Relationships with region in database",
+    type: () => Region,
+  })
   @ManyToOne(() => Region, (region) => region.id)
   region: Region;
 
+  @ApiProperty({
+    description: "Relationships with city in database",
+    type: () => City,
+  })
   @ManyToOne(() => City, (city) => city.id)
   city: City;
 
+  @ApiProperty({
+    description: "Relationships with user refresh token in database",
+    type: () => UserRefreshToken,
+  })
   @OneToMany(() => UserRefreshToken, (token) => token.user, {
     cascade: true,
   })
   refreshTokens: UserRefreshToken[];
 
+  @ApiProperty({
+    description: "Relationships with password reset token column in database",
+    type: () => PasswordResetToken,
+  })
   @OneToMany(() => PasswordResetToken, (token) => token.user, {
     cascade: true,
   })
   passwordResetTokens: PasswordResetToken[];
 
+  @ApiProperty({
+    description: "Relationships with cart column in database",
+    type: () => CartItem,
+  })
   @OneToMany(() => CartItem, (cartItem) => cartItem.user, {
     cascade: true,
   })

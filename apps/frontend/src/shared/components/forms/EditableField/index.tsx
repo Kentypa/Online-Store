@@ -1,7 +1,7 @@
 import { Input } from "@forms/Input";
 import { Label } from "@forms/Label";
 import { Button } from "@ui/Button";
-import { FC } from "react";
+import { ChangeEvent, FC } from "react";
 import EditIcon from "@icons/edit.svg";
 
 type EditableFieldProps = {
@@ -9,8 +9,8 @@ type EditableFieldProps = {
   name: string;
   value?: string;
   isEditing?: boolean;
-  onToggle: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleToggle: () => void;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 export const EditableField: FC<EditableFieldProps> = ({
@@ -18,8 +18,8 @@ export const EditableField: FC<EditableFieldProps> = ({
   name,
   value,
   isEditing,
-  onToggle,
-  onChange,
+  handleToggle,
+  handleChange,
 }) => (
   <div className="flex justify-between items-center gap-2">
     {!isEditing ? (
@@ -30,11 +30,11 @@ export const EditableField: FC<EditableFieldProps> = ({
       <Input
         name={name}
         value={value || ""}
-        handleChange={onChange}
-        className="p-1 border rounded-xl border-subtle-light"
+        handleChange={handleChange}
+        className="p-1 border rounded-4xl border-separator"
       />
     )}
-    <Button type="button" handleClick={onToggle}>
+    <Button type="button" handleClick={handleToggle}>
       <img src={EditIcon} className="size-6" />
     </Button>
   </div>

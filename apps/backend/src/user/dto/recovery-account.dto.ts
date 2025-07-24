@@ -7,6 +7,7 @@ export class RecoveryUserDto {
     example: "test@gmail.com",
     description: "User email",
     type: "string",
+    maxLength: 320,
   })
   @MaxLength(320)
   email: string;
@@ -16,6 +17,7 @@ export class RecoveryUserDto {
     example: "qwerty1234",
     description: "User old password",
     type: "string",
+    maxLength: 512,
   })
   @MaxLength(512)
   password: string;

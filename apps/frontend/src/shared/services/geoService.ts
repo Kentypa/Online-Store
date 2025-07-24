@@ -1,35 +1,32 @@
 import api from "@config/axios";
+import { CityTranslation } from "@shared-types/geoTypes/city/city-translation";
+import { CountryTranslation } from "@shared-types/geoTypes/country/country-translation";
+import { RegionTranslation } from "@shared-types/geoTypes/region/region-translation";
+import { apiErrorHandler } from "@utils/apiErrorHandler";
 
 export function geoService(url: string, langCode: string) {
   const getCountries = async () => {
-    return api
-      .get(`${url}/countries`, { params: { langCode: langCode } })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<CountryTranslation[]>(`${url}/countries`, {
+        params: { langCode },
+      }),
+    );
   };
 
   const getRegions = async (countryCode: string) => {
-    return api
-      .get(`${url}/regions`, {
-        params: { countryCode: countryCode, langCode: langCode },
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<RegionTranslation[]>(`${url}/regions`, {
+        params: { countryCode, langCode },
+      }),
+    );
   };
 
   const getCities = async (regionId: number) => {
-    return api
-      .get(`${url}/cities`, {
-        params: { regionId: regionId, langCode: langCode },
-      })
-      .catch((error) => {
-        console.log(error.toJSON());
-        throw new Error(error.message);
-      });
+    return apiErrorHandler(() =>
+      api.get<CityTranslation[]>(`${url}/cities`, {
+        params: { regionId, langCode },
+      }),
+    );
   };
 
   return { getCountries, getRegions, getCities };

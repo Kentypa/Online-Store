@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { CategoryService } from "./category.service";
 import { CategoryTranslation } from "./entities/category-translation.entity";
 import { MasterCategoryNode } from "./types/master-category-node.type";
+import { GetCategoriesQuery } from "./dto/get-categories.query";
 
 @ApiTags("category")
 @Controller("category")
@@ -18,8 +19,7 @@ export class CategoryController {
   })
   @HttpCode(200)
   async getCategories(
-    @Query("langCode") langCode?: string,
-    @Query("parentId") parentId?: number,
+    @Query() { langCode, parentId }: GetCategoriesQuery,
   ): Promise<CategoryTranslation[]> {
     return this.categoryService.getCategories(langCode, parentId);
   }
@@ -33,8 +33,7 @@ export class CategoryController {
   })
   @HttpCode(200)
   async getCategoriesTree(
-    @Query("langCode") langCode?: string,
-    @Query("parentId") parentId?: number,
+    @Query() { langCode, parentId }: GetCategoriesQuery,
   ): Promise<MasterCategoryNode[]> {
     return this.categoryService.getCategoryTree(langCode, parentId);
   }

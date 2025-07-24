@@ -2,11 +2,7 @@ import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
 import { cartService } from "@services/cartService";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
-
-type UpdateQuantity = {
-  productId: number;
-  newQuantity: number;
-};
+import { UpdateQuantity } from "../types/update-quantity";
 
 export const useUpdateQuantity = () => {
   const queryClient = useQueryClient();
