@@ -2,7 +2,7 @@ import { supportedLanguages } from "@config/supportedLanguages";
 import { ExpandSelectionList } from "@ui/ExpandSelectionList";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useUpdateLanguage } from "@hooks/use-update-language";
+import { useUpdateLanguage } from "@hooks/core/use-update-language";
 import LanguageSwitchIcon from "@icons/language-change.svg?react";
 
 export const LanguageSwitchButton: FC = () => {

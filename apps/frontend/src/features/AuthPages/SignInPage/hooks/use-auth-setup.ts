@@ -1,4 +1,4 @@
-import { useUpdateLanguage } from "@hooks/use-update-language";
+import { useUpdateLanguage } from "@hooks/core/use-update-language";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 

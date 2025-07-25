@@ -1,4 +1,4 @@
-import { CategoryRoot } from "@shared-types/category-root";
+import { CategoryRoot } from "@shared-types/storeTypes/categories/category-root";
 
 type CategoryWithNames = {
   id: number;

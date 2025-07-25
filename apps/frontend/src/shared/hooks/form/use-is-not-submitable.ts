@@ -22,7 +22,7 @@ export const useIsNotSubmitable = ({
     const keys = Object.keys(initialState);
 
     const isUnchanged = keys.every(
-      (key) => normalize(initialState[key]) === normalize(state[key])
+      (key) => normalize(initialState[key]) === normalize(state[key]),
     );
     if (isUnchanged) return true;
 
@@ -31,7 +31,7 @@ export const useIsNotSubmitable = ({
 
     if (allRequired) {
       const hasEmptyRequiredField = keys.some(
-        (key) => normalize(state[key]) === ""
+        (key) => normalize(state[key]) === "",
       );
       if (hasEmptyRequiredField) return true;
     }

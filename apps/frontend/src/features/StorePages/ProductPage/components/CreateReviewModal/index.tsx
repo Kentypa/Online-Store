@@ -5,10 +5,9 @@ import { Modal } from "@modals/Modal";
 import { Label } from "@forms/Label";
 import { Form } from "@forms/Form";
 import { useTranslation } from "react-i18next";
-import { WriteReviewDto } from "@features/ProductPage/types/write-review-dto";
-import FilledStar from "@icons/star-filled.svg?react";
-import Star from "@icons/star.svg?react";
+import { WriteReviewDto } from "@features/StorePages/ProductPage/types/write-review-dto";
 import { useIsNotSubmitable } from "@hooks/form/use-is-not-submitable";
+import { Stars } from "@ui/Stars";
 
 type CreateReviewModalProps = {
   visible: boolean;
@@ -55,22 +54,13 @@ export const CreateReviewModal: FC<CreateReviewModalProps> = ({
         handleSubmit={handleSubmit}
       >
         <Label>{t("modals.createReview.labels.rating")}</Label>
-        <ul className="flex gap-1">
-          {[1, 2, 3, 4, 5].map((rating) => (
-            <li key={rating}>
-              <Button
-                handleClick={() => handleRatingChange(rating)}
-                type="button"
-              >
-                {currentRating && rating <= currentRating ? (
-                  <FilledStar className="fill-primary size-6" />
-                ) : (
-                  <Star className="fill-primary size-6" />
-                )}
-              </Button>
-            </li>
-          ))}
-        </ul>
+        <Stars
+          rating={currentRating ?? 0}
+          gap={4}
+          starSize={24}
+          handleChange={handleRatingChange}
+          className="fill-primary flex"
+        />
         <Label>{t("modals.createReview.labels.comment")}</Label>
         <Input
           handleChange={handleChange}

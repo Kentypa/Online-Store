@@ -1,4 +1,4 @@
-import { useCategories } from "@hooks/use-categories";
+import { useCategories } from "@hooks/store/use-categories";
 import { CatalogVariantsIcons } from "@ui/CatalogVariantsIcons";
 import { FC, useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";

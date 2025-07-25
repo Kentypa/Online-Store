@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { calculateAvarageRating } from "@features/ProductPage/utils/calculate-avarage-rating";
+import { calculateAvarageRating } from "@features/StorePages/ProductPage/utils/calculate-avarage-rating";
 import { productsService } from "@services/productsService";
 import { GetProductsDto } from "@shared-types/storeTypes/products/dto/get-products-dto";
 import { GetProductsWithTotal } from "@shared-types/storeTypes/products/dto/get-products-with-total.dto";

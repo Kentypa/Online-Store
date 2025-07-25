@@ -1,5 +1,5 @@
-import { useForm } from "@hooks/use-form";
-import { useUpdateUser } from "@hooks/use-update-user";
+import { useForm } from "@hooks/form/use-form";
+import { useUpdateUser } from "@hooks/user/use-update-user";
 import { ChangePasswordFormData } from "@shared-types/formData/change-password-form-data";
 import { useState, useMemo, useEffect, useCallback } from "react";
 

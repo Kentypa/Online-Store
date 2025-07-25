@@ -1,5 +1,5 @@
 import api from "@config/axios";
-import { WriteReviewDto } from "@features/ProductPage/types/write-review-dto";
+import { WriteReviewDto } from "@features/StorePages/ProductPage/types/write-review-dto";
 import { apiErrorHandler } from "@utils/apiErrorHandler";
 
 export function reviewsService(url: string) {

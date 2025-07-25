@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { usePushPopupArgs, usePushPopup } from "@hooks/use-push-popup";
+import { usePushPopupArgs, usePushPopup } from "./use-push-popup";
 
 type usePopupArgs = usePushPopupArgs & { isActive: boolean };
 

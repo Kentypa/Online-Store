@@ -1,8 +1,8 @@
 import { FC, useMemo } from "react";
-import { StarsMark } from "../StarsMark";
-import { useUsers } from "@hooks/use-users";
+import { useUsers } from "@hooks/user/use-users";
 import { UserReviewInfo } from "../UserReviewInfo";
 import { Review } from "@shared-types/storeTypes/products/review";
+import { Stars } from "@ui/Stars";
 
 type UsersReviewsProps = {
   reviews: Review[];
@@ -47,7 +47,12 @@ export const UsersReviews: FC<UsersReviewsProps> = ({
                 firstName={user.firstName}
               />
             )}
-            <StarsMark between={6} rating={review.rating ?? 0} starSize={12} />
+            <Stars
+              gap={6}
+              rating={review.rating ?? 0}
+              starSize={12}
+              className="fill-primary flex"
+            />
             <p className="text-body-small max-h-15">{review.comment}</p>
           </div>
         </li>

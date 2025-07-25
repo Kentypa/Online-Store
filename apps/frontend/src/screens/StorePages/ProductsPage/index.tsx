@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
-import { useProducts } from "@hooks/use-products";
+import { useProducts } from "@hooks/store/use-products";
 import { SortProductsBy } from "@enums/sortProductsBy";
 import { PaginationButtons } from "@business/PaginationButtons";
 import { useSearchParams } from "react-router";
-import { ProductsSortingList } from "@features/ProductsPage/components/ProductsSortingList";
+import { ProductsSortingList } from "@features/StorePages/ProductsPage/components/ProductsSortingList";
 import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
 import { ProductsList } from "@layout/ProductsList";
 import "swiper/css";

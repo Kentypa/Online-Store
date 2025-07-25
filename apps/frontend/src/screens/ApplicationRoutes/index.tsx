@@ -1,13 +1,13 @@
-import { useUserData } from "@hooks/use-user-data";
-import { useUserVerify } from "@hooks/use-user-validate";
+import { useUserData } from "@hooks/user/use-user-data";
+import { useUserVerify } from "@hooks/auth/use-user-validate";
 import { AccountRecoveryPage } from "@screens/AuthPages/RecoveryPages/AccountRecoveryPage";
 import { ForgetPasswordPage } from "@screens/AuthPages/RecoveryPages/ForgetPasswordPage";
 import { ResetPasswordPage } from "@screens/AuthPages/RecoveryPages/ResetPasswordPage";
 import { SignInPage } from "@screens/AuthPages/SignInPage";
 import { SignUpPage } from "@screens/AuthPages/SignUpPage";
 import { HomePage } from "@screens/HomePage";
-import { ProductPage } from "@screens/store/ProductPage";
-import { ProductsPage } from "@screens/store/ProductsPage";
+import { ProductPage } from "@screens/StorePages/ProductPage";
+import { ProductsPage } from "@screens/StorePages/ProductsPage";
 import { CartPage } from "@screens/UsersPages/CartPage";
 import { UserSettingsPage } from "@screens/UsersPages/SettingsPage";
 import { ProtectedRoute } from "@wrappers/ProtectedRoute";

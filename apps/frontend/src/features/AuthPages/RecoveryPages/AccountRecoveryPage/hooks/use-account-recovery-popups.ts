@@ -1,5 +1,5 @@
 import { PopupMessageType } from "@enums/popupMessageType";
-import { usePopup } from "@hooks/use-popup";
+import { usePopup } from "@hooks/ui/use-popup";
 
 type UseAccountRecoveryPopupsArgs = {
   userAccountRecoveryIsError: boolean;

@@ -10,25 +10,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { Thumbs } from "swiper/modules";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { ZoomImage } from "@features/ProductPage/components/ZoomImage";
+import { ZoomImage } from "@ui/ZoomImage";
 import { convertCurrency } from "@utils/currencyConverter";
 import { formatCurrency } from "@utils/formatCurrency";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
-import { StarsMark } from "@features/ProductPage/components/StarsMark";
-import { CreateReviewModal } from "@features/ProductPage/components/CreateReviewModal";
-import { useWriteReview } from "@features/ProductPage/hooks/use-write-review";
-import { useWriteReviewPopups } from "@features/ProductPage/hooks/use-write-review-popups";
+import { CreateReviewModal } from "@features/StorePages/ProductPage/components/CreateReviewModal";
+import { useWriteReview } from "@features/StorePages/ProductPage/hooks/use-write-review";
+import { useWriteReviewPopups } from "@features/StorePages/ProductPage/hooks/use-write-review-popups";
 import { userSelector } from "@stores/selectors/userSelector";
 import { useAddToCart } from "@hooks/store/use-add-to-cart";
-import { useAddToCartPopups } from "@features/ProductPage/hooks/use-add-to-cart-popups";
+import { useAddToCartPopups } from "@features/StorePages/ProductPage/hooks/use-add-to-cart-popups";
+import { UsersReviews } from "@features/StorePages/ProductPage/components/UsersReviews";
+import { useAppSelector } from "@hooks/core/redux";
+import { Stars } from "@ui/Stars";
 import Star from "@icons/star.svg?react";
 import ShoppingCart from "@icons/shopping-cart.svg?react";
 import ShoppingCartAdd from "@icons/shopping-cart-add.svg?react";
 import WriteReviewButton from "@icons/write-review.svg?react";
 import ViewReviews from "@icons/view-review.svg?react";
 import "swiper/css";
-import { UsersReviews } from "@features/ProductPage/components/UsersReviews";
-import { useAppSelector } from "@hooks/core/redux";
 
 export const ProductPage: FC = () => {
   const [searchParams] = useSearchParams();
@@ -200,10 +200,11 @@ export const ProductPage: FC = () => {
                           {productData.title}
                         </h2>
                       </div>
-                      <StarsMark
-                        between={12}
+                      <Stars
+                        gap={12}
                         rating={productAvarageRating ?? 0}
                         starSize={24}
+                        className="fill-primary flex"
                       />
                     </div>
                     <div className="flex size-full max-h-60">

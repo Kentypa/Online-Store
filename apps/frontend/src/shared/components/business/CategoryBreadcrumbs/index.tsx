@@ -1,6 +1,6 @@
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { useCategories } from "@hooks/use-categories";
-import { useParentCategories } from "@hooks/use-parent-categories";
+import { useCategories } from "@hooks/store/use-categories";
+import { useParentCategories } from "@hooks/store/use-parent-categories";
 import { Button } from "@ui/Button";
 import { getCategoriesByIds } from "@utils/getCategoriesWithName";
 import { FC } from "react";

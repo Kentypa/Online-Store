@@ -1,7 +1,7 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { useAppDispatch } from "@hooks/redux";
-import { useForm } from "@hooks/use-form";
+import { useAppDispatch } from "@hooks/core/redux";
+import { useForm } from "@hooks/form/use-form";
 import { userService } from "@services/userService";
 import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
 import { logout } from "@stores/user/userSlice";
