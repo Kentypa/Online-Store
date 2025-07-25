@@ -6,9 +6,9 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import { ZoomStyle } from "@features/ProductPage/types/zoom-style";
 import Refraction from "@icons/specials/refraction.svg?react";
 import styles from "./style.module.css";
+import { ZoomStyle } from "@features/StorePages/ProductPage/types/zoom-style";
 
 type ZoomImageProps = {
   src: string;

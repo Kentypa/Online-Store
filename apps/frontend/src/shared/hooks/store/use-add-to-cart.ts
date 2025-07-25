@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { cartService } from "@services/cartService";
+import { cartService } from "@services/cart-service";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export const useAddToCart = () => {

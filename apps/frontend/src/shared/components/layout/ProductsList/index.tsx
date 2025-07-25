@@ -1,10 +1,9 @@
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
-import { convertCurrency } from "@utils/currencyConverter";
-import { formatCurrency } from "@utils/formatCurrency";
 import { FC } from "react";
 import { ProductTranslation } from "@shared-types/storeTypes/products/product-translation";
 import { useTranslation } from "react-i18next";
 import { useNavigateToProduct } from "@hooks/navigation/use-navigate-to-product";
+import { calculateCurrency } from "@utils/calculate-currency";
 import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
 
 type ProductsListProps = {
@@ -12,7 +11,7 @@ type ProductsListProps = {
 };
 
 export const ProductsList: FC<ProductsListProps> = ({ productsData }) => {
-  const { t, i18n } = useTranslation("products");
+  const { t } = useTranslation("products");
 
   const { handleNavigateToProduct } = useNavigateToProduct();
 
@@ -31,16 +30,7 @@ export const ProductsList: FC<ProductsListProps> = ({ productsData }) => {
             />
             <div className="flex flex-col gap-3 mt-3">
               <h5 className="truncate">{productData.title}</h5>
-              <p>
-                {formatCurrency(
-                  convertCurrency(
-                    productData.product.price,
-                    i18n.language === "uk" ? "UAH" : "USD",
-                  ),
-                  i18n.language === "uk" ? "UAH" : "USD",
-                  i18n.language === "uk" ? "uk-UA" : "en-US",
-                )}
-              </p>
+              <p>{calculateCurrency(productData.product.price)}</p>
             </div>
             <ButtonWithIcon
               icon={<AddToCartIcon className="fill-white size-6" />}

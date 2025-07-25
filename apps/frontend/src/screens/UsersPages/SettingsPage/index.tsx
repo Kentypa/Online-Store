@@ -1,22 +1,10 @@
 import { useProfileNavigation } from "@hooks/user/use-profile-navigation";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { ProfileNavigation } from "@layout/ProfileNavigation";
-import { ChangeEvent, FC, useMemo } from "react";
-import { AvatarUploader } from "@features/UsersPages/SettingsPage/components/ui/AvatarUploader";
-import { SaveChangesButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/SaveChangesButton";
-import { ChangePasswordButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/ChangePasswordButton";
-import { DeleteAccountButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/DeleteAccountButton";
-import { LogoutButton } from "@features/UsersPages/SettingsPage/components/ui/buttons/LogoutButton";
+import { FC, useMemo } from "react";
 import { useForm } from "@hooks/form/use-form";
 import { useUserAvatarChange } from "@features/UsersPages/SettingsPage/hooks/use-user-avatar-change";
-import { EditableSettingsInput } from "@features/UsersPages/SettingsPage/components/ui/EditableSettingsInput";
 import { useTranslation } from "react-i18next";
-import { Form } from "@forms/Form";
-import { Option } from "@forms/Option";
-import { Select } from "@forms/Select";
-import { useCountries } from "@features/UsersPages/SettingsPage/hooks/useCountries";
-import { useRegions } from "@features/UsersPages/SettingsPage/hooks/useRegions";
-import { useCities } from "@features/UsersPages/SettingsPage/hooks/useCities";
 import { useUpdateUser } from "@hooks/user/use-update-user";
 import { useAppSelector } from "@hooks/core/redux";
 import { userSelector } from "@stores/selectors/userSelector";
@@ -29,6 +17,9 @@ import { ChangePasswordModal } from "@features/UsersPages/SettingsPage/component
 import { ProfileForm } from "@shared-types/formData/profile-form";
 import { useIsNotSubmitable } from "@hooks/form/use-is-not-submitable";
 import { useEditableFields } from "@hooks/form/use-editable-fields";
+import { UserSettingsForm } from "@features/UsersPages/SettingsPage/components/forms/UserSettingsForm";
+import { useFormHandlers } from "@features/UsersPages/SettingsPage/hooks/use-form-handlers";
+import { useLocationData } from "@features/UsersPages/SettingsPage/hooks/use-location-data";
 
 export const UserSettingsPage: FC = () => {
   const profileNavigation = useProfileNavigation();
@@ -42,6 +33,7 @@ export const UserSettingsPage: FC = () => {
     country,
     region,
   } = useAppSelector(userSelector);
+
   const initialState = useMemo(
     () => ({
       email,
@@ -69,8 +61,11 @@ export const UserSettingsPage: FC = () => {
     isSuccess: userUpdateIsSuccess,
     isError: userUpdateIsError,
   } = useUpdateUser(initialState);
-  const { formState, handleChange, handleChangeByValue, handleSubmit } =
-    useForm<ProfileForm>(initialState, handleUpdatedUser);
+
+  const { formState, handleChangeByValue, handleSubmit } = useForm<ProfileForm>(
+    initialState,
+    handleUpdatedUser,
+  );
 
   const {
     avatarPreview,
@@ -82,33 +77,13 @@ export const UserSettingsPage: FC = () => {
   const { t } = useTranslation("user-settings");
   const { editFields, toggleEdit } = useEditableFields({ email: false });
 
-  const { data: countriesData, isSuccess: isCountriesFetchedSuccess } =
-    useCountries();
-
-  const { data: regionsData, isSuccess: isRegionsFetchedSuccess } = useRegions(
-    isCountriesFetchedSuccess,
-    formState.countryCode ?? "",
-  );
-
-  const { data: citiesData } = useCities(
-    isRegionsFetchedSuccess,
+  const { cities, countries, regions } = useLocationData(
+    formState.countryCode,
     formState.regionId,
   );
 
-  const handleLocationChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    if (name === "countryCode") {
-      handleChangeByValue("countryCode", value);
-      handleChangeByValue("regionId", undefined);
-      handleChangeByValue("cityId", undefined);
-    } else if (name === "regionId") {
-      handleChangeByValue("regionId", Number(value));
-      handleChangeByValue("cityId", undefined);
-    } else if (name === "cityId") {
-      handleChangeByValue("cityId", Number(value));
-    }
-  };
+  const { handleInputChange, handleLocationChange } =
+    useFormHandlers(handleChangeByValue);
 
   const saveChangesIsNotSubmitable = useIsNotSubmitable({
     initialState,
@@ -160,124 +135,24 @@ export const UserSettingsPage: FC = () => {
       />
       <div className="flex justify-between max-w-444 max-h-192 size-full my-18">
         <ProfileNavigation {...profileNavigation} />
-        <Form
+        <UserSettingsForm
+          avatarPreview={avatarPreview}
+          editFields={editFields}
+          formState={formState}
+          handleAvatarChange={handleAvatarChange}
+          handleChange={handleInputChange}
+          handleLocationChange={handleLocationChange}
           handleSubmit={handleSubmit}
-          className="p-10 border-2 gap-46 border-separator rounded-4xl flex flex-col size-full max-w-339 max-h-192"
-        >
-          <div className="flex justify-between">
-            <div className="flex flex-col max-w-150 max-h-90 size-full gap-6">
-              <EditableSettingsInput
-                label={t("inputs.userEmail")}
-                name="email"
-                isEdited={editFields["email"]}
-                toggleEdit={() => toggleEdit("email")}
-                value={formState.email}
-                handleChange={handleChange}
-              />
-              <EditableSettingsInput
-                label={t("inputs.userFirstName")}
-                name="firstName"
-                isEdited={editFields["firstName"]}
-                toggleEdit={() => toggleEdit("firstName")}
-                value={formState.firstName}
-                handleChange={handleChange}
-              />
-              <EditableSettingsInput
-                label={t("inputs.userLastName")}
-                name="lastName"
-                isEdited={editFields["lastName"]}
-                toggleEdit={() => toggleEdit("lastName")}
-                value={formState.lastName}
-                handleChange={handleChange}
-              />
-              <EditableSettingsInput
-                label={t("inputs.userPhoneNumber")}
-                name="phoneNumber"
-                isEdited={editFields["phoneNumber"]}
-                toggleEdit={() => toggleEdit("phoneNumber")}
-                value={formState.phoneNumber}
-                handleChange={handleChange}
-              />
-
-              <Select
-                handleChange={handleLocationChange}
-                name="countryCode"
-                id="countryCode"
-                className="appearance-none"
-                value={formState.countryCode}
-              >
-                <Option value="">{t("sections.chooseCountry")}</Option>
-                {countriesData &&
-                  countriesData.map((country) => (
-                    <Option
-                      key={country.country_code}
-                      value={country.country_code}
-                    >
-                      {country.name}
-                    </Option>
-                  ))}
-              </Select>
-
-              {formState.countryCode && (
-                <Select
-                  handleChange={handleLocationChange}
-                  name="regionId"
-                  id="regionId"
-                  className="appearance-none"
-                  value={formState.regionId}
-                >
-                  <Option value="">{t("sections.chooseRegion")}</Option>
-                  {regionsData &&
-                    regionsData.map((region) => (
-                      <Option key={region.region_id} value={region.region_id}>
-                        {region.name}
-                      </Option>
-                    ))}
-                </Select>
-              )}
-
-              {formState.regionId && (
-                <Select
-                  handleChange={handleLocationChange}
-                  name="cityId"
-                  id="cityId"
-                  className="appearance-none"
-                  value={formState.cityId}
-                >
-                  <Option value="">{t("sections.chooseCity")}</Option>
-                  {citiesData &&
-                    citiesData.map((city) => (
-                      <Option key={city.city_id} value={city.city_id}>
-                        {city.name}
-                      </Option>
-                    ))}
-                </Select>
-              )}
-            </div>
-            <AvatarUploader
-              handleChange={handleAvatarChange}
-              avatarPreview={avatarPreview}
-            />
-          </div>
-          <div className="flex justify-between">
-            <SaveChangesButton
-              type="submit"
-              disabled={saveChangesIsNotSubmitable}
-            />
-
-            <div className="flex flex-col gap-6 max-w-62.5 w-full">
-              <ChangePasswordButton
-                type="button"
-                handleClick={toggleShowChangePasswordModal}
-              />
-              <LogoutButton handleClick={logoutMutate} />
-              <DeleteAccountButton
-                type="button"
-                handleClick={toggleShowDeleteAccountModal}
-              />
-            </div>
-          </div>
-        </Form>
+          logoutMutate={logoutMutate}
+          saveChangesIsNotSubmitable={saveChangesIsNotSubmitable}
+          t={t}
+          toggleEdit={toggleEdit}
+          toggleShowChangePasswordModal={toggleShowChangePasswordModal}
+          toggleShowDeleteAccountModal={toggleShowDeleteAccountModal}
+          citiesData={cities}
+          regionsData={regions}
+          countriesData={countries}
+        />
       </div>
     </MainContentWrapper>
   );

@@ -1,6 +1,6 @@
 import api from "@config/axios";
 import { WriteReviewDto } from "@features/StorePages/ProductPage/types/write-review-dto";
-import { apiErrorHandler } from "@utils/apiErrorHandler";
+import { apiErrorHandler } from "@utils/api-error-handler";
 
 export function reviewsService(url: string) {
   const writeReview = async (data: WriteReviewDto) => {

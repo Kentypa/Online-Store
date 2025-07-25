@@ -2,7 +2,7 @@ import { ResetPasswordDto } from "@features/AuthPages/RecoveryPages/ResetPasswor
 import { UserData } from "@shared-types/auth/user-data";
 import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
 import { formObject } from "@shared-types/formData/form-object";
-import { apiErrorHandler } from "@utils/apiErrorHandler";
+import { apiErrorHandler } from "@utils/api-error-handler";
 import api from "@config/axios";
 
 export function userService(url: string) {

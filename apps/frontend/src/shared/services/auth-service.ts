@@ -1,6 +1,6 @@
 import api from "@config/axios";
 import { formObject } from "@shared-types/formData/form-object";
-import { apiErrorHandler } from "@utils/apiErrorHandler";
+import { apiErrorHandler } from "@utils/api-error-handler";
 
 export function authService(url: string) {
   const signInUser = async (formState: formObject<string>) => {

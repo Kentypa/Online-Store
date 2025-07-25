@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { reviewsService } from "@services/reviewsService";
+import { reviewsService } from "@services/reviews-service";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useState, useMemo } from "react";
 import { WriteReviewDto } from "../types/write-review-dto";

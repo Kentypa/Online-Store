@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { authService } from "@services/authService";
+import { authService } from "@services/auth-service";
 import {
   changeIsAuthenticated,
   changeAuthLoading,

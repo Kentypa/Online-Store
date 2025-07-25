@@ -1,6 +1,6 @@
 import api from "@config/axios";
 import { AddToCartDto } from "@shared-types/storeTypes/cart/dto/add-to-cart-dto";
-import { apiErrorHandler } from "@utils/apiErrorHandler";
+import { apiErrorHandler } from "@utils/api-error-handler";
 
 export function cartService(url: string) {
   const addToCart = async ({ productId }: AddToCartDto) => {

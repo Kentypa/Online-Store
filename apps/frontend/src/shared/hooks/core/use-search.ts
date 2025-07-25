@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { productsService } from "@services/productsService";
+import { productsService } from "@services/products-service";
 import { GetProductsWithTotal } from "@shared-types/storeTypes/products/dto/get-products-with-total.dto";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";

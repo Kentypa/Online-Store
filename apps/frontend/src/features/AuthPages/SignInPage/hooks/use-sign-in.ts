@@ -1,9 +1,9 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { authService } from "@services/authService";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { SignInDto } from "../types/sign-in-dto";
+import { authService } from "@services/auth-service";
 
 export const useSignIn = () => {
   const { signInUser } = authService(ServiceNames.AUTH);

@@ -13,7 +13,7 @@
   "form": {
     "inputs": {
       "name": "Name",
-      "email": "email",
+      "email": "Email",
       "shippingAddress": "Shipping Address",
       "variants": {
         "standartDelivery": "Standart Delivery",
@@ -23,5 +23,8 @@
       "cardYear": "MM/YY",
       "cvc": "CVC"
     }
+  },
+  "messages": {
+    "emptyCart": "User cart is empty"
   }
 }

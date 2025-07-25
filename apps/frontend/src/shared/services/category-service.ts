@@ -1,6 +1,6 @@
 import api from "@config/axios";
 import { CategoryRoot } from "@shared-types/storeTypes/categories/category-root";
-import { apiErrorHandler } from "@utils/apiErrorHandler";
+import { apiErrorHandler } from "@utils/api-error-handler";
 
 export function categoryService(url: string, langCode: string) {
   const getCategories = async () => {

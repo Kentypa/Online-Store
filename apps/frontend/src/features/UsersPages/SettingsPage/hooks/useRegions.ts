@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { geoService } from "@services/geoService";
+import { geoService } from "@services/geo-service";
 import { RegionTranslation } from "@shared-types/geoTypes/region/region-translation";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";

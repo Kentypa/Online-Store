@@ -1,113 +1,61 @@
-import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { FC, useEffect } from "react";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useSearchParams } from "react-router";
-import { useProduct } from "@hooks/store/use-product";
+import { useNavigate } from "react-router";
 import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
-import { SliderNextButton } from "@ui/SliderNextButton";
-import { SliderPrevButton } from "@ui/SliderPrevButton";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from "swiper";
-import { Thumbs } from "swiper/modules";
 import { PagesEndponts } from "@enums/pagesEndpoints";
-import { ZoomImage } from "@ui/ZoomImage";
-import { convertCurrency } from "@utils/currencyConverter";
-import { formatCurrency } from "@utils/formatCurrency";
-import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { CreateReviewModal } from "@features/StorePages/ProductPage/components/CreateReviewModal";
-import { useWriteReview } from "@features/StorePages/ProductPage/hooks/use-write-review";
-import { useWriteReviewPopups } from "@features/StorePages/ProductPage/hooks/use-write-review-popups";
-import { userSelector } from "@stores/selectors/userSelector";
-import { useAddToCart } from "@hooks/store/use-add-to-cart";
-import { useAddToCartPopups } from "@features/StorePages/ProductPage/hooks/use-add-to-cart-popups";
 import { UsersReviews } from "@features/StorePages/ProductPage/components/UsersReviews";
-import { useAppSelector } from "@hooks/core/redux";
-import { Stars } from "@ui/Stars";
-import Star from "@icons/star.svg?react";
-import ShoppingCart from "@icons/shopping-cart.svg?react";
-import ShoppingCartAdd from "@icons/shopping-cart-add.svg?react";
-import WriteReviewButton from "@icons/write-review.svg?react";
 import ViewReviews from "@icons/view-review.svg?react";
-import "swiper/css";
+import { ButtonWithIcon } from "@ui/ButtonWithIcon";
+import { useProductPageQueryParams } from "@features/StorePages/ProductPage/hooks/use-product-page-query-params";
+import { useProductData } from "@features/StorePages/ProductPage/hooks/use-product-data";
+import { useProductReviews } from "@features/StorePages/ProductPage/hooks/use-product-reviews";
+import { useProductCart } from "@features/StorePages/ProductPage/hooks/use-product-cart";
+import { ProductImagesSlider } from "@features/StorePages/ProductPage/components/ProductImagesSlider";
+import { ProductInfo } from "@features/StorePages/ProductPage/components/ProductInfo";
+import { ReviewsSummary } from "@features/StorePages/ProductPage/components/ReviewsSummary";
+import { useProductImagesSlider } from "@features/StorePages/ProductPage/hooks/use-product-image-slider";
 
 export const ProductPage: FC = () => {
-  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
-  const swiperRef = useRef<SwiperType | null>(null);
-
-  const { t, i18n } = useTranslation("product");
-  const productId = Number(searchParams.get("productId"));
-  const [showAllReviews, setShowAllReviews] = useState(false);
-
-  const handleShowReviews = () => setShowAllReviews(true);
-
+  const { t } = useTranslation("product");
+  const { productId } = useProductPageQueryParams();
   const {
     productData,
     productImages,
     productAvarageRating,
     productReviewsCount,
-  } = useProduct({
-    langCode: i18n.language,
-    productsId: [productId],
-    withReviews: true,
-  });
+  } = useProductData(productId);
 
-  const handleSetNewCategory = (categoryId: string) => {
-    const newParams = new URLSearchParams({ categoryId });
-    navigate(`${PagesEndponts.PRODUCTS}?${newParams.toString()}`);
-  };
+  const { thumbsSwiper, setThumbsSwiper, swiperRef } = useProductImagesSlider();
 
   const {
+    showAllReviews,
+    setShowAllReviews,
     formState,
     handleChange,
     handleChangeByValue,
     handleSubmit,
     showWriteReviewModal,
     toggleShowWriteReviewModal,
+    isReviewed,
     closeReviewModal,
-    isError: userWriteReviewError,
-    isSuccess: userWriteReviewIsSuccess,
-  } = useWriteReview(productId);
+    userWriteReviewIsSuccess,
+  } = useProductReviews(productId, productData);
 
-  const { isAuthenticated, id } = useAppSelector(userSelector);
-
-  const userIsGuest = !isAuthenticated;
-  const userHasLeftReview =
-    productData?.product?.reviews?.some((review) => review.user_id === id) ??
-    false;
-
-  const isReviewed = userIsGuest || userHasLeftReview;
+  const { isAlreadyInCart, addToCart } = useProductCart(productId);
 
   useEffect(() => {
     if (userWriteReviewIsSuccess) closeReviewModal();
   }, [closeReviewModal, userWriteReviewIsSuccess]);
 
-  useWriteReviewPopups({ userWriteReviewError });
+  const handleSetNewCategory = (categoryId: string) => {
+    const newParams = new URLSearchParams({ categoryId });
+    navigate(`${PagesEndponts.PRODUCTS}?${newParams.toString()}`);
+  };
 
-  const {
-    mutate,
-    isSuccess: addingToCartIsSuccess,
-    isError: addingToCartError,
-  } = useAddToCart();
-
-  useAddToCartPopups({
-    addingToCartError,
-    addingToCartIsSuccess,
-    productName: productData ? productData.title : "",
-  });
-
-  const { cart } = useAppSelector(userSelector);
-
-  const isAlreadyInCart = useMemo(
-    () =>
-      cart?.some(
-        (cartItem) =>
-          cartItem.product_id === productId || addingToCartIsSuccess,
-      ),
-    [cart, productId, addingToCartIsSuccess],
-  );
+  const handleShowReviews = () => setShowAllReviews(true);
 
   return (
     <MainContentWrapper>
@@ -119,6 +67,7 @@ export const ProductPage: FC = () => {
         toggleModal={toggleShowWriteReviewModal}
         visible={showWriteReviewModal}
       />
+
       {productData && (
         <div className="flex flex-col py-6 px-18 size-full">
           <div className="flex w-full mb-6">
@@ -127,187 +76,40 @@ export const ProductPage: FC = () => {
               handleSetNewCategory={handleSetNewCategory}
             />
           </div>
+
           <div className="flex flex-col gap-11">
             <div className="flex justify-between gap-27">
-              <div className="flex flex-col items-center gap-9.5 p-10 rounded-4xl border-2 border-separator w-auto">
-                <div className="relative w-full h-125 overflow-hidden rounded-4xl max-w-189">
-                  {productImages && productImages?.length > 0 && (
-                    <>
-                      <SliderPrevButton
-                        swiperRef={swiperRef}
-                        className="absolute left-10 top-1/2 -translate-y-1/2 z-10"
-                      />
-                      <SliderNextButton
-                        swiperRef={swiperRef}
-                        className="absolute right-10 top-1/2 -translate-y-1/2 z-10"
-                      />
-                      <Swiper
-                        onSwiper={(swiper) => {
-                          swiperRef.current = swiper;
-                        }}
-                        modules={[Thumbs]}
-                        thumbs={{
-                          swiper:
-                            thumbsSwiper && thumbsSwiper?.el
-                              ? thumbsSwiper
-                              : null,
-                        }}
-                        slidesPerView={1}
-                        loop={true}
-                        className="size-full"
-                      >
-                        {productImages?.map((src, idx) => (
-                          <SwiperSlide key={idx}>
-                            <ZoomImage
-                              src={`http://localhost:3000/public${src}`}
-                            />
-                          </SwiperSlide>
-                        ))}
-                      </Swiper>
-                    </>
-                  )}
-                </div>
-                <div className="w-full max-w-189">
-                  {productImages && productImages?.length > 0 && (
-                    <Swiper
-                      modules={[Thumbs]}
-                      onSwiper={setThumbsSwiper}
-                      slidesPerView={4}
-                      spaceBetween={60}
-                      watchSlidesProgress
-                      centeredSlidesBounds={true}
-                      centeredSlides={true}
-                      slideToClickedSlide={true}
-                    >
-                      {productImages?.map((src, idx) => (
-                        <SwiperSlide key={idx} className="cursor-pointer">
-                          <img
-                            src={`http://localhost:3000/public${src}`}
-                            className="w-full size-25 rounded-4xl object-cover"
-                          />
-                        </SwiperSlide>
-                      ))}
-                    </Swiper>
-                  )}
-                </div>
-              </div>
-              <div className="flex flex-col p-14.5 rounded-4xl border-2 border-separator size-full">
-                <div className="flex flex-col gap-38.5">
-                  <div className="flex flex-col gap-12">
-                    <div>
-                      <div className="max-h-15 mb-6">
-                        <h2 className="text-display-smallest">
-                          {productData.title}
-                        </h2>
-                      </div>
-                      <Stars
-                        gap={12}
-                        rating={productAvarageRating ?? 0}
-                        starSize={24}
-                        className="fill-primary flex"
-                      />
-                    </div>
-                    <div className="flex size-full max-h-60">
-                      {productData.description}
-                    </div>
-                  </div>
-                  <div className="flex w-full justify-between items-center">
-                    <p className="text-display-small">
-                      {t("labels.price")}&nbsp;
-                      {formatCurrency(
-                        convertCurrency(
-                          productData.product.price,
-                          i18n.language === "uk" ? "UAH" : "USD",
-                        ),
-                        i18n.language === "uk" ? "UAH" : "USD",
-                        i18n.language === "uk" ? "uk-UA" : "en-US",
-                      )}
-                    </p>
-                    <div className="flex gap-9">
-                      <ButtonWithIcon
-                        icon={<ShoppingCartAdd className="size-6 fill-white" />}
-                        className="p-3 rounded-4xl bg-primary text-white"
-                        handleClick={() => {
-                          mutate({ productId: productData.product_id });
-                        }}
-                        disabled={isAlreadyInCart}
-                      >
-                        {t("buttons.addToCart")}
-                      </ButtonWithIcon>
-                      <ButtonWithIcon
-                        icon={<ShoppingCart className="size-6 fill-white" />}
-                        className="p-3 rounded-4xl bg-primary text-white"
-                        disabled={true}
-                      >
-                        {t("buttons.buyNow")}
-                      </ButtonWithIcon>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProductImagesSlider
+                images={productImages || []}
+                thumbsSwiper={thumbsSwiper}
+                swiperRef={swiperRef}
+                setThumbsSwiper={setThumbsSwiper}
+              />
+
+              <ProductInfo
+                productData={productData}
+                averageRating={productAvarageRating}
+                isAlreadyInCart={isAlreadyInCart}
+                addToCart={addToCart}
+              />
             </div>
+
             <div className="flex size-full p-10 border-2 border-separator rounded-4xl gap-27.5">
-              <div className="flex flex-col size-full max-w-87.5">
-                <h5 className="text-display-smallest mb-6">
-                  {t("reviews.labels.reviews")}
-                </h5>
-                <div className="flex flex-col mb-6">
-                  <div className="flex flex-row w-full mb-2">
-                    {t("reviews.info.averageUserReview")}:&nbsp;
-                    <p className="font-semibold">
-                      {productAvarageRating?.toFixed(2)}/5
-                    </p>
-                    <Star className="ml-1.5 size-6 fill-primary" />
-                  </div>
-                  <p className="text-body-small">
-                    {t("reviews.info.basedOn")}&nbsp;
-                    {productReviewsCount}&nbsp;
-                    {t("reviews.info.reviews")}
-                  </p>
-                </div>
-                <ul className="flex flex-col gap-2">
-                  {[5, 4, 3, 2, 1].map((rating) => {
-                    const count =
-                      productData.product.reviews?.filter(
-                        (review) => review.rating === rating,
-                      ).length || 0;
+              <ReviewsSummary
+                productData={productData}
+                averageRating={productAvarageRating}
+                reviewsCount={productReviewsCount}
+                isReviewed={isReviewed}
+                toggleShowWriteReviewModal={toggleShowWriteReviewModal}
+              />
 
-                    if (!productReviewsCount) return null;
-                    const percentage = (count / productReviewsCount) * 100;
-
-                    return (
-                      <li
-                        key={rating}
-                        className="flex flex-row gap-2.5 w-full items-center"
-                      >
-                        <p className="w-2.5">{rating}</p>
-                        <Star className="size-6 fill-primary" />
-                        <div className="relative w-45 h-2.5 rounded-lg bg-surface border border-separator">
-                          <span
-                            className="absolute h-2.5 rounded-lg bg-primary max-w-45"
-                            style={{ width: `${percentage}%` }}
-                          />
-                        </div>
-                        <span>({count})</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <ButtonWithIcon
-                  icon={<WriteReviewButton className="size-6 fill-white" />}
-                  className="text-white p-3 bg-primary rounded-4xl flex justify-center items-center mt-9"
-                  handleClick={toggleShowWriteReviewModal}
-                  disabled={isReviewed}
-                >
-                  {t("buttons.writeReview")}
-                </ButtonWithIcon>
-              </div>
               <ul className="flex flex-col gap-9 size-full">
                 <UsersReviews
                   productReviewsCount={productReviewsCount ?? 0}
                   reviews={productData.product.reviews}
                   showAllReviews={showAllReviews}
                 />
+
                 {!showAllReviews && (productReviewsCount ?? 0) > 3 && (
                   <ButtonWithIcon
                     icon={<ViewReviews className="size-6 fill-white" />}

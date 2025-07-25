@@ -3,9 +3,9 @@ import { PopupsOptions } from "@enums/popupsOptions";
 import { popupsListRemove } from "@stores/popupsList/popupsListSlice";
 import { FC, useState, useCallback, useEffect } from "react";
 import { Button } from "@ui/Button";
+import { useAppDispatch } from "@hooks/core/redux";
 import styles from "./styles.module.css";
 import Cross from "@icons/cross.svg?react";
-import { useAppDispatch } from "@hooks/core/redux";
 
 type PopupProps = {
   classname?: string;

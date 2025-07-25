@@ -1,5 +1,5 @@
 import { ServiceNames } from "@enums/serviceNames";
-import { productsService } from "@services/productsService";
+import { productsService } from "@services/products-service";
 import { GetProductsDto } from "@shared-types/storeTypes/products/dto/get-products-dto";
 import { GetProductsWithTotal } from "@shared-types/storeTypes/products/dto/get-products-with-total.dto";
 import { ProductTranslation } from "@shared-types/storeTypes/products/product-translation";

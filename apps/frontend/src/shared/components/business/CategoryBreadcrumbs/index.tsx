@@ -2,9 +2,9 @@ import { PagesEndponts } from "@enums/pagesEndpoints";
 import { useCategories } from "@hooks/store/use-categories";
 import { useParentCategories } from "@hooks/store/use-parent-categories";
 import { Button } from "@ui/Button";
-import { getCategoriesByIds } from "@utils/getCategoriesWithName";
 import { FC } from "react";
 import { useNavigate } from "react-router";
+import { getCategoriesByIds } from "@utils/get-categories-with-names";
 import HomeIcon from "@icons/home.svg?react";
 
 type CategoryBreadcrumbsProps = {

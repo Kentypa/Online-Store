@@ -1,6 +1,6 @@
 import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
-import { userService } from "@services/userService";
+import { userService } from "@services/user-service";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 
 export const useUpdateLanguage = () => {

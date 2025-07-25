@@ -2,7 +2,7 @@ import { Queries } from "@enums/queriesKeys";
 import { ServiceNames } from "@enums/serviceNames";
 import { useAppDispatch } from "@hooks/core/redux";
 import { useForm } from "@hooks/form/use-form";
-import { userService } from "@services/userService";
+import { userService } from "@services/user-service";
 import { DeleteAccountFormData } from "@shared-types/formData/delete-account-form-data";
 import { logout } from "@stores/user/userSlice";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
