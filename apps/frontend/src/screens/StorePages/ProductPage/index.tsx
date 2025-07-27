@@ -6,7 +6,6 @@ import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
 import { PagesEndponts } from "@enums/pagesEndpoints";
 import { CreateReviewModal } from "@features/StorePages/ProductPage/components/CreateReviewModal";
 import { UsersReviews } from "@features/StorePages/ProductPage/components/UsersReviews";
-import ViewReviews from "@icons/view-review.svg?react";
 import { ButtonWithIcon } from "@ui/ButtonWithIcon";
 import { useProductPageQueryParams } from "@features/StorePages/ProductPage/hooks/use-product-page-query-params";
 import { useProductData } from "@features/StorePages/ProductPage/hooks/use-product-data";
@@ -16,6 +15,7 @@ import { ProductImagesSlider } from "@features/StorePages/ProductPage/components
 import { ProductInfo } from "@features/StorePages/ProductPage/components/ProductInfo";
 import { ReviewsSummary } from "@features/StorePages/ProductPage/components/ReviewsSummary";
 import { useProductImagesSlider } from "@features/StorePages/ProductPage/hooks/use-product-image-slider";
+import ViewReviews from "@icons/view-review.svg?react";
 
 export const ProductPage: FC = () => {
   const navigate = useNavigate();

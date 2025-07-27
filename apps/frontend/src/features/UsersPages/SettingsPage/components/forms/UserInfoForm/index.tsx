@@ -1,6 +1,6 @@
 import { TFunction } from "i18next";
 import { ProfileForm } from "@shared-types/formData/profile-form";
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent, FC, FormEvent } from "react";
 import { EditableSettingsInput } from "../../ui/EditableSettingsInput";
 
 type UserInfoFormProps = {
@@ -9,6 +9,7 @@ type UserInfoFormProps = {
   toggleEdit: (field: string) => void;
   formState: ProfileForm;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleInput: (e: FormEvent<HTMLInputElement>) => void;
 };
 
 export const UserInfoForm: FC<UserInfoFormProps> = ({
@@ -17,6 +18,7 @@ export const UserInfoForm: FC<UserInfoFormProps> = ({
   toggleEdit,
   formState,
   handleChange,
+  handleInput,
 }) => (
   <div className="flex flex-col max-w-150 max-h-90 size-full gap-6">
     <EditableSettingsInput
@@ -50,6 +52,10 @@ export const UserInfoForm: FC<UserInfoFormProps> = ({
       toggleEdit={() => toggleEdit("phoneNumber")}
       value={formState.phoneNumber}
       handleChange={handleChange}
+      type="tel"
+      inputMode="tel"
+      pattern="[+0-9\s\-]{3,15}"
+      onInput={handleInput}
     />
   </div>
 );

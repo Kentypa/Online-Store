@@ -28,6 +28,7 @@ type UserSettingsFormProps = {
   handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
   toggleShowChangePasswordModal: () => void;
   toggleShowDeleteAccountModal: () => void;
+  handleInput: (e: FormEvent<HTMLInputElement>) => void;
 };
 
 export const UserSettingsForm: FC<UserSettingsFormProps> = ({
@@ -47,6 +48,7 @@ export const UserSettingsForm: FC<UserSettingsFormProps> = ({
   handleChange,
   toggleShowChangePasswordModal,
   toggleShowDeleteAccountModal,
+  handleInput,
 }) => {
   return (
     <Form
@@ -61,6 +63,7 @@ export const UserSettingsForm: FC<UserSettingsFormProps> = ({
             toggleEdit={toggleEdit}
             formState={formState}
             handleChange={handleChange}
+            handleInput={handleInput}
           />
 
           <LocationSelectors

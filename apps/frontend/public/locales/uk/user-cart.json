@@ -1,0 +1,30 @@
+{
+  "buttons": {
+    "remove": "Видалити",
+    "checkout": "Оформити замовлення"
+  },
+  "labels": {
+    "each": "За одиницю",
+    "quantity": "Кількість",
+    "total": "Разом",
+    "totalPrice": "Загальна сума",
+    "checkoutForm": "Форма оформлення замовлення"
+  },
+  "form": {
+    "inputs": {
+      "name": "Ім’я",
+      "email": "Електронна пошта",
+      "shippingAddress": "Адреса доставки",
+      "variants": {
+        "standartDelivery": "Стандартна доставка",
+        "expressDelivery": "Експрес доставка"
+      },
+      "cardNumber": "Номер картки",
+      "cardYear": "ММ/РР",
+      "cvc": "CVC"
+    }
+  },
+  "messages": {
+    "emptyCart": "Кошик користувача порожній"
+  }
+}

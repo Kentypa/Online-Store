@@ -1,7 +1,7 @@
 import { useProfileNavigation } from "@hooks/user/use-profile-navigation";
 import { MainContentWrapper } from "@layout/MainContentWrapper";
 import { ProfileNavigation } from "@layout/ProfileNavigation";
-import { FC, useMemo } from "react";
+import { FC, FormEvent, useMemo } from "react";
 import { useForm } from "@hooks/form/use-form";
 import { useUserAvatarChange } from "@features/UsersPages/SettingsPage/hooks/use-user-avatar-change";
 import { useTranslation } from "react-i18next";
@@ -53,7 +53,7 @@ export const UserSettingsPage: FC = () => {
       lastName,
       phoneNumber,
       region?.id,
-    ],
+    ]
   );
 
   const {
@@ -64,7 +64,7 @@ export const UserSettingsPage: FC = () => {
 
   const { formState, handleChangeByValue, handleSubmit } = useForm<ProfileForm>(
     initialState,
-    handleUpdatedUser,
+    handleUpdatedUser
   );
 
   const {
@@ -79,7 +79,7 @@ export const UserSettingsPage: FC = () => {
 
   const { cities, countries, regions } = useLocationData(
     formState.countryCode,
-    formState.regionId,
+    formState.regionId
   );
 
   const { handleInputChange, handleLocationChange } =
@@ -89,6 +89,11 @@ export const UserSettingsPage: FC = () => {
     initialState,
     state: formState,
   });
+
+  const handleInput = (e: FormEvent<HTMLInputElement>) => {
+    const input = e.currentTarget;
+    input.value = input.value.replace(/[^\d\s()+-]/g, "");
+  };
 
   const {
     formState: deleteAccountFormState,
@@ -152,6 +157,7 @@ export const UserSettingsPage: FC = () => {
           citiesData={cities}
           regionsData={regions}
           countriesData={countries}
+          handleInput={handleInput}
         />
       </div>
     </MainContentWrapper>

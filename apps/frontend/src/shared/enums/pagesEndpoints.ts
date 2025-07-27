@@ -10,4 +10,5 @@ export enum PagesEndponts {
   USER_ORDERS = "/user/orders",
   USER_SETTINGS = "/user/settings",
   USER_CART = "/user/cart",
+  CHECKOUT = "/user/checkout",
 }

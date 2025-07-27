@@ -1,6 +1,6 @@
-import { Input } from "@forms/Input";
+import { Input, InputProps } from "@forms/Input";
 import { Button } from "@ui/Button";
-import { ChangeEvent, FC } from "react";
+import { FC } from "react";
 import EditFieldPencil from "@icons/pencil.svg?react";
 
 export type EditableSettingsInputProps = {
@@ -9,8 +9,7 @@ export type EditableSettingsInputProps = {
   name: string;
   value?: string | number;
   toggleEdit: () => void;
-  handleChange?: (event: ChangeEvent<HTMLInputElement>) => void;
-};
+} & InputProps;
 
 export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
   label,
@@ -19,6 +18,7 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
   handleChange,
   name,
   value,
+  ...otherProps
 }) => {
   return (
     <div className="flex w-full justify-between">
@@ -28,6 +28,7 @@ export const EditableSettingsInput: FC<EditableSettingsInputProps> = ({
           handleChange={handleChange}
           name={name}
           value={value}
+          {...otherProps}
         />
       ) : (
         <p>{value ? label + value : label}</p>

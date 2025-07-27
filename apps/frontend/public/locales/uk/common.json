@@ -5,17 +5,17 @@
   },
   "footer": {
     "column_1": {
-      "section": "Магазин Кента",
+      "section": "Kent Store",
       "aboutUs": "Про нас",
       "contacts": "Контакти",
-      "allBrands": "Всі бренди",
+      "allBrands": "Усі бренди",
       "onMap": "На мапі"
     },
     "column_2": {
       "section": "Користувачам",
       "delivery": "Доставка",
       "shops": "Магазини",
-      "serviceAndWarranty": "Сервіс та гарантія",
+      "serviceAndWarranty": "Сервіс і гарантія",
       "serviceCenters": "Сервісні центри"
     },
     "column_3": {
@@ -33,17 +33,18 @@
       "discountedProducts": "Товари зі знижкою"
     },
     "column_5": {
-      "section": "Зворотний зв'язок",
+      "section": "Зворотній зв'язок",
       "supportService": "Служба підтримки",
       "phoneNumber": "0 800 216 800",
-      "callCenterHourse": "Графік кол-центру",
-      "weekdays": "Пн-Пт: 9:00–20:00",
-      "weekends": "Сб-Нд: 10:00–19:00"
+      "callCenterHourse": "Години роботи кол-центру",
+      "weekdays": "Пн-Пт: з 9:00 до 20:00",
+      "weekends": "Сб-Нд: з 10:00 до 19:00"
     }
   },
   "profileNavigation": {
     "section": "Профіль",
     "orders": "Замовлення",
-    "userSettings": "Налаштування"
+    "userSettings": "Налаштування",
+    "userCart": "Кошик"
   }
 }

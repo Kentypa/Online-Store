@@ -8,7 +8,7 @@ export function Cached<T>(
   key?: string | ((...args: unknown[]) => string),
 ) {
   return function (
-    target: any,
+    target: unknown,
     propertyKey: string,
     descriptor: TypedPropertyDescriptor<(...args: unknown[]) => Promise<T>>,
   ) {

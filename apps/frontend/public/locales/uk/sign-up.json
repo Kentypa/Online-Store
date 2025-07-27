@@ -1,1 +1,13 @@
-    
+{
+  "welcomeMessage": "Ласкаво просимо до Kent Store",
+  "signUpLabel": "Реєстрація",
+  "email": "Електронна пошта",
+  "password": "Пароль",
+  "button": {
+    "signUp": "Зареєструватись"
+  },
+  "link": {
+    "message": "Вже є акаунт?",
+    "signIn": "Увійти"
+  }
+}

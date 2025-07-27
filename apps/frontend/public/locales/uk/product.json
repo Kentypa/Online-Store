@@ -1,0 +1,33 @@
+{
+  "modals": {
+    "createReview": {
+      "labels": {
+        "rating": "Оберіть оцінку",
+        "comment": "Напишіть коментар"
+      },
+      "buttons": {
+        "confirm": "Підтвердити",
+        "cancel": "Скасувати"
+      }
+    }
+  },
+  "buttons": {
+    "addToCart": "Додати до кошика",
+    "buyNow": "Купити зараз",
+    "writeReview": "Написати відгук",
+    "viewAllReviews": "Переглянути всі відгуки"
+  },
+  "labels": {
+    "price": "Ціна"
+  },
+  "reviews": {
+    "labels": {
+      "reviews": "Відгуки"
+    },
+    "info": {
+      "averageUserReview": "Середня оцінка користувачів",
+      "basedOn": "На основі",
+      "reviews": "відгуків"
+    }
+  }
+}

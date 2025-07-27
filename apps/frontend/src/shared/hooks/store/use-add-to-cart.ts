@@ -11,7 +11,7 @@ export const useAddToCart = () => {
   const { ...options } = useMutation({
     mutationFn: addToCart,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [Queries.CART] });
+      queryClient.invalidateQueries({ queryKey: [Queries.USER] });
     },
   });
 

@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsNumber,
   IsOptional,
+  IsPhoneNumber,
   IsString,
   MaxLength,
 } from "class-validator";
@@ -45,7 +46,7 @@ export class UpdateUserDto {
   lastName?: string;
 
   @IsOptional()
-  @IsString()
+  @IsPhoneNumber()
   @ApiProperty({
     example: "+88005553535",
     description: "Phone number",

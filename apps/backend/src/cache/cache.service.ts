@@ -14,7 +14,7 @@ export class CacheService implements OnModuleInit {
 
   static getInstance(): CacheService {
     if (!CacheService.instance) {
-      throw new Error("CacheService is not initialized yet!");
+      throw new Error("CacheService is not initialized yet!");
     }
     return CacheService.instance;
   }

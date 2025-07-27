@@ -13,6 +13,7 @@ import { UserSettingsPage } from "@screens/UsersPages/SettingsPage";
 import { ProtectedRoute } from "@wrappers/ProtectedRoute";
 import { Routes, Route } from "react-router";
 import { FC } from "react";
+import { CheckoutPage } from "@screens/CheckoutPage";
 
 export const ApplicationRoutes: FC = () => {
   const { isSuccess: isAuthenticated } = useUserVerify();
@@ -32,6 +33,7 @@ export const ApplicationRoutes: FC = () => {
         <Route path="user">
           <Route path="settings" element={<UserSettingsPage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
         </Route>
       </Route>
     </Routes>

@@ -1,5 +1,5 @@
 import { Module, Global } from "@nestjs/common";
-import { CacheModule } from "@nestjs/cache-manager";
+import { CacheInterceptor, CacheModule } from "@nestjs/cache-manager";
 import { CacheService } from "./cache.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import KeyvRedis from "@keyv/redis";
@@ -19,7 +19,7 @@ import KeyvRedis from "@keyv/redis";
       }),
     }),
   ],
-  providers: [CacheService],
+  providers: [CacheService, CacheInterceptor],
   exports: [CacheService],
 })
 export class AppCacheModule {}
