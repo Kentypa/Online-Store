@@ -132,3 +132,7 @@ To open project use VSCode
 ### Maildev:
 
 - [Maildev](https://github.com/maildev/maildev) - Email client
+
+### Database Relationships diagram
+
+![Diagram](./docs/db-relationships.svg)
