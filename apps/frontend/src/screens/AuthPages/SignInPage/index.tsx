@@ -54,6 +54,7 @@ export const SignInPage: FC = () => {
             disabled={isSubmitDisabled}
             className="text-body-paragraph text-white p-3 w-full flex justify-center rounded-4xl bg-primary"
             icon={<SignInIcon className="fill-white size-6" />}
+            id={"sign-in"}
           >
             {t("button.signIn")}
           </ButtonWithIcon>

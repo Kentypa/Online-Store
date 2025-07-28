@@ -45,7 +45,7 @@ export const Popup: FC<PopupProps & { popupKey: string | number }> = ({
   if (!isVisible) return null;
 
   return (
-    <div
+    <li
       className={`bg-surface border border-subtle-light rounded-2xl shadow-lg w-[320px] p-2 flex flex-col gap-3 ${
         isClosing ? styles["animate-slide-down"] : styles["animate-slide-up"]
       } ${classname}`}
@@ -70,6 +70,6 @@ export const Popup: FC<PopupProps & { popupKey: string | number }> = ({
           style={{ animationDuration: `${duration}ms` }}
         />
       </div>
-    </div>
+    </li>
   );
 };

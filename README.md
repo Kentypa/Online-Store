@@ -113,6 +113,7 @@ To open project use VSCode
 - [TanStack Query (React Query) ](https://tanstack.com/query/latest) — Powerful data-fetching and caching solution.
 - [Axios](https://axios-http.com) — Promise-based HTTP client for APIs.
 - [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS framework for rapid UI development.
+- [Cypress](https://www.cypress.io/) — End to end and components testing
 - [i18n](https://tailwindcss.com/) — Internationalization
 - [Swiper](https://swiperjs.com/) — Carousel
 

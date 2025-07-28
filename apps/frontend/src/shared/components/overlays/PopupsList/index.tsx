@@ -8,7 +8,7 @@ export const PopupList: FC = () => {
   const popups = useAppSelector(popupsListSelector);
 
   return createPortal(
-    <div className="fixed bottom-6 right-6 flex flex-col items-end gap-4 z-[50]">
+    <ul className="fixed bottom-6 right-6 flex flex-col items-end gap-4 z-[50]">
       {popups.map((popup, index) => (
         <Popup
           key={popup.key ?? index}
@@ -18,7 +18,7 @@ export const PopupList: FC = () => {
           messageType={popup.messageType}
         />
       ))}
-    </div>,
-    document.body,
+    </ul>,
+    document.body
   );
 };
