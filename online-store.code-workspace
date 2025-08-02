@@ -15,9 +15,10 @@
   ],
   "extensions": {
     "recommendations": [
-      "PKief.material-icon-theme",
       "aaron-bond.better-comments",
+      "BeardedBear.beardedtheme",
       "bocovo.dbml-erd-visualizer",
+      "BracketPairColorDLW.bracket-pair-color-dlw",
       "bradlc.vscode-tailwindcss",
       "dbaeumer.vscode-eslint",
       "ecmel.vscode-html-css",
@@ -29,14 +30,15 @@
       "IBM.output-colorizer",
       "kamikillerto.vscode-colorize",
       "matt-meyers.vscode-dbml",
+      "miguelsolorio.fluent-icons",
       "ms-azuretools.vscode-containers",
       "ms-vscode.js-debug",
       "ms-vscode.js-debug-companion",
       "ms-vscode.vscode-js-profile-table",
+      "oderwat.indent-rainbow",
+      "PKief.material-icon-theme",
       "yzhang.markdown-all-in-one",
-      "Zignd.html-css-class-completion",
-      "dzhavat.bracket-pair-toggler",
-      "miguelsolorio.fluent-icons"
+      "Zignd.html-css-class-completion"
     ]
   },
   "settings": {
