@@ -7,7 +7,7 @@ import { ProductTranslation } from "@shared-types/storeTypes/products/product-tr
 
 export const useProductReviews = (
   productId: number,
-  productData?: ProductTranslation,
+  productData?: ProductTranslation
 ) => {
   const [showAllReviews, setShowAllReviews] = useState(false);
   const { isAuthenticated, id } = useAppSelector(userSelector);

@@ -31,7 +31,7 @@ export const useWriteReview = (productId: number) => {
 
   const initalState = useMemo<Omit<WriteReviewDto, "productId">>(
     () => ({ rating: null, comment: "" }),
-    [],
+    []
   );
 
   const { formState, handleChangeByValue, handleChange, handleSubmit } =

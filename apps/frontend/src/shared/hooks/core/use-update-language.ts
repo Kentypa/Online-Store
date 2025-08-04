@@ -12,6 +12,7 @@ export const useUpdateLanguage = () => {
     mutationFn: updateLanguageUser,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [Queries.USER] });
+      queryClient.invalidateQueries({ queryKey: [Queries.PRODUCT] });
     },
   });
 
