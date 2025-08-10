@@ -8,41 +8,41 @@ import api from "@config/axios";
 export function userService(url: string) {
   const deleteAccount = async (data: DeleteAccountFormData) => {
     return apiErrorHandler(() =>
-      api.delete(`${url}/api/delete-account`, { data })
+      api.delete(`/api/${url}/delete-account`, { data })
     );
   };
 
   const getUserById = async (userId: number) => {
     return apiErrorHandler(() =>
-      api.get<UserData>(`${url}/api/get-by-id`, { params: { userId } })
+      api.get<UserData>(`/api/${url}/get-by-id`, { params: { userId } })
     );
   };
 
   const getUsersByIds = (usersIds: number[]) => {
     return apiErrorHandler(() =>
-      api.get<UserData[]>(`${url}/api/get-by-ids`, { params: { usersIds } })
+      api.get<UserData[]>(`/api/${url}/get-by-ids`, { params: { usersIds } })
     );
   };
 
   const getUser = async () => {
-    return apiErrorHandler(() => api.get<UserData>(`${url}/api/me`));
+    return apiErrorHandler(() => api.get<UserData>(`/api/${url}/me`));
   };
 
   const updateUserData = async (data: FormData): Promise<UserData> => {
     return apiErrorHandler(() =>
-      api.patch<UserData>(`${url}/api/update`, data)
+      api.patch<UserData>(`/api/${url}/update`, data)
     );
   };
 
   const recoveryUser = async (formState: formObject<string>) => {
     return apiErrorHandler(() =>
-      api.post(`${url}/api/recovery-account`, formState)
+      api.post(`/api/${url}/recovery-account`, formState)
     );
   };
 
   const requestResetPasswordUser = async (formState: formObject<string>) => {
     return apiErrorHandler(() =>
-      api.post(`${url}/api/request-password-reset`, formState)
+      api.post(`/api/${url}/request-password-reset`, formState)
     );
   };
 
@@ -51,13 +51,13 @@ export function userService(url: string) {
     resetToken,
   }: ResetPasswordDto) => {
     return apiErrorHandler(() =>
-      api.post(`${url}/api/reset-password`, { newPassword, resetToken })
+      api.post(`/api/${url}/reset-password`, { newPassword, resetToken })
     );
   };
 
   const updateLanguageUser = async (languageCode: string) => {
     return apiErrorHandler(() =>
-      api.patch(`${url}/api/update`, { languageCode: languageCode })
+      api.patch(`/api/${url}/update`, { languageCode: languageCode })
     );
   };
 

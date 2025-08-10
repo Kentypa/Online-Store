@@ -5,7 +5,7 @@ import { apiErrorHandler } from "@utils/api-error-handler";
 export function categoryService(url: string, langCode: string) {
   const getCategories = async () => {
     return apiErrorHandler(() =>
-      api.get<CategoryRoot[]>(`${url}/api/categories-tree`, {
+      api.get<CategoryRoot[]>(`/api/${url}/categories-tree`, {
         params: { langCode },
       })
     );
@@ -13,7 +13,7 @@ export function categoryService(url: string, langCode: string) {
 
   const getParentCategories = async (categoryId: number) => {
     return apiErrorHandler(() =>
-      api.get<number[]>(`${url}/api/categories-parent-ids`, {
+      api.get<number[]>(`/api/${url}/categories-parent-ids`, {
         params: { categoryId },
       })
     );

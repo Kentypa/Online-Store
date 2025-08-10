@@ -5,7 +5,7 @@ import { apiErrorHandler } from "@utils/api-error-handler";
 export function reviewsService(url: string) {
   const writeReview = async (data: WriteReviewDto) => {
     return apiErrorHandler(() =>
-      api.post(`${url}/api/create-review`, { ...data })
+      api.post(`/api/${url}/create-review`, { ...data })
     );
   };
 
