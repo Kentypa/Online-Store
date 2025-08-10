@@ -84,6 +84,8 @@ async function bootstrap() {
       new ClassSerializerInterceptor(app.get(Reflector)),
     );
 
+    app.setGlobalPrefix("api");
+
     await app.init();
 
     logger.log("Seeders is enabled, running database seeding...");
