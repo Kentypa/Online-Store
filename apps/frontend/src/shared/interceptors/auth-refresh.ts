@@ -23,7 +23,7 @@ const retryValidate = async (
   for (let i = 0; i < countRetries; i++) {
     try {
       await axios.post(
-        `${BACKEND_URL}/api/${ServiceNames.AUTH}/refresh`,
+        `${BACKEND_URL}/${ServiceNames.AUTH}/refresh`,
         {},
         { withCredentials: true }
       );
@@ -76,7 +76,7 @@ api.interceptors.response.use(
     if (
       error.response?.status !== 401 ||
       originalRequest._retry ||
-      originalRequest.url?.includes(`/api/${ServiceNames.AUTH}/refresh`) ||
+      originalRequest.url?.includes(`${ServiceNames.AUTH}/refresh`) ||
       isRefreshing
     ) {
       return Promise.reject(error);

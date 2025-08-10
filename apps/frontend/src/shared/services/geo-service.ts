@@ -7,7 +7,7 @@ import { apiErrorHandler } from "@utils/api-error-handler";
 export function geoService(url: string, langCode: string) {
   const getCountries = async () => {
     return apiErrorHandler(() =>
-      api.get<CountryTranslation[]>(`/api/${url}/countries`, {
+      api.get<CountryTranslation[]>(`${url}/countries`, {
         params: { langCode },
       })
     );
@@ -15,7 +15,7 @@ export function geoService(url: string, langCode: string) {
 
   const getRegions = async (countryCode: string) => {
     return apiErrorHandler(() =>
-      api.get<RegionTranslation[]>(`/api/${url}/regions`, {
+      api.get<RegionTranslation[]>(`${url}/regions`, {
         params: { countryCode, langCode },
       })
     );
@@ -23,7 +23,7 @@ export function geoService(url: string, langCode: string) {
 
   const getCities = async (regionId: number) => {
     return apiErrorHandler(() =>
-      api.get<CityTranslation[]>(`/api/${url}/cities`, {
+      api.get<CityTranslation[]>(`${url}/cities`, {
         params: { regionId, langCode },
       })
     );
