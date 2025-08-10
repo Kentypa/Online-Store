@@ -1,3 +1,4 @@
+import { BACKEND_URL } from "@config/config";
 import { ProductTranslation } from "@shared-types/storeTypes/products/product-translation";
 import { Button } from "@ui/Button";
 import { calculateCurrency } from "@utils/calculate-currency";
@@ -24,7 +25,7 @@ export const CartItem: FC<CartItemProps> = ({
   return (
     <li className="max-h-37 flex flex-row size-full p-6 border-2 border-separator rounded-4xl">
       <img
-        src={`http://localhost:3000/public/${product.product.main_image_url}`}
+        src={`${BACKEND_URL}/public/${product.product.main_image_url}`}
         className="size-25 object-cover rounded-4xl"
         alt={product.title}
       />
@@ -59,7 +60,7 @@ export const CartItem: FC<CartItemProps> = ({
                 <option key={qty} value={qty}>
                   {qty}
                 </option>
-              ),
+              )
             )}
           </select>
         </div>
@@ -68,7 +69,7 @@ export const CartItem: FC<CartItemProps> = ({
           <h4>{t("labels.total")}</h4>
           <p className="font-semibold">
             {calculateCurrency(
-              calculateTotal(product.product_id, product.product.price),
+              calculateTotal(product.product_id, product.product.price)
             )}
           </p>
         </div>

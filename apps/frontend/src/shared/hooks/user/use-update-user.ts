@@ -6,6 +6,7 @@ import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { useAppDispatch } from "@hooks/core/redux";
 import { ProfileForm } from "@shared-types/formData/profile-form";
 import { UserData } from "@shared-types/auth/user-data";
+import { BACKEND_URL } from "@config/config";
 
 export const useUpdateUser = ({
   cityId,
@@ -30,9 +31,9 @@ export const useUpdateUser = ({
         changeByData({
           ...updatedUser,
           avatarUrl: updatedUser.avatarUrl
-            ? `http://localhost:3000/${updatedUser.avatarUrl}`
+            ? `${BACKEND_URL}/${updatedUser.avatarUrl}`
             : "",
-        }),
+        })
       );
       queryClient.refetchQueries({ queryKey: [Queries.USER] });
     },

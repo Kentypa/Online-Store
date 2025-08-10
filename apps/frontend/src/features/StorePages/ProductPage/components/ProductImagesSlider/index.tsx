@@ -5,6 +5,7 @@ import { Swiper as SwiperType } from "swiper";
 import { SliderNextButton } from "@ui/SliderNextButton";
 import { SliderPrevButton } from "@ui/SliderPrevButton";
 import { RefObject } from "react";
+import { BACKEND_URL } from "@config/config";
 
 type ProductImagesSliderProps = {
   images: string[];
@@ -45,7 +46,7 @@ export const ProductImagesSlider = ({
           >
             {images?.map((src, idx) => (
               <SwiperSlide key={idx}>
-                <ZoomImage src={`http://localhost:3000/public${src}`} />
+                <ZoomImage src={`${BACKEND_URL}/public${src}`} />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -67,7 +68,7 @@ export const ProductImagesSlider = ({
           {images?.map((src, idx) => (
             <SwiperSlide key={idx} className="cursor-pointer">
               <img
-                src={`http://localhost:3000/public${src}`}
+                src={`${BACKEND_URL}/public${src}`}
                 className="w-full size-25 rounded-4xl object-cover"
                 alt={`Thumbnail ${idx + 1}`}
               />

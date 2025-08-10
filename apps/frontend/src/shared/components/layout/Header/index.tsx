@@ -15,6 +15,7 @@ import StoreLogo from "@icons/logo-website.svg?react";
 import CatalogIcon from "@icons/catalog.svg?react";
 import UserIcon from "@icons/user.svg?react";
 import ShopCartIcon from "@icons/shopping-cart.svg?react";
+import { BACKEND_URL } from "@config/config";
 
 type SearchProps = {
   query: string;
@@ -49,7 +50,7 @@ export const Header: FC = () => {
                   type="button"
                 >
                   <img
-                    src={`http://localhost:3000/public/${product.product.main_image_url}`}
+                    src={`${BACKEND_URL}/public/${product.product.main_image_url}`}
                     className="object-cover size-6 rounded-full"
                   />
                   {product.title}

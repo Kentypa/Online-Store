@@ -59,8 +59,11 @@ async function bootstrap() {
       prefix: "/public/",
     });
 
+    const feUrl = configService.get<string>("project.frontend.url");
+    const localUrl = `http://localhost:${configService.get<number>("project.frontend.port")}`;
+
     app.enableCors({
-      origin: `http://localhost:${configService.get("project.frontend.port") as number}`,
+      origin: `${feUrl ?? localUrl}`,
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
       credentials: true,
     });

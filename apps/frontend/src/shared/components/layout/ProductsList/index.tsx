@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigateToProduct } from "@hooks/navigation/use-navigate-to-product";
 import { calculateCurrency } from "@utils/calculate-currency";
 import AddToCartIcon from "@icons/shopping-cart-add.svg?react";
+import { BACKEND_URL } from "@config/config";
 
 type ProductsListProps = {
   productsData?: ProductTranslation[];
@@ -25,7 +26,7 @@ export const ProductsList: FC<ProductsListProps> = ({ productsData }) => {
           >
             <img
               className="w-[240px] h-[135px] rounded-2xl"
-              src={`http://localhost:3000/public${productData.product.main_image_url}`}
+              src={`${BACKEND_URL}/public${productData.product.main_image_url}`}
               alt={productData.title}
             />
             <div className="flex flex-col gap-3 mt-3">

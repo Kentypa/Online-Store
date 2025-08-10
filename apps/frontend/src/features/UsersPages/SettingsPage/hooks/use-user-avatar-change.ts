@@ -2,23 +2,24 @@ import { useState, useEffect, ChangeEvent } from "react";
 import { ImageMimeTypes } from "@enums/imageMimeTypes";
 import { isValidMimeType } from "../utils/isValidMimeType";
 import { ProfileForm } from "@shared-types/formData/profile-form";
+import { BACKEND_URL } from "@config/config";
 
 const isAbsoluteUrl = (url: string) => /^http?:\/\//.test(url);
 
 const getFullUrl = (url?: string) => {
   if (!url) return "";
-  return isAbsoluteUrl(url) ? url : `http://localhost:3000/${url}`;
+  return isAbsoluteUrl(url) ? url : `${BACKEND_URL}/${url}`;
 };
 
 export const useUserAvatarChange = (
   handleChangeByValue: (
     name: keyof ProfileForm,
-    value: ProfileForm[keyof ProfileForm],
+    value: ProfileForm[keyof ProfileForm]
   ) => void,
-  avatarUrl?: string,
+  avatarUrl?: string
 ) => {
   const [avatarPreview, setAvatarPreview] = useState<string>(
-    getFullUrl(avatarUrl),
+    getFullUrl(avatarUrl)
   );
   const [isError, setIsError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);

@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserData } from "@shared-types/auth/user-data";
 import { initialState } from "./initialState";
+import { BACKEND_URL } from "@config/config";
 
-const formatAvatarUrl = (url?: string) =>
-  url ? `http://localhost:3000/${url}` : "";
+const formatAvatarUrl = (url?: string) => (url ? `${BACKEND_URL}/${url}` : "");
 
 export const userSlice = createSlice({
   name: "user",
