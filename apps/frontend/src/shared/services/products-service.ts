@@ -16,7 +16,7 @@ export function productsService(url: string) {
     query,
   }: GetProductsDto) => {
     return apiErrorHandler(() =>
-      api.get<GetProductsWithTotal>(url, {
+      api.get<GetProductsWithTotal>(`/api/${url}`, {
         params: {
           langCode,
           ids: productsId,
@@ -28,7 +28,7 @@ export function productsService(url: string) {
           withReviews,
           query,
         },
-      }),
+      })
     );
   };
 

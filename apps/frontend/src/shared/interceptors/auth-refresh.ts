@@ -16,16 +16,16 @@ const retryValidate = async (
   countRetries: number,
   delayTime: number,
   isSuccess?: () => void,
-  isError?: () => void,
+  isError?: () => void
 ): Promise<TokenValidatingStatus> => {
   let validationStatus = TokenValidatingStatus.IN_PROCESS;
 
   for (let i = 0; i < countRetries; i++) {
     try {
       await axios.post(
-        `${BACKEND_URL}/${ServiceNames.AUTH}/refresh`,
+        `${BACKEND_URL}/api/${ServiceNames.AUTH}/refresh`,
         {},
-        { withCredentials: true },
+        { withCredentials: true }
       );
       validationStatus = TokenValidatingStatus.SUCCESS;
       break;
@@ -76,7 +76,7 @@ api.interceptors.response.use(
     if (
       error.response?.status !== 401 ||
       originalRequest._retry ||
-      originalRequest.url?.includes(`${ServiceNames.AUTH}/refresh`) ||
+      originalRequest.url?.includes(`/api/${ServiceNames.AUTH}/refresh`) ||
       isRefreshing
     ) {
       return Promise.reject(error);
@@ -92,7 +92,7 @@ api.interceptors.response.use(
         1,
         1000,
         setSuccessRefresh,
-        setFailureRefresh,
+        setFailureRefresh
       );
 
       if (validationStatus === TokenValidatingStatus.SUCCESS) {
@@ -106,5 +106,5 @@ api.interceptors.response.use(
     } finally {
       isRefreshing = false;
     }
-  },
+  }
 );
