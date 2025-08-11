@@ -10,12 +10,12 @@ export const useUserAvatarChange = (
   ) => void,
   avatarUrl?: string
 ) => {
-  const [avatarPreview, setAvatarPreview] = useState<string>((avatarUrl = ""));
+  const [avatarPreview, setAvatarPreview] = useState<string>(avatarUrl ?? "");
   const [isError, setIsError] = useState(false);
   const [errorCount, setErrorCount] = useState(0);
 
   useEffect(() => {
-    setAvatarPreview(avatarUrl);
+    setAvatarPreview(avatarUrl ?? "");
   }, [avatarUrl]);
 
   const handleAvatarChange = (e: ChangeEvent<HTMLInputElement>) => {
