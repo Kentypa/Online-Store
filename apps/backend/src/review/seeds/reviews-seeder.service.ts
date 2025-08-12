@@ -102,8 +102,8 @@ export class ReviewsSeederService {
 
       for (const user of reviewers) {
         reviews.push({
-          product_id: product.id,
-          user_id: user.id,
+          productId: product.id,
+          userId: user.id,
           rating: fakerEN.number.int({ min: 1, max: 5 }),
           comment: fakerEN.lorem.sentences(
             fakerEN.number.int({ min: 1, max: 3 }),

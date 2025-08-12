@@ -21,7 +21,7 @@ export const useProductCart = (productId: number) => {
   const isAlreadyInCart = useMemo(
     () =>
       cart?.some(
-        (cartItem) => cartItem.product_id === productId || addingToCartIsSuccess
+        (cartItem) => cartItem.productId === productId || addingToCartIsSuccess
       ),
     [cart, productId, addingToCartIsSuccess]
   );

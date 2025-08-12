@@ -36,7 +36,7 @@ export class ProductStats {
     type: "number",
   })
   @Column({ name: "product_id" })
-  product_id: number;
+  productId: number;
 
   @ApiProperty({
     description: "Relationships in database with region column",
@@ -52,28 +52,28 @@ export class ProductStats {
     type: "number",
   })
   @Column({ name: "region_id" })
-  region_id: number;
+  regionId: number;
 
   @ApiProperty({
     example: 13,
     description: "Product total solds",
     type: "number",
   })
-  @Column({ type: "integer", default: 0 })
-  total_sold: number;
+  @Column({ type: "integer", default: 0, name: "total_sold" })
+  totalSold: number;
 
   @ApiProperty({
     example: "ALL_WEEK",
     description: "Period type code",
     type: "string",
   })
-  @Column({ type: "varchar", length: 20 })
-  period_type_code: string;
+  @Column({ type: "varchar", length: 20, name: "period_type_code" })
+  periodTypeCode: string;
 
   @ApiProperty({
     description: "Period date",
     type: () => Date,
   })
-  @Column({ type: "date" })
-  period_date: Date;
+  @Column({ type: "date", name: "period_date" })
+  periodDate: Date;
 }

@@ -37,11 +37,11 @@ export class ProductsService {
 
     if (query) {
       qb.addSelect(
-        `ts_rank(translation.search_vector, plainto_tsquery('simple', :query))`,
+        `ts_rank(translation.searchVector, plainto_tsquery('simple', :query))`,
         "rank",
       )
         .where(
-          "translation.search_vector @@ plainto_tsquery('simple', :query)",
+          "translation.searchVector @@ plainto_tsquery('simple', :query)",
           { query },
         )
         .orderBy("rank", "DESC");
@@ -50,10 +50,7 @@ export class ProductsService {
     if (sortBy) {
       switch (sortBy) {
         case SortProductsBy.TOTAL_SOLD_DESC:
-          qb.orderBy("stats.total_sold", "DESC").addOrderBy(
-            "product.id",
-            "ASC",
-          );
+          qb.orderBy("stats.totalSold", "DESC").addOrderBy("product.id", "ASC");
           break;
         case SortProductsBy.PRICE_ASC:
           qb.orderBy("product.price", "ASC");
@@ -82,13 +79,13 @@ export class ProductsService {
         categoryId,
       );
 
-      qb.andWhere("product.category_id IN (:...categoryIds)", {
+      qb.andWhere("product.categoryId IN (:...categoryIds)", {
         categoryIds,
       });
     }
 
     if (regionId) {
-      qb.andWhere("stats.region_id = :regionId", { regionId });
+      qb.andWhere("stats.regionId = :regionId", { regionId });
     }
 
     qb.skip(offset ?? 0);

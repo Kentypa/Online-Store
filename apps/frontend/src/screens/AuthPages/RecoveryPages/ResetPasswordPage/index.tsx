@@ -19,7 +19,7 @@ export const ResetPasswordPage: FC = () => {
   const initialState = useMemo(() => ({ newPassword: "" }), []);
   const { handleChange, handleSubmit, isSubmitDisabled } = useRecoveryForm(
     initialState,
-    ({ newPassword }) => mutate({ resetToken: token, newPassword }),
+    ({ newPassword }) => mutate({ resetToken: token, newPassword })
   );
 
   useNavigateOnSuccess(isSuccess, PagesEndponts.SIGN_IN);

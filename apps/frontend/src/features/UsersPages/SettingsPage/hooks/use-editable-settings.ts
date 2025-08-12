@@ -6,7 +6,7 @@ import { useEditableFields } from "@hooks/form/use-editable-fields";
 
 export const useEditableSettings = (
   handleChange: (event: ChangeEvent<HTMLInputElement>) => void,
-  formState: Record<string, string>,
+  formState: Record<string, string>
 ): EditableSettingsInputProps[] => {
   const { t } = useTranslation("user-settings");
 
@@ -14,7 +14,7 @@ export const useEditableSettings = (
     editableSettingsKeys.map((obj) => {
       const labelKey = Object.keys(obj)[0];
       return [labelKey, false];
-    }),
+    })
   );
 
   const editableFields = useEditableFields(editableFieldsInitialState);

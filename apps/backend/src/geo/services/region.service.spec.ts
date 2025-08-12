@@ -16,7 +16,7 @@ jest.mock("../../shared/decorators/cached.decorator", () => ({
 const createMockRegion = (id: number, regionCode: string): Region => {
   const region = new Region();
   region.id = id;
-  region.country_code = regionCode;
+  region.countryCode = regionCode;
   return region;
 };
 
@@ -26,7 +26,7 @@ const createMockRegionTranslation = (
   region: Region,
 ): RegionTranslation => {
   const translation = new RegionTranslation();
-  translation.lang_code = langCode;
+  translation.langCode = langCode;
   translation.name = name;
   translation.region = region;
   return translation;

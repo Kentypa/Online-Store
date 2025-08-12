@@ -1,5 +1,5 @@
 import { FC, useRef } from "react";
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";

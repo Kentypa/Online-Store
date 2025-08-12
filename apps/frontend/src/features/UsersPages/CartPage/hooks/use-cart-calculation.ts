@@ -2,7 +2,7 @@ import { ProductTranslation } from "@shared-types/storeTypes/products/product-tr
 
 export const useCartCalculations = (
   productsData?: ProductTranslation[],
-  quantities?: Record<number, number>,
+  quantities?: Record<number, number>
 ) => {
   const calculateProductTotal = (productId: number, price: number) => {
     const quantity = quantities?.[productId] ?? 1;
@@ -12,7 +12,7 @@ export const useCartCalculations = (
   const totalCartPrice =
     productsData?.reduce((acc, product) => {
       const price = product.product.price;
-      const quantity = quantities?.[product.product_id] ?? 1;
+      const quantity = quantities?.[product.productId] ?? 1;
       return acc + price * quantity;
     }, 0) ?? 0;
 

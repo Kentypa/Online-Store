@@ -11,11 +11,11 @@ import { useSearch } from "@hooks/core/use-search";
 import { useForm } from "@hooks/form/use-form";
 import { useNavigateToProducts } from "@hooks/navigation/use-navigate-to-products";
 import { useNavigateToProduct } from "@hooks/navigation/use-navigate-to-product";
+import { BACKEND_URL } from "@config/config";
 import StoreLogo from "@icons/logo-website.svg?react";
 import CatalogIcon from "@icons/catalog.svg?react";
 import UserIcon from "@icons/user.svg?react";
 import ShopCartIcon from "@icons/shopping-cart.svg?react";
-import { BACKEND_URL } from "@config/config";
 
 type SearchProps = {
   query: string;
@@ -41,16 +41,14 @@ export const Header: FC = () => {
         <ul className="absolute flex flex-col max-w-157.5 size-full h-auto right-1/2 translate-x-1/2 top-20 p-2.5 gap-1.5 bg-background border-2 rounded-4xl">
           {products &&
             products.map((product) => (
-              <li key={product.product_id}>
+              <li key={product.productId}>
                 <Button
                   className="flex flex-row gap-3 p-3 w-full hover:bg-accent rounded-4xl"
-                  handleClick={() =>
-                    handleNavigateToProduct(product.product_id)
-                  }
+                  handleClick={() => handleNavigateToProduct(product.productId)}
                   type="button"
                 >
                   <img
-                    src={`${BACKEND_URL}/public/${product.product.main_image_url}`}
+                    src={`${BACKEND_URL}/public/${product.product.mainImageUrl}`}
                     className="object-cover size-6 rounded-full"
                   />
                   {product.title}

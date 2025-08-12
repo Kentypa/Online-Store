@@ -19,16 +19,16 @@ export class CategoryTranslation {
     description: "Category ID",
     type: "number",
   })
-  @PrimaryColumn()
-  category_id: number;
+  @PrimaryColumn({ name: "category_id" })
+  categoryId: number;
 
   @ApiProperty({
     example: "en",
     description: "Language code from standart",
     type: "string",
   })
-  @PrimaryColumn()
-  lang_code: string;
+  @PrimaryColumn({ name: "lang_code" })
+  langCode: string;
 
   @ApiProperty({
     description: "Relationships with category column in database",

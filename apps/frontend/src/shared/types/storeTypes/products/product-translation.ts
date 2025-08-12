@@ -1,7 +1,7 @@
 import { Product } from "./product";
 
 export type ProductTranslation = {
-  product_id: number;
+  productId: number;
   lang: string;
   product: Product;
   title: string;

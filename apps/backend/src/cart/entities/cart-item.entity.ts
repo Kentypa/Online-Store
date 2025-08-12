@@ -15,7 +15,7 @@ import {
 } from "typeorm";
 
 @Entity()
-@Index(["user_id", "product_id"], { unique: true })
+@Index(["userId", "productId"], { unique: true })
 export class CartItem {
   @ApiProperty({
     example: 13,
@@ -30,8 +30,8 @@ export class CartItem {
     description: "User ID",
     type: "number",
   })
-  @Column({ type: "integer" })
-  user_id: number;
+  @Column({ type: "integer", name: "user_id" })
+  userId: number;
 
   @ApiProperty({
     description: "Relationships with user column",
@@ -49,8 +49,8 @@ export class CartItem {
     description: "Product ID",
     type: "number",
   })
-  @Column({ type: "integer" })
-  product_id: number;
+  @Column({ type: "integer", name: "product_id" })
+  productId: number;
 
   @ApiProperty({
     description: "Relationships with product table",

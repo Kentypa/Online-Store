@@ -9,7 +9,7 @@ export const useCartQuantities = (cart?: CartItem[]) => {
   useEffect(() => {
     if (cart) {
       const initialQuantities = Object.fromEntries(
-        cart.map((item) => [item.product_id, item.quantity]),
+        cart.map((item) => [item.productId, item.quantity])
       );
       setQuantities(initialQuantities);
     }

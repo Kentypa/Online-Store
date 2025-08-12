@@ -17,11 +17,11 @@ export const ForgetPasswordPage: FC = () => {
     () => ({
       email: "",
     }),
-    [],
+    []
   );
   const { handleChange, handleSubmit, isSubmitDisabled } = useRecoveryForm(
     initialState,
-    mutate,
+    mutate
   );
 
   useNavigateOnSuccess(isSuccess, PagesEndponts.SIGN_IN);

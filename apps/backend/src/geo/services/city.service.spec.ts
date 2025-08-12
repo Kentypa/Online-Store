@@ -25,7 +25,7 @@ const createMockCityTranslation = (
   city: City,
 ): CityTranslation => {
   const translation = new CityTranslation();
-  translation.lang_code = langCode;
+  translation.langCode = langCode;
   translation.name = name;
   translation.city = city;
   return translation;

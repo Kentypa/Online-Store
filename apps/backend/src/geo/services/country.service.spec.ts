@@ -25,7 +25,7 @@ const createMockCountryTranslation = (
   country: Country,
 ): CountryTranslation => {
   const translation = new CountryTranslation();
-  translation.lang_code = langCode;
+  translation.langCode = langCode;
   translation.name = name;
   translation.country = country;
   return translation;

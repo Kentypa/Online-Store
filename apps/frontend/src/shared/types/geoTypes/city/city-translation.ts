@@ -2,9 +2,9 @@ import { City } from "./city";
 import { Language } from "../language/language";
 
 export type CityTranslation = {
-  city_id: number;
+  cityId: number;
   city: City;
   language: Language;
-  lang_code: string;
+  langCode: string;
   name: string;
 };

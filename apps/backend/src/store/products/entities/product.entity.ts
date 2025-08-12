@@ -55,8 +55,8 @@ export class Product {
     description: "Path to main image url",
     type: "string",
   })
-  @Column({ type: "varchar", length: 256 })
-  main_image_url: string;
+  @Column({ type: "varchar", length: 256, name: "main_image_url" })
+  mainImageUrl: string;
 
   @ApiProperty({
     example: [
@@ -67,8 +67,13 @@ export class Product {
     type: "string",
     isArray: true,
   })
-  @Column({ type: "text", array: true, nullable: true })
-  other_image_urls: string[];
+  @Column({
+    type: "text",
+    array: true,
+    nullable: true,
+    name: "other_image_urls",
+  })
+  otherImageUrls: string[];
 
   @ApiProperty({
     description: "Relationships at database with category column",
@@ -83,8 +88,8 @@ export class Product {
     description: "Category ID",
     type: "number",
   })
-  @Column({ type: "integer" })
-  category_id: number;
+  @Column({ type: "integer", name: "category_id" })
+  categoryId: number;
 
   @ApiProperty({
     description: "Relationships with translations column in database",

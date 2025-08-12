@@ -28,7 +28,7 @@ export const useProductReviews = (
 
   const userIsGuest = !isAuthenticated;
   const userHasLeftReview =
-    productData?.product?.reviews?.some((review) => review.user_id === id) ??
+    productData?.product?.reviews?.some((review) => review.userId === id) ??
     false;
 
   const isReviewed = userIsGuest || userHasLeftReview;

@@ -27,8 +27,8 @@ export class Review {
     description: "User ID",
     type: "number",
   })
-  @Column({ type: "integer" })
-  user_id: number;
+  @Column({ type: "integer", name: "user_id" })
+  userId: number;
 
   @ApiProperty({
     description: "Relationships with user column in database",
@@ -43,8 +43,8 @@ export class Review {
     description: "Product ID",
     type: "number",
   })
-  @Column({ type: "integer" })
-  product_id: number;
+  @Column({ type: "integer", name: "product_id" })
+  productId: number;
 
   @ApiProperty({
     example: 13,

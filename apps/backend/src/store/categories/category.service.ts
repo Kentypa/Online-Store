@@ -58,9 +58,9 @@ export class CategoryService {
       where: { id: categoryId },
     });
 
-    if (category && category.parent_id !== null) {
-      parents.push(category.parent_id);
-      return this.getParentCategoryIds(category.parent_id, parents);
+    if (category && category.parentId !== null) {
+      parents.push(category.parentId);
+      return this.getParentCategoryIds(category.parentId, parents);
     }
 
     return parents;
@@ -87,13 +87,13 @@ export class CategoryService {
 
     allCategories.forEach((category) => {
       const filteredTranslations = langCode
-        ? category.translations.filter((t) => t.lang_code === langCode)
+        ? category.translations.filter((t) => t.langCode === langCode)
         : category.translations;
 
       nodeMap.set(category.id, {
         id: category.id,
-        parent_id: category.parent_id,
-        image_url: category.image_url,
+        parentId: category.parentId,
+        imageUrl: category.imageUrl,
         translations: filteredTranslations,
         children: [],
       });
@@ -101,8 +101,8 @@ export class CategoryService {
 
     const tree: MasterCategoryNode[] = [];
     nodeMap.forEach((node) => {
-      if (node.parent_id && nodeMap.has(node.parent_id)) {
-        nodeMap.get(node.parent_id)!.children.push(node);
+      if (node.parentId && nodeMap.has(node.parentId)) {
+        nodeMap.get(node.parentId)!.children.push(node);
       } else {
         tree.push(node);
       }
@@ -130,10 +130,10 @@ export class CategoryService {
       where: {},
     };
     if (langCode) {
-      options.where = { ...options.where, lang_code: langCode };
+      options.where = { ...options.where, langCode: langCode };
     }
     if (parent_id) {
-      options.where = { ...options.where, category: { parent_id: parent_id } };
+      options.where = { ...options.where, category: { parentId: parent_id } };
     }
 
     return this.categoryTranslationRepository.find(options);

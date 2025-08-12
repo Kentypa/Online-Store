@@ -18,8 +18,8 @@ export class CountryTranslation {
     description: "Country code",
     type: "string",
   })
-  @PrimaryColumn()
-  country_code: string;
+  @PrimaryColumn({ name: "country_code" })
+  countryCode: string;
 
   @ApiProperty({
     description: "Language translation relationship",
@@ -34,8 +34,8 @@ export class CountryTranslation {
     description: "Language code",
     type: "string",
   })
-  @PrimaryColumn()
-  lang_code: string;
+  @PrimaryColumn({ name: "lang_code" })
+  langCode: string;
 
   @ApiProperty({
     example: "United Kingdom",

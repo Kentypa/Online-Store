@@ -7,7 +7,7 @@ export const useCartProducts = () => {
   const { i18n } = useTranslation("user-cart");
   const { cart } = useAppSelector(userSelector);
 
-  const cartProductsIds = cart?.map((item) => item.product_id) || [];
+  const cartProductsIds = cart?.map((item) => item.productId) || [];
   const shouldFetchProducts = cartProductsIds.length > 0;
 
   const { productsData } = useProducts(
@@ -15,7 +15,7 @@ export const useCartProducts = () => {
       productsId: cartProductsIds,
       langCode: i18n.language,
     },
-    shouldFetchProducts,
+    shouldFetchProducts
   );
 
   return {

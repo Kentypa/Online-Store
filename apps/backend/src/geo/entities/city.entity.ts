@@ -25,8 +25,8 @@ export class City {
     description: "Region ID",
     type: "number",
   })
-  @Column()
-  region_id: number;
+  @Column({ name: "region_id" })
+  regionId: number;
 
   @ApiProperty({
     description: "Region this city belongs to",

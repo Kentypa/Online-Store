@@ -5,7 +5,7 @@ import { RegionTranslation } from "./region-translation";
 export type Region = {
   id: number;
   country: Country;
-  country_code: string;
+  countryCode: string;
   code: string;
   translations: RegionTranslation[];
   cities: City[];

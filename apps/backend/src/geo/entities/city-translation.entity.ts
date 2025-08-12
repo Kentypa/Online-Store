@@ -11,8 +11,8 @@ export class CityTranslation {
     description: "City ID",
     type: "number",
   })
-  @PrimaryColumn()
-  city_id: number;
+  @PrimaryColumn({ name: "city_id" })
+  cityId: number;
 
   @ApiProperty({
     description: "City column in database",
@@ -36,8 +36,8 @@ export class CityTranslation {
     description: "Language code from standart",
     type: "string",
   })
-  @PrimaryColumn()
-  lang_code: string;
+  @PrimaryColumn({ name: "lang_code" })
+  langCode: string;
 
   @ApiProperty({
     example: "Kropivnitskii",

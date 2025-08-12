@@ -1,5 +1,5 @@
 import { FC, useEffect } from "react";
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 import { CategoryBreadcrumbs } from "@business/CategoryBreadcrumbs";
@@ -72,7 +72,7 @@ export const ProductPage: FC = () => {
         <div className="flex flex-col py-6 px-18 size-full">
           <div className="flex w-full mb-6">
             <CategoryBreadcrumbs
-              categoryId={productData.product.category_id}
+              categoryId={productData.product.categoryId}
               handleSetNewCategory={handleSetNewCategory}
             />
           </div>

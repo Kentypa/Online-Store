@@ -64,7 +64,7 @@ export class ProductSeederService {
     ]);
 
     const leafCategories = allCategories.filter((cat) =>
-      allCategories.every((c) => c.parent_id !== cat.id),
+      allCategories.every((c) => c.parentId !== cat.id),
     );
 
     const imageDir = path.join(process.cwd(), "public", "products", "images");
@@ -89,9 +89,9 @@ export class ProductSeederService {
           price: fakerEN.number.int({ min: 10, max: 1000 }),
           currency: "USD",
           stock: fakerEN.number.int({ min: 0, max: 100 }),
-          main_image_url: `/products/images/${mainImage}`,
-          other_image_urls: otherImages.map((img) => `/products/images/${img}`),
-          category_id: category.id,
+          mainImageUrl: `/products/images/${mainImage}`,
+          otherImageUrls: otherImages.map((img) => `/products/images/${img}`),
+          categoryId: category.id,
         });
       }
     }
@@ -120,13 +120,13 @@ export class ProductSeederService {
       const randomRegion = fakerEN.helpers.arrayElement(allRegions);
       translations.push(
         {
-          product_id: productId,
+          productId: productId,
           lang: "uk",
           title: fakerUK.commerce.productName() + "UA",
           description: fakerUK.commerce.productDescription() + "UA",
         },
         {
-          product_id: productId,
+          productId: productId,
           lang: "en",
           title: fakerEN.commerce.productName() + "EN",
           description: fakerEN.commerce.productDescription() + "EN",
@@ -134,11 +134,11 @@ export class ProductSeederService {
       );
 
       stats.push({
-        product_id: productId,
-        region_id: randomRegion.region_id,
-        total_sold: fakerEN.number.int({ min: 0, max: 1000 }),
-        period_type_code: periodType,
-        period_date: periodDate,
+        productId: productId,
+        regionId: randomRegion.regionId,
+        totalSold: fakerEN.number.int({ min: 0, max: 1000 }),
+        periodTypeCode: periodType,
+        periodDate: periodDate,
       });
     }
 

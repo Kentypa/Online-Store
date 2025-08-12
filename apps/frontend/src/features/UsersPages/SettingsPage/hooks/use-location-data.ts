@@ -1,6 +1,6 @@
-import { useCountries } from "./useCountries";
-import { useRegions } from "./useRegions";
-import { useCities } from "./useCities";
+import { useCountries } from "./use-counties";
+import { useRegions } from "./use-regions";
+import { useCities } from "./use-cities";
 
 export const useLocationData = (countryCode?: string, regionId?: number) => {
   const countries = useCountries();

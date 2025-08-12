@@ -11,14 +11,14 @@ export const useProduct = (dto: GetProductsDto) => {
   const { getProducts } = productsService(ServiceNames.PRODUCTS);
 
   const { data, ...otherOptions } = useQuery<GetProductsWithTotal>({
-    queryKey: [Queries.PRODUCT, dto.productsId],
+    queryKey: [Queries.PRODUCT, dto],
     queryFn: () => getProducts(dto),
   });
 
   const productData: ProductTranslation | undefined = data?.data[0];
   const productImages = productData && [
-    productData.product.main_image_url,
-    ...productData.product.other_image_urls,
+    productData.product.mainImageUrl,
+    ...productData.product.otherImageUrls,
   ];
 
   const productAvarageRating =

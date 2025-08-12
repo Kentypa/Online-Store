@@ -141,13 +141,13 @@ export class GeoSeederService {
 
       const countryTranslations = [
         entityManager.create(CountryTranslation, {
-          country_code: savedCountry.code,
-          lang_code: langEn.code,
+          countryCode: savedCountry.code,
+          langCode: langEn.code,
           name: countryData.name,
         }),
         entityManager.create(CountryTranslation, {
-          country_code: savedCountry.code,
-          lang_code: langUk.code,
+          countryCode: savedCountry.code,
+          langCode: langUk.code,
           name: countryData.translated_to_ukraine,
         }),
       ];
@@ -156,20 +156,20 @@ export class GeoSeederService {
 
       for (const stateData of countryData.states) {
         const region = entityManager.create(Region, {
-          country_code: savedCountry.code,
+          countryCode: savedCountry.code,
           code: stateData.state_code,
         });
         const savedRegion = await entityManager.save(region);
 
         const regionTranslations = [
           entityManager.create(RegionTranslation, {
-            region_id: savedRegion.id,
-            lang_code: langEn.code,
+            regionId: savedRegion.id,
+            langCode: langEn.code,
             name: stateData.name,
           }),
           entityManager.create(RegionTranslation, {
-            region_id: savedRegion.id,
-            lang_code: langUk.code,
+            regionId: savedRegion.id,
+            langCode: langUk.code,
             name: stateData.translated_to_ukraine,
           }),
         ];
@@ -178,19 +178,19 @@ export class GeoSeederService {
 
         for (const cityData of stateData.cities) {
           const city = entityManager.create(City, {
-            region_id: savedRegion.id,
+            regionId: savedRegion.id,
           });
           const savedCity = await entityManager.save(city);
 
           const cityTranslations = [
             entityManager.create(CityTranslation, {
-              city_id: savedCity.id,
-              lang_code: langEn.code,
+              cityId: savedCity.id,
+              langCode: langEn.code,
               name: cityData.name,
             }),
             entityManager.create(CityTranslation, {
-              city_id: savedCity.id,
-              lang_code: langUk.code,
+              cityId: savedCity.id,
+              langCode: langUk.code,
               name: cityData.translated_to_ukraine,
             }),
           ];

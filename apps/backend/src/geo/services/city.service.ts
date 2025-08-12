@@ -28,13 +28,13 @@ export class CityService {
     };
 
     if (langCode) {
-      options.where = { ...options.where, lang_code: langCode };
+      options.where = { ...options.where, langCode };
     }
 
     if (regionId) {
       options.where = {
         ...options.where,
-        city: { region_id: regionId },
+        city: { regionId },
       };
     }
 

@@ -1,5 +1,5 @@
 import { useProfileNavigation } from "@hooks/user/use-profile-navigation";
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { ProfileNavigation } from "@layout/ProfileNavigation";
 import { FC, FormEvent, useMemo } from "react";
 import { useForm } from "@hooks/form/use-form";

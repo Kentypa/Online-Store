@@ -15,7 +15,7 @@ export class CountryService {
   async getCountries(langCode?: string): Promise<CountryTranslation[]> {
     if (langCode) {
       return this.countryRepository.find({
-        where: { lang_code: langCode },
+        where: { langCode },
       });
     }
     return this.countryRepository.find();

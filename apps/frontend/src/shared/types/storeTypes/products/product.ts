@@ -6,9 +6,9 @@ export type Product = {
   price: number;
   currency: string;
   stock: number;
-  main_image_url: string;
-  other_image_urls: string[];
-  category_id: number;
+  mainImageUrl: string;
+  otherImageUrls: string[];
+  categoryId: number;
   stats: ProductStats[];
   reviews: Review[];
 };

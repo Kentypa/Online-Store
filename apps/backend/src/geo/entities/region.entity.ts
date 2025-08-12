@@ -34,8 +34,8 @@ export class Region {
     description: "Country code",
     type: "string",
   })
-  @Column()
-  country_code: string;
+  @Column({ name: "country_code" })
+  countryCode: string;
 
   @ApiProperty({
     example: "Lvivska Oblast",

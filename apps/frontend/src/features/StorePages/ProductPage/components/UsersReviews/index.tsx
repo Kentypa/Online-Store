@@ -15,7 +15,7 @@ export const UsersReviews: FC<UsersReviewsProps> = ({
   showAllReviews,
   productReviewsCount,
 }) => {
-  const userIds = useMemo(() => reviews.map((r) => r.user_id), [reviews]);
+  const userIds = useMemo(() => reviews.map((r) => r.userId), [reviews]);
   const { data: usersData } = useUsers(userIds);
 
   const usersById = useMemo(() => {
@@ -25,14 +25,14 @@ export const UsersReviews: FC<UsersReviewsProps> = ({
         acc[user.id] = user;
         return acc;
       },
-      {},
+      {}
     );
   }, [usersData]);
 
   return reviews
     .slice(0, showAllReviews ? productReviewsCount : 3)
     .map((review) => {
-      const user = usersById[review.user_id];
+      const user = usersById[review.userId];
 
       return (
         <li

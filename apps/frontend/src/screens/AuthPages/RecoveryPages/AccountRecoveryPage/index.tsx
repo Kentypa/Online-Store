@@ -16,7 +16,7 @@ export const AccountRecoveryPage: FC = () => {
   const initialState = useMemo(() => ({ email: "", password: "" }), []);
   const { handleChange, handleSubmit, isSubmitDisabled } = useRecoveryForm(
     initialState,
-    mutate,
+    mutate
   );
 
   useNavigateOnSuccess(isSuccess, PagesEndponts.SIGN_IN);

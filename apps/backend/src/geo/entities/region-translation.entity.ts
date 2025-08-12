@@ -11,8 +11,8 @@ export class RegionTranslation {
     description: "Region ID",
     type: "number",
   })
-  @PrimaryColumn()
-  region_id: number;
+  @PrimaryColumn({ name: "region_id" })
+  regionId: number;
 
   @ApiProperty({
     description: "Relationships with region",
@@ -36,8 +36,8 @@ export class RegionTranslation {
     description: "Language code",
     type: "string",
   })
-  @PrimaryColumn()
-  lang_code: string;
+  @PrimaryColumn({ name: "lang_code" })
+  langCode: string;
 
   @ApiProperty({
     example: "Lvivska oblast",

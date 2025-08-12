@@ -34,7 +34,7 @@ export const LocationSelectors: FC<LocationSelectorsProps> = ({
     >
       <Option value="">{t("sections.chooseCountry")}</Option>
       {countriesData?.map((country) => (
-        <Option key={country.country_code} value={country.country_code}>
+        <Option key={country.countryCode} value={country.countryCode}>
           {country.name}
         </Option>
       ))}
@@ -50,7 +50,7 @@ export const LocationSelectors: FC<LocationSelectorsProps> = ({
       >
         <Option value="">{t("sections.chooseRegion")}</Option>
         {regionsData?.map((region) => (
-          <Option key={region.region_id} value={region.region_id}>
+          <Option key={region.regionId} value={region.regionId}>
             {region.name}
           </Option>
         ))}
@@ -67,7 +67,7 @@ export const LocationSelectors: FC<LocationSelectorsProps> = ({
       >
         <Option value="">{t("sections.chooseCity")}</Option>
         {citiesData?.map((city) => (
-          <Option key={city.city_id} value={city.city_id}>
+          <Option key={city.cityId} value={city.cityId}>
             {city.name}
           </Option>
         ))}

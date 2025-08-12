@@ -1,5 +1,5 @@
 export type CategoryTranslation = {
-  category_id: number;
-  lang_code: string;
+  categoryId: number;
+  langCode: string;
   name: string;
 };

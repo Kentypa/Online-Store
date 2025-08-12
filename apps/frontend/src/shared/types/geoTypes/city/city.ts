@@ -4,6 +4,6 @@ import { CityTranslation } from "./city-translation";
 export type City = {
   id: number;
   region: Region;
-  region_id: number;
+  regionId: number;
   translations: CityTranslation[];
 };

@@ -108,21 +108,21 @@ export class CategorySeederService {
 
       const newCategory = this.categoryRepository.create({
         parent: parent ?? undefined,
-        image_url: imageUrl ?? undefined,
+        imageUrl: imageUrl ?? undefined,
       });
 
       const savedCategory = await manager.save(newCategory);
 
       const enTranslation = this.translationRepository.create({
-        category_id: savedCategory.id,
-        lang_code: "en",
+        categoryId: savedCategory.id,
+        langCode: "en",
         name: enName,
       });
       await manager.save(enTranslation);
 
       const ukTranslation = this.translationRepository.create({
-        category_id: savedCategory.id,
-        lang_code: "uk",
+        categoryId: savedCategory.id,
+        langCode: "uk",
         name: ukName,
       });
       await manager.save(ukTranslation);

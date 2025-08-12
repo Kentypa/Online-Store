@@ -55,12 +55,12 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
           >
             <CatalogVariantsIcons
               className="size-6"
-              iconName={category.image_url ?? ""}
+              iconName={category.imageUrl ?? ""}
             />
             <Button
               className="flex justify-between max-w-62 w-full"
               handleClick={() =>
-                handleCategoryClick(category.translations[0].category_id)
+                handleCategoryClick(category.translations[0].categoryId)
               }
             >
               <p className="text-body-paragraph">
@@ -77,7 +77,7 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
             <p className="text-display-smallest mb-3 hover:text-accent cursor-pointer">
               <Button
                 handleClick={() =>
-                  handleCategoryClick(category.translations[0].category_id)
+                  handleCategoryClick(category.translations[0].categoryId)
                 }
               >
                 {category.translations[0].name}
@@ -92,7 +92,7 @@ export const CatalogVariants: FC<CatalogVariantsProps> = ({ visible }) => {
                   <Button
                     handleClick={() =>
                       handleCategoryClick(
-                        subcategory.translations[0].category_id,
+                        subcategory.translations[0].categoryId
                       )
                     }
                   >

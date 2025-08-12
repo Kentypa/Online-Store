@@ -1,4 +1,4 @@
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { FC } from "react";
 
 export const CheckoutPage: FC = () => {

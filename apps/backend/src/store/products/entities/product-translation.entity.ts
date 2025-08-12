@@ -11,8 +11,8 @@ export class ProductTranslation {
     description: "Product ID",
     type: "number",
   })
-  @PrimaryColumn({ type: "integer" })
-  product_id: number;
+  @PrimaryColumn({ type: "integer", name: "product_id" })
+  productId: number;
 
   @ApiProperty({
     example: "en",
@@ -60,7 +60,7 @@ export class ProductTranslation {
     description: "Search vector",
     type: "number",
   })
-  @Column({ type: "tsvector", nullable: true })
+  @Column({ type: "tsvector", nullable: true, name: "search_vector" })
   @Exclude()
-  search_vector: string;
+  searchVector: string;
 }

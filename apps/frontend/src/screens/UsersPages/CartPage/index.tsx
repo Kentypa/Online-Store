@@ -1,5 +1,5 @@
 import { useProfileNavigation } from "@hooks/user/use-profile-navigation";
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { ProfileNavigation } from "@layout/ProfileNavigation";
 import { FC } from "react";
 import { useCartProducts } from "@features/UsersPages/CartPage/hooks/use-cart-products";
@@ -16,7 +16,7 @@ export const CartPage: FC = () => {
   const { quantities, handleQuantityChange } = useCartQuantities(cart);
   const { calculateProductTotal, totalCartPrice } = useCartCalculations(
     productsData,
-    quantities,
+    quantities
   );
   const { mutate: removeFromCartMutate } = useRemoveItemFromCart();
 
@@ -36,9 +36,9 @@ export const CartPage: FC = () => {
               <ul className="flex flex-col gap-6 size-full">
                 {productsData?.map((product) => (
                   <CartItem
-                    key={product.product_id}
+                    key={product.productId}
                     product={product}
-                    quantity={quantities[product.product_id] ?? 1}
+                    quantity={quantities[product.productId] ?? 1}
                     onQuantityChange={handleQuantityChange}
                     onRemove={handleRemoveItem}
                     calculateTotal={calculateProductTotal}

@@ -26,16 +26,16 @@ export class CartService {
       throw new BadRequestException("Product not found");
 
     const existingCartItem = await this.cartItemRepository.findOneBy({
-      user_id: userId,
-      product_id: productId,
+      userId: userId,
+      productId: productId,
     });
 
     if (existingCartItem)
       throw new BadRequestException("Review already exists");
 
     const cartItem = this.cartItemRepository.create({
-      user_id: userId,
-      product_id: productId,
+      userId: userId,
+      productId: productId,
     });
 
     return this.cartItemRepository.save(cartItem);
@@ -52,8 +52,8 @@ export class CartService {
       throw new BadRequestException("Product not found");
 
     const existingCartItem = await this.cartItemRepository.findOneBy({
-      user_id: userId,
-      product_id: productId,
+      userId: userId,
+      productId: productId,
     });
 
     if (!existingCartItem)
@@ -74,8 +74,8 @@ export class CartService {
 
     const existingCartItem = await this.cartItemRepository.findOne({
       where: {
-        user_id: userId,
-        product_id: productId,
+        userId: userId,
+        productId: productId,
       },
       relations: ["product"],
     });
@@ -84,7 +84,7 @@ export class CartService {
       throw new BadRequestException("Quantity is more than stock");
 
     return await this.cartItemRepository.update(
-      { user_id: userId, product_id: productId },
+      { userId: userId, productId: productId },
       { quantity: newQuantity },
     );
   }

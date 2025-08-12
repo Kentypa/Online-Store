@@ -25,14 +25,14 @@ export const CartItem: FC<CartItemProps> = ({
   return (
     <li className="max-h-37 flex flex-row size-full p-6 border-2 border-separator rounded-4xl">
       <img
-        src={`${BACKEND_URL}/public/${product.product.main_image_url}`}
+        src={`${BACKEND_URL}/public/${product.product.mainImageUrl}`}
         className="size-25 object-cover rounded-4xl"
         alt={product.title}
       />
       <div className="flex flex-col justify-between items-start ml-3">
         <h3>{product.title}</h3>
         <Button
-          handleClick={() => onRemove(product.product_id)}
+          handleClick={() => onRemove(product.productId)}
           className="text-body-small hover:text-accent"
         >
           {t("buttons.remove")}
@@ -51,7 +51,7 @@ export const CartItem: FC<CartItemProps> = ({
           <select
             value={quantity}
             onChange={(e) =>
-              onQuantityChange(product.product_id, Number(e.target.value))
+              onQuantityChange(product.productId, Number(e.target.value))
             }
             className="font-semibold border rounded px-2 py-1"
           >
@@ -69,7 +69,7 @@ export const CartItem: FC<CartItemProps> = ({
           <h4>{t("labels.total")}</h4>
           <p className="font-semibold">
             {calculateCurrency(
-              calculateTotal(product.product_id, product.product.price)
+              calculateTotal(product.productId, product.product.price)
             )}
           </p>
         </div>

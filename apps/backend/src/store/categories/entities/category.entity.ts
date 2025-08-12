@@ -34,16 +34,16 @@ export class Category {
     description: "Parent category ID",
     type: "number",
   })
-  @Column({ nullable: true })
-  parent_id: number;
+  @Column({ nullable: true, name: "parent_id" })
+  parentId: number;
 
   @ApiProperty({
     example: "/public/products/images/electronics.svg",
     description: "URL to category image",
     type: "string",
   })
-  @Column({ nullable: true })
-  image_url: string;
+  @Column({ nullable: true, name: "image_url" })
+  imageUrl: string;
 
   @ApiProperty({
     description: "Relationships with category translations in database",

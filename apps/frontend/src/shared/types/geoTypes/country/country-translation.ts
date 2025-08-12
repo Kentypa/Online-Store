@@ -3,8 +3,8 @@ import { Country } from "./country";
 
 export type CountryTranslation = {
   country: Country;
-  country_code: string;
+  countryCode: string;
   language: Language;
-  lang_code: string;
+  langCode: string;
   name: string;
 };

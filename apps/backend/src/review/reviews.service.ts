@@ -29,16 +29,16 @@ export class ReviewsService {
       throw new BadRequestException("Product not found");
 
     const existingReview = await this.reviewRepository.findOneBy({
-      user_id: userId,
-      product_id: productId,
+      userId: userId,
+      productId: productId,
     });
     if (existingReview) throw new BadRequestException("Review already exists");
 
     const userReview = this.reviewRepository.create({
       comment,
       rating,
-      user_id: userId,
-      product_id: productId,
+      userId: userId,
+      productId: productId,
     });
 
     return this.reviewRepository.save(userReview);

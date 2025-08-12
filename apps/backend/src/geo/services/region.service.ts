@@ -33,13 +33,13 @@ export class RegionService {
     };
 
     if (langCode) {
-      options.where = { ...options.where, lang_code: langCode };
+      options.where = { ...options.where, langCode: langCode };
     }
 
     if (countryCode) {
       options.where = {
         ...options.where,
-        region: { country_code: countryCode },
+        region: { countryCode: countryCode },
       };
     }
 

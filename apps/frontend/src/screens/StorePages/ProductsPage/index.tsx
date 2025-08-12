@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { MainContentWrapper } from "@layout/MainContentWrapper";
+import { MainContentWrapper } from "@wrappers/MainContentWrapper";
 import { PaginationButtons } from "@business/PaginationButtons";
 import { ProductsList } from "@layout/ProductsList";
 import { useProductsQueryParams } from "@features/StorePages/ProductsPage/hooks/use-products-query-params";
@@ -26,7 +26,7 @@ export const ProductsPage: FC = () => {
     currentPage,
     currentSortingType,
     categoryId,
-    query,
+    query
   );
 
   const handleSortingChange = (value: SortProductsBy) => {
