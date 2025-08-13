@@ -1,5 +1,7 @@
 import { Type } from "class-transformer";
 import {
+  ArrayMinSize,
+  ArrayNotEmpty,
   IsArray,
   IsBoolean,
   IsEnum,
@@ -18,6 +20,9 @@ export class GetProductsQuery {
   @IsOptional()
   @Type(() => Number)
   @IsArray()
+  @ArrayNotEmpty()
+  @ArrayMinSize(1)
+  @IsNumber({}, { each: true })
   ids?: number[];
 
   @IsOptional()

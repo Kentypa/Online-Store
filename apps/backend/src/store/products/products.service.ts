@@ -68,7 +68,7 @@ export class ProductsService {
       qb.andWhere("translation.lang = :langCode", { langCode });
     }
 
-    if (ids?.length) {
+    if (ids) {
       qb.andWhere("product.id IN (:...ids)", { ids });
     }
 
