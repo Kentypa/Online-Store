@@ -1,0 +1,1 @@
+CREATE DATABASE teamcity_db;

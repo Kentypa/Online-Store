@@ -1,0 +1,104 @@
+services:
+  backend:
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile.prod
+    volumes:
+      - backend_uploads:/app/uploads
+    env_file:
+      - ./apps/backend/.env
+    expose:
+      - "3000"
+    networks:
+      - private
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./apps/frontend
+      dockerfile: Dockerfile.prod
+    env_file:
+      - ./apps/frontend/.env
+    container_name: online-store-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - private
+    depends_on:
+      - backend
+
+  db:
+    image: postgres:15-alpine
+    env_file:
+      - database.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./db-init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - private
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    networks:
+      - private
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  teamcity-server:
+    image: jetbrains/teamcity-server:latest
+    container_name: teamcity-server
+    ports:
+      - "8111:8111"
+    volumes:
+      - teamcity_data:/data/teamcity_server/datadir
+      - teamcity_logs:/opt/teamcity/logs
+    restart: unless-stopped
+    env_file:
+      - database.env
+    networks:
+      - private
+    environment:
+      TEAMCITY_DB_TYPE: postgresql
+      TEAMCITY_DB_HOST: db
+      TEAMCITY_DB_PORT: 5432
+      TEAMCITY_DB_NAME: teamcity_db
+      TEAMCITY_DB_USER: ${POSTGRES_USER}
+      TEAMCITY_DB_PASSWORD: ${POSTGRES_PASSWORD}
+
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:latest
+    environment:
+      - SERVER_URL=http://teamcity-server:8111
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - private
+
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:
+  backend_uploads:
+  teamcity_data:
+  teamcity_logs:
+
+networks:
+  private:
+    driver: bridge
