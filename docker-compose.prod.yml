@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   backend:
     build:
@@ -35,7 +37,7 @@ services:
   db:
     image: postgres:15-alpine
     env_file:
-      - database.env
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
       - ./db-init-scripts:/docker-entrypoint-initdb.d
@@ -70,7 +72,7 @@ services:
       - teamcity_logs:/opt/teamcity/logs
     restart: unless-stopped
     env_file:
-      - database.env
+      - .env
     networks:
       - private
     environment:
@@ -85,8 +87,10 @@ services:
     image: jetbrains/teamcity-agent:latest
     environment:
       - SERVER_URL=http://teamcity-server:8111
+      - PATH=/compose-bin:${PATH}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ~/compose-bin:/compose-bin:ro
     restart: unless-stopped
     networks:
       - private
