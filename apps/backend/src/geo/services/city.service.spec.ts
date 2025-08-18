@@ -114,7 +114,7 @@ describe("CityService", () => {
       const result = await service.getCities("en");
 
       expect(findSpy).toHaveBeenCalledWith({
-        where: { lang_code: "en" },
+        where: { langCode: "en" },
         relations: ["city"],
       });
       expect(result).toEqual(filteredCountries);

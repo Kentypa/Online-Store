@@ -82,23 +82,27 @@ services:
       TEAMCITY_DB_NAME: teamcity_db
       TEAMCITY_DB_USER: ${POSTGRES_USER}
       TEAMCITY_DB_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
 
   teamcity-agent:
-    image: jetbrains/teamcity-agent:latest
-    environment:
-      - SERVER_URL=http://teamcity-server:8111
-      - PATH=/compose-bin:${PATH}
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ~/compose-bin:/compose-bin:ro
-    restart: unless-stopped
+    image: jetbrains/teamcity-agent:2025.07.1-linux-sudo
+    container_name: teamcity-agent-prod
+    privileged: true
+    user: root
     networks:
       - private
+    depends_on:
+      - teamcity-server
+    environment:
+      - SERVER_URL=http://teamcity-server:8111
+      - DOCKER_IN_DOCKER=start
+    volumes:
+      - ./agent/conf:/data/teamcity_agent/conf
 
 volumes:
   db_data:
-  caddy_data:
-  caddy_config:
   backend_uploads:
   teamcity_data:
   teamcity_logs:
