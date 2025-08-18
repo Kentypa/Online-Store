@@ -2,6 +2,7 @@ version: "3.8"
 
 services:
   backend:
+    image: kentypa/backend
     build:
       context: ./apps/backend
       dockerfile: Dockerfile.prod
@@ -19,6 +20,7 @@ services:
         condition: service_healthy
 
   frontend:
+    image: kentypa/frontend
     build:
       context: ./apps/frontend
       dockerfile: Dockerfile.prod
